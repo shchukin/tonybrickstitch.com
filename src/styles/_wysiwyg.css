@@ -4,6 +4,12 @@
     line-height: var(--body-line-height);
 }
 
+.wysiwyg--smaller {
+    --body-font-size: 14px;
+    --body-line-height: 20px;
+}
+
+
 .wysiwyg p,
 .wysiwyg ul,
 .wysiwyg ol,
@@ -23,6 +29,7 @@
     margin-top: calc(var(--body-line-height) / 2);
     margin-bottom: calc(var(--body-line-height) / 2);
 }
+
 
 .wysiwyg p:first-child,
 .wysiwyg ul:first-child,
