@@ -15,7 +15,7 @@
     --disabled-background: #F6F6F6;
     --disabled-color: #999999;
     --error: #FF0033;
-    --text-color: #333333
+    --text-color: #333333;
 }
 
 @media (350px <= width < 740px) {
