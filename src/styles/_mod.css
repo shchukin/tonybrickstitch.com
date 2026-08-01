@@ -1,6 +1,6 @@
 .mod {
     display: flex;
-    align-items: flex-start;
+    align-items: stretch;
     gap: 28px;
     padding: 24px 28px;
     background-color: #FFFFFF;
@@ -48,6 +48,8 @@
     .mod__sidebar {
         flex-shrink: 0;
         width: 200px;
+        display: flex;
+        flex-direction: column;
     }
         .mod__original {
 
@@ -74,4 +76,19 @@
                 font-size: 13px;
                 line-height: 20px;
                 text-align: center;
+            }
+
+        .mod__printing-hint {
+            margin-top: auto;
+            margin-bottom: -12px;
+            padding-top: 4px;
+            font-style: italic;
+            font-size: 12px;
+            line-height: 16px;
+            color: var(--text-gray);
+            text-align: center;
+            opacity: 75%;
+        }
+            .mod__highlight {
+                font-weight: bold;
             }

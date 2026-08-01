@@ -17,6 +17,8 @@
     --error: #FF0033;
     --heading-color: #111827;
     --text-color: #333333;
+    --text-gray: #6B7280;
+    --text-lighter-gray: #9BA3AB;
 }
 
 @media (350px <= width < 740px) {

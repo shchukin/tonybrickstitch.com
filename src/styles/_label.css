@@ -7,5 +7,5 @@
     line-height: 14px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    color: #6B7280;
+    color: var(--text-gray);
 }
