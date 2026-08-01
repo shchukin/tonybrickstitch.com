@@ -5,8 +5,8 @@
 }
 
 .wysiwyg--smaller {
-    --body-font-size: 14px;
-    --body-line-height: 20px;
+    --body-font-size: 13px;
+    --body-line-height: 18px;
 }
 
 
@@ -86,4 +86,15 @@
 }
 
 
+.wysiwyg--smaller ul,
+.wysiwyg--smaller ol {
+    padding-left: 12px;
+}
+    .wysiwyg--smaller li {
+        margin-top: 4px;
+    }
+
+    .wysiwyg--smaller li:first-child {
+        margin-top: 0;
+    }
 
