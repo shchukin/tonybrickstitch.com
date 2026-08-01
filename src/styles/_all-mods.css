@@ -1,0 +1,15 @@
+.all-mods {
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+    .all-mods__heading {
+
+    }
+
+    .all-mods__description {
+        margin-top: 24px;
+    }
+
+    .all-mods__list {
+        margin-top: 24px;
+    }

@@ -1,5 +1,6 @@
 .intro {
-    padding-top: 60px;
+    padding-top: 24px;
+    padding-bottom: 24px;
 }
     .intro__heading {
         display: flex;
@@ -7,6 +8,9 @@
         gap: 12px;
         margin-top: 0;
         margin-bottom: 0;
+        font-size: 32px;
+        line-height: 32px;
+        color: #000000;
     }
         .intro__heading::before {
             content: "";
@@ -23,5 +27,5 @@
         }
 
     .intro__content {
-        margin-top: 20px;
+        margin-top: 16px;
     }

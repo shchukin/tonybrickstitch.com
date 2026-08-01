@@ -1,5 +1,5 @@
 :root {
-    --font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", "Helvetica", "Arial", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    --font: "Open Sans", sans-serif;
     --body-font-size: 16px;
     --body-line-height: 24px;
     --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
@@ -15,6 +15,7 @@
     --disabled-background: #F6F6F6;
     --disabled-color: #999999;
     --error: #FF0033;
+    --text-color: #333333
 }
 
 @media (350px <= width < 740px) {

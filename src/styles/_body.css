@@ -2,6 +2,8 @@ body {
     height: 100%;
     -webkit-font-smoothing: antialiased;
     font-family: var(--font);
+    font-weight: 500;
     font-size: var(--body-font-size);
     line-height: var(--body-line-height);
+    color: var(--text-color);
 }
