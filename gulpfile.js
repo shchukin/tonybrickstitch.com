@@ -113,7 +113,6 @@ gulp.task('clean', function () {
 
 gulp.task('manifest', function () {
     return gulp.src([
-        'src/browserconfig.xml',
         'src/manifest.json',
         'src/humans.txt',
         'src/favicon.ico'], {encoding: false})
