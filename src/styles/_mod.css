@@ -1,19 +1,24 @@
 .mod {
     display: flex;
-    gap: 24px;
-    align-items: flex-start;
-    padding: 24px;
+    flex-direction: column;
+    height: 100%;
     background-color: #FFFFFF;
     border: 1px solid #E5E7EB;
     border-radius: 16px;
+    overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.02);
     transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.2s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.2s ease;
 }
+
+.mod:hover {
+    border-color: #D1D5DB;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06), 0 4px 8px rgba(0, 0, 0, 0.03);
+    transform: translateY(-4px);
+}
+
     .mod__preview {
         display: block;
-        flex-shrink: 0;
-        width: 280px;
-        border-radius: 12px;
+        width: 100%;
         overflow: hidden;
         background-color: var(--image-fallback);
     }
@@ -24,57 +29,48 @@
             height: auto;
             aspect-ratio: 4 / 3;
             object-fit: cover;
-            border-radius: 12px;
             transition: transform 0.3s ease;
         }
 
         .mod__preview:hover .mod__image {
-            transform: scale(1.04);
+            transform: scale(1.05);
         }
 
     .mod__body {
         display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 14px;
+        padding: 20px;
         flex-grow: 1;
-        min-width: 0;
     }
 
     .mod__heading {
         margin-top: 0;
-        margin-bottom: 4px;
-        font-size: 20px;
-        line-height: 28px;
+        margin-bottom: 2px;
+        font-size: 18px;
+        line-height: 24px;
         font-weight: 700;
         color: #111827;
     }
 
     .mod__section {
         display: flex;
-        flex-wrap: wrap;
-        gap: 4px 8px;
-        align-items: baseline;
-        font-size: 14px;
-        line-height: 22px;
+        flex-direction: column;
+        gap: 2px;
+        font-size: 13px;
+        line-height: 18px;
     }
 
     .mod__source {
+        font-size: 11px;
         font-weight: 600;
+        line-height: 16px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
         color: #6B7280;
     }
 
     .mod__link {
         color: #374151;
+        word-break: break-word;
     }
-
-@media (width < 740px) {
-
-    .mod {
-        flex-direction: column;
-        padding: 16px;
-    }
-
-        .mod__preview {
-            width: 100%;
-        }
-}
