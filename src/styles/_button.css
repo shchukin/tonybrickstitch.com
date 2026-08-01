@@ -39,14 +39,25 @@
 }
 
 .button--secondary {
-    box-shadow: inset 0 0 0 2px var(--action-color);
-    background-color: transparent;
+    box-shadow: none;
+    background-color: #F3F9FF;
     color: var(--action-color);
 }
 
 .button--secondary:hover {
-    background-color: #F3F9FF;
+    background-color: #F7FBFF;
 }
 
+    .button__icon {
+        vertical-align: top;
+        stroke: currentColor;
+    }
 
+
+.button--square {
+    width: 46px;
+    min-width: 0;
+    padding-left: 0;
+    padding-right: 0;
+}
 

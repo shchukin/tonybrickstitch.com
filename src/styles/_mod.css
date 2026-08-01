@@ -62,13 +62,24 @@
         .mod__download {
             margin-top: 18px;
         }
-            .mod__main-link {
+            .mod__actions {
                 margin-top: 4px;
+                display: flex;
+                align-items: flex-start;
+                gap: 4px;
             }
-                .mod__main-link .button {
-                    width: 100%;
-                    padding-left: 12px;
-                    padding-right: 12px;
+                .mod__main-link {
+                    flex-grow: 1;
+                }
+                    .mod__main-link .button {
+                        width: 100%;
+                        padding-left: 12px;
+                        padding-right: 12px;
+                    }
+
+                .mod__share {
+                    margin-right: -20px;
+
                 }
 
             .mod__alt-link {
