@@ -5,6 +5,7 @@
 }
     .window__close {
         float: right;
+        position: relative;
         width: 68px;
         height: 68px;
         display: flex;
