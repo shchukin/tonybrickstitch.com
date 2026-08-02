@@ -67,11 +67,6 @@ export const mods: ModData[] = [
 					<li><strong>Original Game & Sprite Art:</strong><br class="smartphone-only"> © 1991 Konami (TMNT3 on NES)<br></li>
 					<li><strong>Franchise Rights:</strong><br class="smartphone-only"> © Paramount Global / Nickelodeon</li>
 				</ul>
-<!--				<ul style="margin-top: 0;">-->
-<!--					<li>Original Character Design: <strong>Kevin Eastman & Peter Laird</strong><br></li>-->
-<!--					<li>Original Game & Sprite Art: <strong>© 1991 Konami (TMNT3 on NES)</strong><br></li>-->
-<!--					<li>Franchise Rights: <strong>© Paramount Global / Nickelodeon</strong></li>-->
-<!--				</ul>-->
 			</div>
 		`,
 		author: {
