@@ -4,6 +4,7 @@ import Link from '../Link/Link.astro';
 import Wysiwyg from '../Wysiwyg/Wysiwyg.astro';
 import Button from '../Button/Button.astro';
 import type { ModData } from '../../types/mod';
+import Label from "../Label/Label.astro";
 
 interface Props extends ModData {}
 
@@ -32,17 +33,17 @@ const previewImage = `/content/mods/${alias}-pattern-mods-preview.jpg`;
 	</div>
 	<div class="mod__sidebar">
 		<div class="mod__original">
-			<div class="label">
+			<Label>
 				Original design
-			</div>
+			</Label>
 			<div class="mod__author">
 				<Link href={author.href}>{author.name}</Link>
 			</div>
 		</div>
 		<div class="mod__download">
-			<div class="label">
+			<Label>
 				Mods
-			</div>
+			</Label>
 			<div class="mod__actions">
 				<div class="mod__main-link">
 					<Button href={pdfEn}>Download PDF</Button>
