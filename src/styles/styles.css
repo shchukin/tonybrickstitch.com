@@ -1,3 +1,5 @@
+@import "normalize.css";
+
 @import "global/root.css";
 @import "global/box-sizing.css";
 @import "global/html.css";
