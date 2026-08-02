@@ -1,0 +1,31 @@
+---
+import './AllMods.css';
+import Title from '../Title/Title.astro';
+import Wysiwyg from '../Wysiwyg/Wysiwyg.astro';
+import Mod from '../Mod/Mod.astro';
+import type { ModData } from '../../types/mod';
+
+interface Props {
+	mods: ModData[];
+}
+
+const { mods } = Astro.props;
+---
+
+<div class="all-mods">
+	<div class="all-mods__heading">
+		<Title as="h2">Pattern mods</Title>
+	</div>
+	<div class="all-mods__description">
+		<Wysiwyg halved>
+			<p>
+				Crafting something with seed beads I often work with non-beading patterns. It can be a friendship bracelet from the <a href="https://www.braceletbook.com">Bracelet Book</a> or a pixel art sprite from a video game.
+				Either way it needs to be modified for beading. Usually it means adding or cutting few lines, removing some details, finding beads colors and so on. I save these modifications in the PDF
+				files and share them same as the original patterns were. Everything is free. Design authors are credited.
+			</p>
+		</Wysiwyg>
+	</div>
+	<div class="all-mods__list">
+		{mods.map((mod) => <Mod {...mod} />)}
+	</div>
+</div>

@@ -2,9 +2,12 @@
 	import BaseLayout from "../layouts/BaseLayout.astro"
 	import Intro from "../components/Intro/Intro.astro";
 	import Follow from "../components/Follow/Follow.astro";
+	import AllMods from "../components/AllMods/AllMods.astro";
+	import { mods } from "../data/mods";
 ---
 
 <BaseLayout>
 	<Intro />
 	<Follow />
+	<AllMods mods={mods} />
 </BaseLayout>
