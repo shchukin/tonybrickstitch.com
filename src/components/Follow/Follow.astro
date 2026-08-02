@@ -2,6 +2,7 @@
 import './Follow.css';
 import Link from "../Link/Link.astro";
 import Title from "../Title/Title.astro";
+import Wysiwyg from "../Wysiwyg/Wysiwyg.astro";
 ---
 
 
@@ -10,7 +11,7 @@ import Title from "../Title/Title.astro";
         <Title as="h2">Follow me</Title>
     </div>
     <div class="follow__content">
-        <div class="wysiwyg wysiwyg--halved">
+        <Wysiwyg halved>
             <p>
                 Please follow me on <Link href="http://tiktok.com/@tonybrickstitch">TikTok</Link> for my works showcase.
             </p>
@@ -19,6 +20,6 @@ import Title from "../Title/Title.astro";
                 <Link href="https://t.me/TonyBrickStitch">Telegram in English</Link> &nbsp;•&nbsp; <Link href="https://t.me/TonyBrickStitchRu">Телеграм на русском</Link><br>
                 You can also message me via private message right into this channel.
             </p>
-        </div>
+        </Wysiwyg>
     </div>
 </div>

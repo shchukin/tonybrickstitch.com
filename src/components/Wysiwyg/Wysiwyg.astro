@@ -1,0 +1,17 @@
+---
+import './Wysiwyg.css';
+
+interface Props {
+  halved?: boolean;
+  smaller?: boolean;
+}
+
+const {
+  halved,
+  smaller,
+} = Astro.props;
+---
+
+<div class:list={['wysiwyg', halved && 'wysiwyg--halved', smaller && 'wysiwyg--smaller']}>
+    <slot/>
+</div>
