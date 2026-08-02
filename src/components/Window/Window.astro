@@ -1,6 +1,7 @@
 ---
 import './Window.css';
 import Icon from '../Icon/Icon.astro';
+import Title from "../Title/Title.astro";
 
 interface Props {
   heading?: string;
@@ -15,7 +16,9 @@ const {heading} = Astro.props;
   </button>
   {heading && (
     <div class="window__heading">
-      {heading}
+      <Title>
+        {heading}
+      </Title>
     </div>
   )}
     <div class="window__body">

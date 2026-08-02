@@ -1,44 +1,69 @@
+.hystmodal__window:has(.share) {
+    width: 680px !important;
+}
+
 .share {
 
 }
+    .share__intro {
 
-.share__preview {
-    border-radius: 12px;
-    overflow: hidden;
-}
+    }
+    .share__all-links {
+        margin-top: 12px;
+    }
+        .share__item {
 
-.share__image {
-    display: block;
-    width: 100%;
-    height: auto;
-    background-color: var(--image-fallback);
-}
+        }
 
-.share__links {
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-}
+        .share__item:first-child {
+            margin-top: 0;
+        }
+            .share__label {
+                width: fit-content;
+                margin-bottom: -4px;
+                font-weight: bold;
+                font-size: 14px;
+                line-height: 20px;
+            }
 
-.hystmodal__close {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    border: none;
-    border-radius: 8px;
-    background: transparent;
-    color: var(--text-gray);
-    cursor: pointer;
-    transition: background-color var(--transition-hover),
-                color var(--transition-hover);
-}
+            .share__wrap {
 
-.hystmodal__close:hover {
-    background-color: #F3F4F6;
-    color: var(--heading-color);
+            }
+
+            .share__link {
+                padding-top: 4px;
+                padding-bottom: 4px;
+                font-size: 12px;
+                line-height: 18px;
+                font-family: monospace;
+            }
+                .share__copy {
+
+                }
+
+    .share__addition {
+        margin-top: 18px;
+    }
+
+    .share__preview {
+        margin-top: 12px;
+        width: fit-content;
+    }
+        .share__image {
+            vertical-align: top;
+            width: 100%;
+            max-width: 360px;
+            margin-left: auto;
+            margin-right: auto;
+            height: auto;
+            background-color: var(--image-fallback);
+            border-radius: 12px;
+        }
+
+
+@media (width < 740px) {
+    .hystmodal__window:has(.share) {
+        width: calc(100% - var(--container-padding)) !important;
+        margin: calc(var(--container-padding) / 2);
+    }
 }

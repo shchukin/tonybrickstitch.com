@@ -4,6 +4,7 @@ import Button from '../Button/Button.astro';
 import Link from '../Link/Link.astro';
 import type { ModData } from '../../types/mod';
 import Window from "../Window/Window.astro";
+import Wysiwyg from "../Wysiwyg/Wysiwyg.astro";
 
 interface Props extends ModData {}
 
@@ -20,6 +21,50 @@ const previewImage = `/content/mods/${alias}-pattern-mods-preview.jpg`;
 		<div class="hystmodal__window" role="dialog" aria-modal="true" aria-labelledby={`${modalId}-title`}>
 			<Window heading={title}>
 				<div class="share">
+					<div class="share__intro">
+					  <Wysiwyg halved>
+							<p>
+								Please refrain from sharing the PDF-file itself. Kindly share one of these links instead.
+								They will always lead to the most recent version of the file which may get new additional pages or mistake fixes.
+							</p>
+						</Wysiwyg>
+					</div>
+					<div class="share__all-links">
+						<!--{import.meta.env.BASE_URL}-->
+						<div class="share__item">
+							<div class="share__label">
+								English version:
+							</div>
+							<div class="share__wrap">
+								<div class="share__link">
+									https://tonybrickstitch.com{ pdfEn }
+								</div>
+								<div class="share__copy">
+
+								</div>
+							</div>
+						</div>
+						<div class="share__item">
+							<div class="share__label">
+								Русская версия:
+							</div>
+							<div class="share__wrap">
+								<div class="share__link">
+									https://tonybrickstitch.com{ pdfRu }
+								</div>
+								<div class="share__copy">
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="share__addition">
+						<Wysiwyg halved>
+							<p>To make a nice look post you can use this image. Right click or a long tap to save:</p>
+						</Wysiwyg>
+					</div>
+
 					<div class="share__preview">
 						<img
 							class="share__image"
@@ -28,10 +73,6 @@ const previewImage = `/content/mods/${alias}-pattern-mods-preview.jpg`;
 							height="420"
 							alt=""
 						>
-					</div>
-					<div class="share__links">
-						<Button href={pdfEn}>Download PDF</Button>
-						<Link href={pdfRu}>Русская версия</Link>
 					</div>
 				</div>
 			</Window>
