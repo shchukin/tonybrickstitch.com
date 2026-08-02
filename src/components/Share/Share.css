@@ -1,4 +1,4 @@
-.mod-modal {
+.share {
     width: min(560px, calc(100vw - 32px));
     padding: 28px;
     background-color: #FFFFFF;
@@ -6,7 +6,7 @@
     box-shadow: 0 24px 48px rgba(0 0 0 / 12%);
 }
 
-.mod-modal__title {
+.share__title {
     margin: 0 32px 20px 0;
     font-weight: bold;
     font-size: 20px;
@@ -14,19 +14,19 @@
     color: var(--heading-color);
 }
 
-.mod-modal__preview {
+.share__preview {
     border-radius: 12px;
     overflow: hidden;
 }
 
-.mod-modal__image {
+.share__image {
     display: block;
     width: 100%;
     height: auto;
     background-color: var(--image-fallback);
 }
 
-.mod-modal__links {
+.share__links {
     margin-top: 20px;
     display: flex;
     flex-direction: column;

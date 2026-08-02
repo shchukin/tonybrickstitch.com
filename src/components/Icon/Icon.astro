@@ -1,0 +1,21 @@
+---
+interface Props {
+	name: 'share' | 'close';
+	class?: string;
+}
+
+import shareSvg from '../../icons/share.svg?raw';
+import closeSvg from '../../icons/close.svg?raw';
+
+const svgs = {
+	share: shareSvg,
+	close: closeSvg,
+};
+
+const { name, class: className } = Astro.props;
+const svg = className
+	? svgs[name].replace('<svg', `<svg class="${className}"`)
+	: svgs[name];
+---
+
+<Fragment set:html={svg} />
