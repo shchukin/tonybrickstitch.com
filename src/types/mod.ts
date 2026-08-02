@@ -6,6 +6,6 @@ export interface ModAuthor {
 export interface ModData {
 	alias: string;
 	title: string;
-	description: string[];
+	description: string;
 	author: ModAuthor;
 }

@@ -26,11 +26,7 @@ const previewImage = `/content/mods/${alias}-pattern-mods-preview.jpg`;
 			{title}
 		</h3>
 		<div class="mod__description">
-			<Wysiwyg smaller>
-				<ul>
-					{description.map((item) => <li>{item}</li>)}
-				</ul>
-			</Wysiwyg>
+			<Wysiwyg smaller set:html={description} />
 		</div>
 	</div>
 	<div class="mod__sidebar">
