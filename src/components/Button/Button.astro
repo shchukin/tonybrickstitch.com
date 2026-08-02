@@ -1,0 +1,36 @@
+---
+import './Button.css';
+
+interface Props {
+	href?: string;
+	secondary?: boolean;
+	square?: boolean;
+	type?: 'button' | 'submit';
+	[key: string]: unknown;
+}
+
+const {
+	href,
+	secondary,
+	square,
+	type = 'button',
+	...rest
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+
+const classes = [
+	'button',
+	secondary && 'button--secondary',
+	square && 'button--square',
+].filter(Boolean).join(' ');
+---
+
+<Tag
+	href={Tag === 'a' ? href : undefined}
+	type={Tag === 'button' ? type : undefined}
+	class={classes}
+	{...rest}
+>
+	<slot />
+</Tag>
