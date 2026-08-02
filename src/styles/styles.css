@@ -10,3 +10,5 @@
 @import "global/visuallyhidden.css";
 @import "global/hide-scrollbar.css";
 @import "global/smartphone-only.css";
+
+@import "overrides/hyst-modal.css";

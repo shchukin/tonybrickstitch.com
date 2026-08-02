@@ -1,0 +1,7 @@
+.hystmodal {
+    z-index: 3000 !important;
+}
+
+.hystmodal__window {
+    background-color: transparent !important; /* use window component */
+}

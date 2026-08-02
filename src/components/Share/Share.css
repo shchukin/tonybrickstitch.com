@@ -2,14 +2,6 @@
 
 }
 
-.share__title {
-    margin: 0 32px 20px 0;
-    font-weight: bold;
-    font-size: 20px;
-    line-height: 28px;
-    color: var(--heading-color);
-}
-
 .share__preview {
     border-radius: 12px;
     overflow: hidden;

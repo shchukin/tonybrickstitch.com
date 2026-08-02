@@ -7,6 +7,7 @@
     --transition-show: 1200ms var(--ease-out-quint);
     --image-fallback: #F3F5F4;
     --container-padding: 40px;
+    --radius: 20px;
     --action-color: #0D7FC5;
     --action-color-hover: #2FA5ED;
     --input-border: #B3B3B3;
@@ -19,6 +20,7 @@
     --text-color: #333333;
     --text-gray: #6B7280;
     --text-lighter-gray: #9BA3AB;
+    --light-blue: #F3F9FF;
 }
 
 @media (350px <= width < 740px) {

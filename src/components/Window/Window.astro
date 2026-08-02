@@ -1,0 +1,24 @@
+---
+import './Window.css';
+import Icon from '../Icon/Icon.astro';
+
+interface Props {
+  heading?: string;
+}
+
+const {heading} = Astro.props;
+---
+
+<div class="window">
+  <button class="window__close" type="button" data-hystclose>
+    <Icon name="close"/>
+  </button>
+  {heading && (
+    <div class="window__heading">
+      {heading}
+    </div>
+  )}
+    <div class="window__body">
+      <slot/>
+    </div>
+</div>
