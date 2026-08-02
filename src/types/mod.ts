@@ -1,4 +1,5 @@
 export interface ModAuthor {
+	label: string;
 	name: string;
 	href: string;
 }

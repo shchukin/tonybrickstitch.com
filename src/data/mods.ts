@@ -13,6 +13,7 @@ export const mods: ModData[] = [
 			</ul>
 		`,
 		author: {
+			label: 'Original Design',
 			name: 'lwhitby112 on BraceletBook',
 			href: 'https://www.braceletbook.com/patterns/alpha/50842',
 		},
@@ -28,6 +29,7 @@ export const mods: ModData[] = [
 			</ul>
 		`,
 		author: {
+			label: 'Original Design',
 			name: 'Irisss on BraceletBook',
 			href: 'https://www.braceletbook.com/patterns/alpha/81416',
 		},
@@ -43,6 +45,7 @@ export const mods: ModData[] = [
 			</ul>
 		`,
 		author: {
+			label: 'Original Design',
 			name: 'sodapop on BraceletBook',
 			href: 'https://www.braceletbook.com/patterns/alpha/57747',
 		},
@@ -53,10 +56,25 @@ export const mods: ModData[] = [
 		description: `
 			<ul>
 				<li>Added reverse side.</li>
+				<li>Short instruction on how to weave a two layer piece on the loom</li>
 				<li>Divided the pattern into phases: weaving the body on the loom and adding details.</li>
 			</ul>
+			<div>
+				<div class="label">Legalities</div>
+				<ul style="margin-top: 0;">
+					<li><strong>Original Character Design:</strong><br class="smartphone-only"> Kevin Eastman & Peter Laird<br></li>
+					<li><strong>Original Game & Sprite Art:</strong><br class="smartphone-only"> © 1991 Konami (TMNT3 on NES)<br></li>
+					<li><strong>Franchise Rights:</strong><br class="smartphone-only"> © Paramount Global / Nickelodeon</li>
+				</ul>
+<!--				<ul style="margin-top: 0;">-->
+<!--					<li>Original Character Design: <strong>Kevin Eastman & Peter Laird</strong><br></li>-->
+<!--					<li>Original Game & Sprite Art: <strong>© 1991 Konami (TMNT3 on NES)</strong><br></li>-->
+<!--					<li>Franchise Rights: <strong>© Paramount Global / Nickelodeon</strong></li>-->
+<!--				</ul>-->
+			</div>
 		`,
 		author: {
+			label: 'Sprite Upload',
 			name: 'Dominodalek on fandom.com',
 			href: 'https://videogaming.fandom.com/wiki/Shredder_(Teenage_Mutant_Ninja_Turtles)/Gallery?file=Teenage_Mutant_Ninja_Turtles_III_The_Manhattan_Project_-_Sprite_-_Shredder_-_Intro.png',
 		},

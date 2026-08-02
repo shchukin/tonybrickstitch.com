@@ -1,0 +1,6 @@
+@media (740px <= width) {
+
+    .smartphone-only {
+        display: none;
+    }
+}
