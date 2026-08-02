@@ -109,30 +109,17 @@
 
     .mod {
         display: block;
-        /*align-items: stretch;*/
-        /*gap: 28px;*/
         padding: 0;
-        /*background-color: #FFFFFF;*/
-        /*border: 1px solid #E5E7EB;*/
         border-radius: 16px;
-        /*box-shadow: 0 4px 16px rgba(0 0 0 / 3%),*/
-        /*            0 1px 2px rgba(0 0 0 / 2%);*/
     }
     
         .mod__preview {
-            /*flex-shrink: 0;*/
             width: auto;
-            /*border-radius: 12px;*/
-            /*overflow: hidden;*/
         }
             .mod__image {
-                /*width: 100%;*/
-                /*height: auto;*/
                 max-height: 240px;
                 object-fit: cover;
-                /*background-color: var(--image-fallback);*/
                 border-radius: 15px 15px 0 0;
-                /*transition: transform 600ms var(--ease-out-quint);*/
             }
 
             .mod__preview:hover .mod__image {
@@ -149,47 +136,33 @@
         }
 
         .mod__body {
-            padding: 24px 28px;
-            /*padding-top: 4px;*/
-            /*flex-grow: 1;*/
-            /*align-items: start;*/
+            padding: 22px 20px;
         }
             .mod__heading {
-                /*margin-top: 0;*/
-                /*margin-bottom: 0;*/
-                /*font-weight: bold;*/
-                /*font-size: 20px;*/
-                /*line-height: 28px;*/
-                /*color: var(--heading-color);*/
+                font-size: 19px;
+                line-height: 24px;
             }
 
             .mod__description {
-                /*margin-top: 12px;*/
+                margin-top: 10px;
             }
 
         .mod__sidebar {
-            /*flex-shrink: 0;*/
             padding: 0 28px 20px;
             width: auto;
-            /*display: flex;*/
-            /*flex-direction: column;*/
         }
             .mod__original {
 
             }
                 .mod__author {
-                    /*font-size: 13px;*/
-                    /*line-height: 20px;*/
+
                 }
 
             .mod__download {
-                /*margin-top: 18px;*/
+
             }
                 .mod__actions {
-                    /*margin-top: 4px;*/
-                    /*display: flex;*/
-                    /*align-items: flex-start;*/
-                    /*gap: 4px;*/
+
                 }
                     .mod__main-link {
                         /*flex-grow: 1;*/

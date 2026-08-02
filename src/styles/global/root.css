@@ -23,6 +23,13 @@
     --light-blue: #F3F9FF;
 }
 
+@media (width < 740px) {
+    :root {
+        --body-font-size: 15px;
+        --body-line-height: 22px;
+    }
+}
+
 @media (350px <= width < 740px) {
     :root {
         --container-padding: 24px;

@@ -9,7 +9,7 @@
         margin-top: 0;
         margin-bottom: 0;
         font-size: 32px;
-        line-height: 32px;
+        line-height: 36px;
         color: var(--heading-color);
     }
         .intro__heading::before {
@@ -29,3 +29,24 @@
     .intro__content {
         margin-top: 16px;
     }
+
+
+
+@media (width < 740px) {
+
+    .intro {
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+        .intro__heading {
+            font-size: 28px;
+            line-height: 32px;
+        }
+            .intro__heading::before {
+
+            }
+
+        .intro__content {
+            margin-top: 14px;
+        }
+}
