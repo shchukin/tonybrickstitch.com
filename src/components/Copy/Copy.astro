@@ -1,0 +1,69 @@
+---
+
+import './Copy.css';
+
+interface Props {
+  textToCopy: string;
+  buttonText?: string;
+  copiedText?: string;
+  className?: string;
+}
+
+const {
+  textToCopy,
+  buttonText = "Copy",
+  copiedText = "Copied!",
+  className = "",
+} = Astro.props;
+---
+
+<button
+    class={`copy-btn ${className}`}
+    data-clipboard-text={textToCopy}
+    data-default-text={buttonText}
+    data-copied-text={copiedText}
+    type="button"
+>
+    <span class="btn-text">{buttonText}</span>
+</button>
+
+<script>
+  function setupCopyButtons() {
+    const buttons = document.querySelectorAll<HTMLButtonElement>(".copy-btn");
+
+    buttons.forEach((button) => {
+      if (button.dataset.initialized) return;
+      button.dataset.initialized = "true";
+
+      button.addEventListener("click", async () => {
+        const text = button.dataset.clipboardText;
+        const textSpan = button.querySelector(".btn-text");
+        const defaultText = button.dataset.defaultText || "Copy";
+        const copiedText = button.dataset.copiedText || "Copied!";
+
+        if (!text) return;
+
+        try {
+          await navigator.clipboard.writeText(text);
+
+          if (textSpan) {
+            textSpan.textContent = copiedText;
+          }
+          button.classList.add("is-copied");
+
+          setTimeout(() => {
+            if (textSpan) {
+              textSpan.textContent = defaultText;
+            }
+            button.classList.remove("is-copied");
+          }, 2000);
+        } catch (err) {
+          console.error("Failed to copy text: ", err);
+        }
+      });
+    });
+  }
+
+  setupCopyButtons();
+  document.addEventListener("astro:page-load", setupCopyButtons);
+</script>

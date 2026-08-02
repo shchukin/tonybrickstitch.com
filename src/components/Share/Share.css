@@ -12,34 +12,38 @@
         margin-top: 12px;
     }
         .share__item {
-
+            display: flex;
+            align-items: center;
+            gap: 14px;
         }
 
         .share__item:first-child {
             margin-top: 0;
         }
-            .share__label {
-                width: fit-content;
-                margin-bottom: -4px;
-                font-weight: bold;
-                font-size: 14px;
-                line-height: 20px;
-            }
-
             .share__wrap {
-
+                overflow: hidden;
             }
-
-            .share__link {
-                padding-top: 4px;
-                padding-bottom: 4px;
-                font-size: 12px;
-                line-height: 18px;
-                font-family: monospace;
-            }
-                .share__copy {
-
+                .share__label {
+                    width: fit-content;
+                    margin-bottom: -4px;
+                    font-weight: bold;
+                    font-size: 14px;
+                    line-height: 20px;
                 }
+
+                .share__link {
+                    padding-top: 4px;
+                    padding-bottom: 4px;
+                    font-size: 12px;
+                    line-height: 18px;
+                    font-family: monospace;
+                    word-wrap: break-word;
+                }
+
+            .share__copy {
+                margin-top: 2px;
+                flex-shrink: 0;
+            }
 
     .share__addition {
         margin-top: 18px;
