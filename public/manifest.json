@@ -1,6 +1,6 @@
 {
-    "name": "Template",
-    "short_name": "Template",
+    "name": "Tony Brick Stitch",
+    "short_name": "TonyBrickStitch",
     "icons": [
         {
             "src": "favicon/android-chrome-192x192.png",
@@ -13,7 +13,7 @@
             "type": "image/png"
         }
     ],
-    "theme_color": "#ECE5E4",
-    "background_color": "#ECE5E4",
+    "theme_color": "#FFFFFF",
+    "background_color": "#FFFFFF",
     "display": "standalone"
 }
