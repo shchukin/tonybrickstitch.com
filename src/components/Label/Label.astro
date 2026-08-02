@@ -12,6 +12,6 @@ const {
 
 ---
 
-<Tag class="label" for={Astro.props.for ? Astro.props.for : ''}>
+<Tag class="label" {...Astro.props.for && { for: Astro.props.for }}>
     <slot />
 </Tag>
