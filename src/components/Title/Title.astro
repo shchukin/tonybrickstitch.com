@@ -1,0 +1,16 @@
+---
+import './Title.css';
+
+interface Props {
+  as?: 'div' | 'b' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+}
+
+const {
+  as: Tag = 'div',
+} = Astro.props;
+
+---
+
+<Tag class="title">
+    <slot />
+</Tag>
