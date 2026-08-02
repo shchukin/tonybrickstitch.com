@@ -1,0 +1,31 @@
+.intro {
+    padding-top: 24px;
+    padding-bottom: 24px;
+}
+    .intro__heading {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 32px;
+        line-height: 32px;
+        color: var(--heading-color);
+    }
+        .intro__heading::before {
+            content: "";
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            background-image: url("logo.png");
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: left center;
+            border: 2px solid #FFFFFF;
+            border-radius: 50%;
+            box-shadow: 2px 2px 4px 1px rgb(0 0 0 / 10%);
+        }
+
+    .intro__content {
+        margin-top: 16px;
+    }
