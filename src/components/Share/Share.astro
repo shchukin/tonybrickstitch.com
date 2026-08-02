@@ -17,25 +17,37 @@ const previewImage = `/content/mods/${alias}-pattern-mods-preview.jpg`;
 
 <div class="hystmodal" id={modalId} aria-hidden="true">
 	<div class="hystmodal__wrap">
-		<div class="hystmodal__window share" role="dialog" aria-modal="true" aria-labelledby={`${modalId}-title`}>
-			<button type="button" data-hystclose class="hystmodal__close" aria-label="Close">
-				<Icon name="close" />
-			</button>
-			<h2 class="share__title" id={`${modalId}-title`}>
-				{title}
-			</h2>
-			<div class="share__preview">
-				<img
-					class="share__image"
-					src={previewImage}
-					width="560"
-					height="420"
-					alt=""
-				>
-			</div>
-			<div class="share__links">
-				<Button href={pdfEn}>Download PDF</Button>
-				<Link href={pdfRu}>Русская версия</Link>
+		<div class="hystmodal__window" role="dialog" aria-modal="true" aria-labelledby={`${modalId}-title`}>
+
+			<div class="window">
+				<button class="window__close" data-hystclose>
+					<Icon name="close" />
+				</button>
+				<div class="window__heading">
+					
+					<h2 class="title title--24px">Feature Film</h2>
+				</div>
+				<div class="window__body">
+
+					<div class="share">
+						<h2 class="share__title" id={`${modalId}-title`}>
+							{title}
+						</h2>
+						<div class="share__preview">
+							<img
+								class="share__image"
+								src={previewImage}
+								width="560"
+								height="420"
+								alt=""
+							>
+						</div>
+						<div class="share__links">
+							<Button href={pdfEn}>Download PDF</Button>
+							<Link href={pdfRu}>Русская версия</Link>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

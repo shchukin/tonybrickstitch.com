@@ -1,9 +1,5 @@
 .share {
-    width: min(560px, calc(100vw - 32px));
-    padding: 28px;
-    background-color: #FFFFFF;
-    border-radius: 20px;
-    box-shadow: 0 24px 48px rgba(0 0 0 / 12%);
+
 }
 
 .share__title {
