@@ -1,0 +1,47 @@
+---
+import './Link.css';
+
+interface Props {
+    href?: string;
+    target?: string;
+    rel?: string;
+    as?: 'a' | 'div' | 'span' | 'button';
+    textAlike?: boolean;
+    invertedTextAlike?: boolean;
+    noHover?: boolean;
+    fake?: boolean;
+    [key: string]: any;
+}
+
+const {
+    href,
+    target,
+    rel,
+    as: Tag = 'a',
+    textAlike,
+    invertedTextAlike,
+    noHover,
+    fake,
+    type: _type,
+    ...rest
+} = Astro.props;
+
+const classes = [
+    'link',
+    textAlike && 'link--text-alike',
+    invertedTextAlike && 'link--inverted-text-alike',
+    noHover && 'link--no-hover',
+    fake && 'link--fake'
+].filter(Boolean).join(' ');
+---
+
+<Tag
+    href={Tag === 'a' ? href : undefined}
+    target={Tag === 'a' ? target : undefined}
+    rel={Tag === 'a' ? rel : undefined}
+    type={Tag === 'button' ? 'button' : undefined}
+    class={classes}
+    {...rest}
+>
+    <slot />
+</Tag>
