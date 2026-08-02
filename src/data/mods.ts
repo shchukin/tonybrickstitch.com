@@ -26,6 +26,7 @@ export const mods: ModData[] = [
 				<li>Stretched vertically by 1.25x to adjust for the bead aspect ratio.</li>
 				<li>The moon was redrawn to maintain its 1:1 circular ratio after the stretch.</li>
 				<li>The bubble color was replaced with white (looks much better in beads).</li>
+				<li>Three length options: conventionally 16cm, 15cm, and 13cm.</li>
 			</ul>
 		`,
 		author: {
