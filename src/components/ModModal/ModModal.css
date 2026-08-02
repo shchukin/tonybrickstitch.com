@@ -1,0 +1,56 @@
+.mod-modal {
+    width: min(560px, calc(100vw - 32px));
+    padding: 28px;
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    box-shadow: 0 24px 48px rgba(0 0 0 / 12%);
+}
+
+.mod-modal__title {
+    margin: 0 32px 20px 0;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 28px;
+    color: var(--heading-color);
+}
+
+.mod-modal__preview {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.mod-modal__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    background-color: var(--image-fallback);
+}
+
+.mod-modal__links {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.hystmodal__close {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-gray);
+    cursor: pointer;
+    transition: background-color var(--transition-hover),
+                color var(--transition-hover);
+}
+
+.hystmodal__close:hover {
+    background-color: #F3F4F6;
+    color: var(--heading-color);
+}

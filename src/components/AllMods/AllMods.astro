@@ -3,6 +3,8 @@ import './AllMods.css';
 import Title from '../Title/Title.astro';
 import Wysiwyg from '../Wysiwyg/Wysiwyg.astro';
 import Mod from '../Mod/Mod.astro';
+import ModModal from '../ModModal/ModModal.astro';
+import HystModalInit from '../HystModalInit/HystModalInit.astro';
 import type { ModData } from '../../types/mod';
 
 interface Props {
@@ -28,4 +30,6 @@ const { mods } = Astro.props;
 	<div class="all-mods__list">
 		{mods.map((mod) => <Mod {...mod} />)}
 	</div>
+	{mods.map((mod) => <ModModal {...mod} />)}
+	<HystModalInit />
 </div>

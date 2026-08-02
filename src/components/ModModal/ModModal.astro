@@ -1,0 +1,43 @@
+---
+import './ModModal.css';
+import Button from '../Button/Button.astro';
+import Link from '../Link/Link.astro';
+import type { ModData } from '../../types/mod';
+
+interface Props extends ModData {}
+
+const { alias, title } = Astro.props;
+
+const modalId = `mod-modal-${alias}`;
+const pdfEn = `/patterns/${alias}-en.pdf`;
+const pdfRu = `/patterns/${alias}-ru.pdf`;
+const previewImage = `/content/mods/${alias}-pattern-mods-preview.jpg`;
+---
+
+<div class="hystmodal" id={modalId} aria-hidden="true">
+	<div class="hystmodal__wrap">
+		<div class="hystmodal__window mod-modal" role="dialog" aria-modal="true" aria-labelledby={`${modalId}-title`}>
+			<button type="button" data-hystclose class="hystmodal__close" aria-label="Close">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+					<path stroke="currentColor" stroke-width="1.75" stroke-linecap="round" d="M6 6L18 18M18 6L6 18"/>
+				</svg>
+			</button>
+			<h2 class="mod-modal__title" id={`${modalId}-title`}>
+				{title}
+			</h2>
+			<div class="mod-modal__preview">
+				<img
+					class="mod-modal__image"
+					src={previewImage}
+					width="560"
+					height="420"
+					alt=""
+				>
+			</div>
+			<div class="mod-modal__links">
+				<Button href={pdfEn}>Download PDF</Button>
+				<Link href={pdfRu}>Русская версия</Link>
+			</div>
+		</div>
+	</div>
+</div>
