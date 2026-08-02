@@ -3,6 +3,7 @@ import './Label.css';
 
 interface Props {
   as?: 'div' | 'span' | 'b' | 'label';
+  for?: string;
 }
 
 const {
@@ -11,6 +12,6 @@ const {
 
 ---
 
-<Tag class="label">
+<Tag class="label" for={Astro.props.for ? Astro.props.for : ''}>
     <slot />
 </Tag>
