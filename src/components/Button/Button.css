@@ -40,12 +40,12 @@
 
 .button--secondary {
     box-shadow: none;
-    background-color: var(--light-blue);
+    background-color: var(--action-bg-light);
     color: var(--action-color);
 }
 
 .button--secondary:hover {
-    background-color: #F7FBFF;
+    background-color: var(--action-bg-light-hover);
 }
 
     .button__icon {

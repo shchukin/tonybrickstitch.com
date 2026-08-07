@@ -9,22 +9,24 @@
     font-size: inherit; /* in case of <button> */
     line-height: inherit; /* in case of <button> */
     letter-spacing: inherit; /* in case of <button> */
-    color: #1B73E8;
+    color: var(--link-color);
     text-decoration: underline;
+    text-decoration-color: var(--link-color);
     text-decoration-thickness: 1px;
     text-underline-offset: 0.25em;
     cursor: pointer;
-    transition: text-decoration-color var(--transition-hover);
+    transition: color var(--transition-hover), text-decoration-color var(--transition-hover);
 }
 
 .link:hover,
 .wysiwyg a:hover {
+    color: var(--link-color-hover);
     text-decoration-color: transparent;
 }
 
 .link:active,
 .wysiwyg a:active {
-    color: #777777;
+    color: var(--action-color-hover);
     transition: none;
 }
 

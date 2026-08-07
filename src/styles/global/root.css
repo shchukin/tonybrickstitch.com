@@ -8,19 +8,25 @@
     --image-fallback: #F3F5F4;
     --container-padding: 40px;
     --radius: 20px;
-    --action-color: #0D7FC5;
-    --action-color-hover: #2FA5ED;
+    --action-color: #2E6B56;
+    --action-color-hover: #3B826A;
+    --action-bg-light: #F0F6F3;
+    --action-bg-light-hover: #E3EFE9;
+    --link-color: #285C4A;
+    --link-color-hover: #3B826A;
     --input-border: #B3B3B3;
     --input-border-hover-and-focus: #7E7E7E;
     --placeholder-color: #999999;
     --disabled-background: #F6F6F6;
     --disabled-color: #999999;
     --error: #FF0033;
-    --heading-color: #111827;
-    --text-color: #333333;
+    --heading-color: #1F2937;
+    --text-color: #374151;
     --text-gray: #6B7280;
     --text-lighter-gray: #9BA3AB;
-    --light-blue: #F3F9FF;
+    --bg-color: #FBFDFC;
+    /* Legacy alias for backwards compatibility */
+    --light-blue: var(--action-bg-light);
 }
 
 @media (width < 740px) {

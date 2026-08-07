@@ -28,7 +28,7 @@
         }
 
         .window__close:hover::before {
-            background-color: var(--light-blue);
+            background-color: var(--action-bg-light);
         }
 
         .window__close:active {
