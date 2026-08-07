@@ -25,8 +25,6 @@
     --text-gray: #6B7280;
     --text-lighter-gray: #9BA3AB;
     --bg-color: #FAF7F8;
-    /* Legacy alias for backwards compatibility */
-    --light-blue: var(--action-bg-light);
 }
 
 @media (width < 740px) {
