@@ -2,30 +2,28 @@
     padding-top: 24px;
     padding-bottom: 24px;
 }
-    .intro__heading {
+    .intro__head {
         display: flex;
         align-items: center;
         gap: 12px;
-        margin-left: -4px;
-        margin-top: 0;
-        margin-bottom: 0;
-        font-size: 32px;
-        line-height: 36px;
-        color: var(--heading-color);
     }
-        .intro__heading::before {
-            content: "";
+        .intro__logo {
             flex-shrink: 0;
+            margin-left: -4px;
             width: 50px;
             height: 50px;
             background-color: var(--image-fallback);
-            background-image: url("logo.png");
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: left center;
             border: 2px solid #FFFFFF;
             border-radius: 50%;
             box-shadow: 2px 2px 4px 1px rgb(0 0 0 / 10%);
+        }
+
+        .intro__heading {
+            margin-top: 0;
+            margin-bottom: 0;
+            font-size: 32px;
+            line-height: 36px;
+            color: var(--heading-color);
         }
 
     .intro__content {
@@ -40,11 +38,11 @@
         padding-top: 16px;
         padding-bottom: 16px;
     }
-        .intro__heading {
+        .intro__head {
             font-size: 28px;
             line-height: 32px;
         }
-            .intro__heading::before {
+            .intro__head::before {
 
             }
 
