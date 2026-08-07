@@ -12,8 +12,8 @@
     color: var(--link-color);
     text-decoration: underline;
     text-decoration-color: var(--link-color);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.25em;
+    text-decoration-thickness: 1.25px;
+    text-underline-offset: 3px;
     cursor: pointer;
     transition: color var(--transition-hover), text-decoration-color var(--transition-hover);
 }
@@ -21,7 +21,7 @@
 .link:hover,
 .wysiwyg a:hover {
     color: var(--link-color-hover);
-    text-decoration-color: transparent;
+    text-decoration-color: var(--link-color-hover);
 }
 
 .link:active,
