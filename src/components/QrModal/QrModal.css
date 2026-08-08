@@ -3,28 +3,17 @@
 }
 
 .qr-modal {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 16px;
 }
-
-.qr-modal__logo-wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.qr-modal__logo {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    border: 2px solid #ffffff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
-    background-color: var(--image-fallback);
-    object-fit: cover;
-}
+    .qr-modal__logo {
+        display: block;
+        margin: -106px auto 0;
+        width: 108px;
+        height: 108px;
+        border-radius: 50%;
+        border: 4px solid #ffffff;
+        background-color: var(--image-fallback);
+        object-fit: cover;
+    }
 
 .qr-modal__code-wrap {
     display: flex;
@@ -41,8 +30,8 @@
 }
 
 .qr-modal__qr-image {
-    width: 100%;
-    height: 100%;
+    width: 240px;
+    height: 240px;
     object-fit: contain;
     border-radius: 8px;
 }

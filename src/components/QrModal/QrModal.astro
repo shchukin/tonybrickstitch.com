@@ -15,21 +15,21 @@ const { option } = Astro.props;
 const optionsData = {
 	tiktok: {
 		id: 'qr-modal-tiktok',
-		heading: 'TikTok',
 		qrImage: '/images/tiktok.png',
 		username: '@tonybrickstitch',
+		label: 'TonyBrickStitch on TikTok',
 	},
 	'telegram-en': {
 		id: 'qr-modal-telegram-en',
-		heading: 'Telegram Channel in English',
 		qrImage: '/images/telegram-en.jpg',
 		username: '@TonyBrickStitch',
+		label: 'TonyBrickStitch’s Telegram Channel',
 	},
 	'telegram-ru': {
 		id: 'qr-modal-telegram-ru',
-		heading: 'Телеграм на русском',
 		qrImage: '/images/telegram-ru.jpg',
 		username: '@TonyBrickStitchRu',
+		label: 'Телеграм канал TonyBrickStitch',
 	},
 };
 
@@ -38,14 +38,12 @@ const data = optionsData[option];
 
 <div class="hystmodal" id={data.id} aria-hidden="true">
 	<div class="hystmodal__wrap">
-		<div class="hystmodal__window" role="dialog" aria-modal="true" aria-labelledby={`${data.id}-title`}>
-			<Window heading={data.heading}>
+		<div class="hystmodal__window" role="dialog">
+			<Window>
 				<div class="qr-modal">
-					<div class="qr-modal__logo-wrap">
-						<Image class="qr-modal__logo" src={logoImg} alt="Tony Brick Stitch Logo" />
-					</div>
+					<Image class="qr-modal__logo" src={logoImg} alt="Tony Brick Stitch Logo" />
 					<div class="qr-modal__code-wrap">
-						<img class="qr-modal__qr-image" src={data.qrImage} alt={`QR code for ${data.heading}`} />
+						<img class="qr-modal__qr-image" src={data.qrImage} alt={`QR code for ${data.label}`} />
 					</div>
 					<div class="qr-modal__username">
 						{data.username}
