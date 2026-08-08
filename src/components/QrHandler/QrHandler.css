@@ -19,6 +19,6 @@
     }
 
     .qr-handler:hover .qr-handler__icon {
-        transform: scale(110%);
+        transform: scale(115%);
         stroke: var(--link-color-hover);
     }
