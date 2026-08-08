@@ -1,8 +1,8 @@
 ---
 import './QrModal.css';
-import { Image } from 'astro:assets';
-import logoImg from '../../assets/images/logo.png';
 import Window from '../Window/Window.astro';
+import QrTiktok from './QrTiktok.astro';
+import QrTelegram from './QrTelegram.astro';
 
 export type QrOption = 'tiktok' | 'telegram-en' | 'telegram-ru';
 
@@ -40,15 +40,11 @@ const data = optionsData[option];
 	<div class="hystmodal__wrap">
 		<div class="hystmodal__window" role="dialog">
 			<Window>
-				<div class="qr-modal">
-					<Image class="qr-modal__logo" src={logoImg} alt="Tony Brick Stitch Logo" />
-					<div class="qr-modal__code-wrap">
-						<img class="qr-modal__qr-image" src={data.qrImage} alt={`QR code for ${data.label}`} />
-					</div>
-					<div class="qr-modal__username">
-						{data.username}
-					</div>
-				</div>
+				{option === 'tiktok' ? (
+					<QrTiktok qrImage={data.qrImage} username={data.username} label={data.label} />
+				) : (
+					<QrTelegram qrImage={data.qrImage} username={data.username} label={data.label} />
+				)}
 			</Window>
 		</div>
 	</div>

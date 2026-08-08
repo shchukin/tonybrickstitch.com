@@ -4,6 +4,13 @@
 
 .qr-modal {
 }
+
+.qr-modal--tiktok {
+}
+
+.qr-modal--telegram {
+}
+
     .qr-modal__logo {
         display: block;
         margin: -106px auto 0;

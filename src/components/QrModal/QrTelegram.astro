@@ -1,0 +1,22 @@
+---
+import { Image } from 'astro:assets';
+import logoImg from '../../assets/images/logo.png';
+
+interface Props {
+	qrImage: string;
+	username: string;
+	label: string;
+}
+
+const { qrImage, username, label } = Astro.props;
+---
+
+<div class="qr-modal qr-modal--telegram">
+	<Image class="qr-modal__logo" src={logoImg} alt="Tony Brick Stitch Logo" />
+	<div class="qr-modal__code-wrap">
+		<img class="qr-modal__qr-image" src={qrImage} alt={`QR code for ${label}`} />
+	</div>
+	<div class="qr-modal__username">
+		{username}
+	</div>
+</div>
