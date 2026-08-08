@@ -1,0 +1,24 @@
+.qr-handler {
+    display: inline;
+    vertical-align: baseline;
+    border: none;
+    padding: 9px 6px;
+    margin: 0 -4px;
+    background-color: transparent;
+    cursor: pointer;
+}
+    .qr-handler__icon {
+        position: relative;
+        top: 2px;
+        vertical-align: top;
+        width: 16px;
+        height: 16px;
+        stroke: var(--link-color);
+        transition: stroke var(--transition-hover),
+                   transform 400ms var(--ease-out-quint);
+    }
+
+    .qr-handler:hover .qr-handler__icon {
+        transform: scale(110%);
+        stroke: var(--link-color-hover);
+    }

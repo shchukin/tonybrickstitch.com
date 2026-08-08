@@ -1,15 +1,17 @@
 ---
 interface Props {
-	name: 'share' | 'close';
+	name: 'share' | 'close' | 'qr';
 	class?: string;
 }
 
 import shareSvg from '../../icons/share.svg?raw';
 import closeSvg from '../../icons/close.svg?raw';
+import qrSvg from '../../icons/qr.svg?raw';
 
 const svgs = {
 	share: shareSvg,
 	close: closeSvg,
+	qr: qrSvg,
 };
 
 const { name, class: className } = Astro.props;
