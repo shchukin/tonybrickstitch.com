@@ -4,6 +4,7 @@ import Link from "../Link/Link.astro";
 import Title from "../Title/Title.astro";
 import Wysiwyg from "../Wysiwyg/Wysiwyg.astro";
 import QrHandler from "../QrHandler/QrHandler.astro";
+import QrModal from "../QrModal/QrModal.astro";
 ---
 
 
@@ -14,15 +15,18 @@ import QrHandler from "../QrHandler/QrHandler.astro";
     <div class="follow__content">
         <Wysiwyg halved>
             <p>
-                Check out my <Link href="http://tiktok.com/@tonybrickstitch">TikTok</Link> <QrHandler/> for short videos of my latest pieces.
+                Check out my <Link href="http://tiktok.com/@tonybrickstitch">TikTok</Link> <QrHandler option="tiktok" /> for short videos of my latest pieces.
             </p>
             <p>
                 Join my Telegram channel for tips, tricks, and a personal blog:<br>
-                <Link href="https://t.me/TonyBrickStitch">Telegram&nbsp;<span class="desktop-only">Channel&nbsp;</span>in&nbsp;English</Link> <QrHandler/> &nbsp;•&nbsp; <Link href="https://t.me/TonyBrickStitchRu">Телеграм&nbsp;на&nbsp;русском</Link> <QrHandler/><br>
+                <Link href="https://t.me/TonyBrickStitch">Telegram&nbsp;<span class="desktop-only">Channel&nbsp;</span>in&nbsp;English</Link> <QrHandler option="telegram-en" /> &nbsp;•&nbsp; <Link href="https://t.me/TonyBrickStitchRu">Телеграм&nbsp;на&nbsp;русском</Link> <QrHandler option="telegram-ru" /><br>
             </p>
             <p>
                 To contact me, please send a direct message right into the Telegram channel.
             </p>
         </Wysiwyg>
     </div>
+    <QrModal option="tiktok" />
+    <QrModal option="telegram-en" />
+    <QrModal option="telegram-ru" />
 </div>

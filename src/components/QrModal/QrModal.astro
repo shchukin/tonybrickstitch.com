@@ -1,0 +1,57 @@
+---
+import './QrModal.css';
+import { Image } from 'astro:assets';
+import logoImg from '../../assets/images/logo.png';
+import Window from '../Window/Window.astro';
+
+export type QrOption = 'tiktok' | 'telegram-en' | 'telegram-ru';
+
+interface Props {
+	option: QrOption;
+}
+
+const { option } = Astro.props;
+
+const optionsData = {
+	tiktok: {
+		id: 'qr-modal-tiktok',
+		heading: 'TikTok',
+		qrImage: '/images/tiktok.png',
+		username: '@tonybrickstitch',
+	},
+	'telegram-en': {
+		id: 'qr-modal-telegram-en',
+		heading: 'Telegram Channel in English',
+		qrImage: '/images/telegram-en.jpg',
+		username: '@TonyBrickStitch',
+	},
+	'telegram-ru': {
+		id: 'qr-modal-telegram-ru',
+		heading: 'Телеграм на русском',
+		qrImage: '/images/telegram-ru.jpg',
+		username: '@TonyBrickStitchRu',
+	},
+};
+
+const data = optionsData[option];
+---
+
+<div class="hystmodal" id={data.id} aria-hidden="true">
+	<div class="hystmodal__wrap">
+		<div class="hystmodal__window" role="dialog" aria-modal="true" aria-labelledby={`${data.id}-title`}>
+			<Window heading={data.heading}>
+				<div class="qr-modal">
+					<div class="qr-modal__logo-wrap">
+						<Image class="qr-modal__logo" src={logoImg} alt="Tony Brick Stitch Logo" />
+					</div>
+					<div class="qr-modal__code-wrap">
+						<img class="qr-modal__qr-image" src={data.qrImage} alt={`QR code for ${data.heading}`} />
+					</div>
+					<div class="qr-modal__username">
+						{data.username}
+					</div>
+				</div>
+			</Window>
+		</div>
+	</div>
+</div>

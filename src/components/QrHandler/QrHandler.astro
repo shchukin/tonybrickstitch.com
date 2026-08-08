@@ -1,8 +1,17 @@
 ---
 import './QrHandler.css';
 import Icon from '../Icon/Icon.astro';
+
+export type QrOption = 'tiktok' | 'telegram-en' | 'telegram-ru';
+
+interface Props {
+	option: QrOption;
+}
+
+const { option } = Astro.props;
+const modalId = `#qr-modal-${option}`;
 ---
 
-<button class="qr-handler" type="button">
+<button class="qr-handler" type="button" data-hystmodal={modalId} aria-label={`Open QR code for ${option}`}>
     <Icon class="qr-handler__icon" name="qr" />
 </button>
