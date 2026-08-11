@@ -18,6 +18,7 @@ const optionsData = {
 		id: 'qr-modal-tiktok',
 		qrImage: '/images/tiktok.png',
 		username: '@tonybrickstitch',
+		link: 'https://www.tiktok.com/@tonybrickstitch',
 		label: 'TonyBrickStitch on TikTok',
 	},
 	'telegram-en': {
@@ -40,7 +41,7 @@ const data = optionsData[option];
 <HystModal id={data.id}>
 	<Window>
 		{option === 'tiktok' ? (
-			<QrTiktok qrImage={data.qrImage} title={'TonyBrickStitch'} username={data.username} label={data.label} />
+			<QrTiktok qrImage={data.qrImage} title={'TonyBrickStitch'} username={data.username} label={data.label} link={data.link} />
 		) : (
 			<QrTelegram qrImage={data.qrImage} username={data.username} label={data.label} />
 		)}
