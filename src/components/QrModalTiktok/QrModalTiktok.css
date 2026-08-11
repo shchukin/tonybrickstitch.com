@@ -4,8 +4,12 @@
     background-color: #000000;
     background-repeat: no-repeat;
     background-position: center bottom;
+}
+
+.hystmodal--active:has(.qr-modal-tiktok):before {
     opacity: 100%;
 }
+
 
 .hystmodal__window:has(.qr-modal-tiktok) {
     width: 346px;
