@@ -1,6 +1,7 @@
 ---
 import './QrModal.css';
 import Window from '../Window/Window.astro';
+import HystModal from '../HystModal/HystModal.astro';
 import QrTiktok from '../QrModalTiktok/QrModalTiktok.astro';
 import QrTelegram from './QrTelegram.astro';
 
@@ -36,16 +37,12 @@ const optionsData = {
 const data = optionsData[option];
 ---
 
-<div class="hystmodal" id={data.id} aria-hidden="true">
-	<div class="hystmodal__wrap">
-		<div class="hystmodal__window" role="dialog">
-			<Window>
-				{option === 'tiktok' ? (
-					<QrTiktok qrImage={data.qrImage} username={data.username} label={data.label} />
-				) : (
-					<QrTelegram qrImage={data.qrImage} username={data.username} label={data.label} />
-				)}
-			</Window>
-		</div>
-	</div>
-</div>
+<HystModal id={data.id}>
+	<Window>
+		{option === 'tiktok' ? (
+			<QrTiktok qrImage={data.qrImage} username={data.username} label={data.label} />
+		) : (
+			<QrTelegram qrImage={data.qrImage} username={data.username} label={data.label} />
+		)}
+	</Window>
+</HystModal>

@@ -1,0 +1,15 @@
+---
+interface Props {
+	id?: string;
+}
+
+const { id } = Astro.props;
+---
+
+<div class="hystmodal" id={id} aria-hidden="true">
+	<div class="hystmodal__wrap">
+		<div class="hystmodal__window" role="dialog" aria-modal="true">
+			<slot />
+		</div>
+	</div>
+</div>

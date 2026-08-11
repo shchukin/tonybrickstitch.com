@@ -1,6 +1,7 @@
 ---
 import './Share.css';
 import type { ModData } from '../../types/mod';
+import HystModal from "../HystModal/HystModal.astro";
 import Window from "../Window/Window.astro";
 import Wysiwyg from "../Wysiwyg/Wysiwyg.astro";
 import Copy from "../Copy/Copy.astro";
@@ -15,65 +16,61 @@ const pdfRu = `https://tonybrickstitch.com/patterns/${alias}-ru.pdf`;
 const previewImage = `/content/mods-preview/${alias}-pattern-mods-preview.jpg`;
 ---
 
-<div class="hystmodal" id={modalId} aria-hidden="true">
-	<div class="hystmodal__wrap">
-		<div class="hystmodal__window" role="dialog" aria-modal="true" aria-labelledby={`${modalId}-title`}>
-			<Window heading={title}>
-				<div class="share">
-					<div class="share__intro">
-					  <Wysiwyg halved>
-							<p>When sharing, please avoid forwarding the PDF file itself. Kindly use one of these links instead — they are direct links, so the download will start immediately without even opening the website.</p>
-							<p>The thing is, the pattern may get updates over time (new pages, small fixes, improvements), and these links always point to the most recent version.</p>
-						</Wysiwyg>
-					</div>
-					<div class="share__all-links">
-						<!--{import.meta.env.BASE_URL}-->
-						<div class="share__item">
-							<div class="share__wrap">
-								<div class="share__label">
-									English version:
-								</div>
-								<div class="share__link">
-									{ pdfEn }
-								</div>
-							</div>
-							<div class="share__copy">
-								<Copy textToCopy={pdfEn} client:load />
-							</div>
+<HystModal id={modalId}>
+	<Window floatedCrossButton heading={title}>
+		<div class="share">
+			<div class="share__intro">
+			  <Wysiwyg halved>
+					<p>When sharing, please avoid forwarding the PDF file itself. Kindly use one of these links instead — they are direct links, so the download will start immediately without even opening the website.</p>
+					<p>The thing is, the pattern may get updates over time (new pages, small fixes, improvements), and these links always point to the most recent version.</p>
+				</Wysiwyg>
+			</div>
+			<div class="share__all-links">
+				<!--{import.meta.env.BASE_URL}-->
+				<div class="share__item">
+					<div class="share__wrap">
+						<div class="share__label">
+							English version:
 						</div>
-						<div class="share__item">
-							<div class="share__wrap">
-								<div class="share__label">
-									Русская версия:
-								</div>
-								<div class="share__link">
-									{ pdfRu }
-								</div>
-							</div>
-							<div class="share__copy">
-								<Copy textToCopy={pdfRu} client:load />
-							</div>
+						<div class="share__link">
+							{ pdfEn }
 						</div>
 					</div>
-
-					<div class="share__addition">
-						<Wysiwyg halved>
-							<p>Use this image for the post preview.<br class="desktop-only">
-								Right-click (or long-press) → Save image:</p>
-						</Wysiwyg>
-					</div>
-
-					<div class="share__preview">
-						<img
-							class="share__image"
-							src={previewImage}
-							width="560"
-							height="420"
-							alt=""
-						>
+					<div class="share__copy">
+						<Copy textToCopy={pdfEn} client:load />
 					</div>
 				</div>
-			</Window>
+				<div class="share__item">
+					<div class="share__wrap">
+						<div class="share__label">
+							Русская версия:
+						</div>
+						<div class="share__link">
+							{ pdfRu }
+						</div>
+					</div>
+					<div class="share__copy">
+						<Copy textToCopy={pdfRu} client:load />
+					</div>
+				</div>
+			</div>
+
+			<div class="share__addition">
+				<Wysiwyg halved>
+					<p>Use this image for the post preview.<br class="desktop-only">
+						Right-click (or long-press) → Save image:</p>
+				</Wysiwyg>
+			</div>
+
+			<div class="share__preview">
+				<img
+					class="share__image"
+					src={previewImage}
+					width="560"
+					height="420"
+					alt=""
+				>
+			</div>
 		</div>
-	</div>
-</div>
+	</Window>
+</HystModal>
