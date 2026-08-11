@@ -4,8 +4,9 @@
     border-radius: 12px;
 }
     .window__close {
-        float: right;
-        position: relative;
+        position: absolute;
+        right: 0;
+        top: 0;
         width: 68px;
         height: 68px;
         display: flex;
@@ -44,7 +45,7 @@
         }
 
     .window__heading {
-        padding: 28px 0 0 32px;
+        padding: 28px 32px 0 32px;
     }
 
     .window__body {
@@ -62,6 +63,19 @@
         gap: 8px;
     }
 
+
+
+.window--floated-cross-button {
+
+}
+    .window--floated-cross-button .window__close {
+        position: relative;
+        float: right;
+    }
+
+    .window--floated-cross-button .window__heading {
+        padding-right: 0;
+    }
 
 
 @media (width < 740px) {
