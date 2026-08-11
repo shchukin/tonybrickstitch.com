@@ -2,19 +2,22 @@
 import './QrModalTiktok.css';
 import { Image } from 'astro:assets';
 import logoImg from '../../assets/images/logo.png';
+import tiktokLogo from '../../assets/images/tiktok-logo.png';
 
 interface Props {
 	qrImage: string;
+	title: string;
 	username: string;
 	label: string;
 }
 
-const { qrImage, username, label } = Astro.props;
+const { qrImage, title, username, label } = Astro.props;
 ---
 
 <div class="qr-modal-tiktok">
 	<Image class="qr-modal-tiktok__logo" src={logoImg} alt="Tony Brick Stitch Logo" />
-	<div class="qr-modal-tiktok__extra">foobar</div>
-	<img class="qr-modal-tiktok__image" src={qrImage} alt={`QR code for ${label}`} />
+	<div class="qr-modal-tiktok__title">{title}</div>
 	<div class="qr-modal-tiktok__username">{username}</div>
+	<img class="qr-modal-tiktok__image" src={qrImage} alt={`QR code for ${label}`} />
+	<Image class="qr-modal-tiktok__platform-logo" src={tiktokLogo} alt="" />
 </div>

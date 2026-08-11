@@ -40,7 +40,7 @@ const data = optionsData[option];
 <HystModal id={data.id}>
 	<Window>
 		{option === 'tiktok' ? (
-			<QrTiktok qrImage={data.qrImage} username={data.username} label={data.label} />
+			<QrTiktok qrImage={data.qrImage} title={'TonyBrickStitch'} username={data.username} label={data.label} />
 		) : (
 			<QrTelegram qrImage={data.qrImage} username={data.username} label={data.label} />
 		)}

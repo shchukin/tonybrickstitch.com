@@ -1,5 +1,23 @@
+.hystmodal:has(.qr-modal-tiktok)::before {
+    background-image: url("./tiktok-background.jpg");
+    background-size: auto 896px;
+    background-color: #000000;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+    opacity: 100%;
+}
+
 .hystmodal__window:has(.qr-modal-tiktok) {
     width: 346px;
+}
+
+.hystmodal__window:has(.qr-modal-tiktok) .window {
+    border-radius: 34px;
+    corner-shape: superellipse(1.5);
+}
+
+.hystmodal__window:has(.qr-modal-tiktok) .window__body {
+    padding: 24px 32px 20px;
 }
 
 .qr-modal-tiktok {
@@ -15,16 +33,32 @@
         object-fit: cover;
     }
 
-    .qr-modal-tiktok__extra {
+    .qr-modal-tiktok__title {
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 26px;
+        color: #000000;
+        letter-spacing: -0.25px;
+    }
 
+    .qr-modal-tiktok__username {
+        margin-top: 1px;
+        font-size: 16px;
+        line-height: 22px;
+        color: #7F7F7F;
+        letter-spacing: -0.25px;
     }
 
     .qr-modal-tiktok__image {
         vertical-align: top;
+        margin-top: 14px;
         width: 240px;
         height: 240px;
     }
 
-    .qr-modal-tiktok__username {
-
+    .qr-modal-tiktok__platform-logo {
+        vertical-align: top;
+        margin-top: 12px;
+        width: 91px;
+        height: 38px;
     }
