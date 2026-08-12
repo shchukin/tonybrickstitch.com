@@ -3,22 +3,26 @@ import './QrModalTelegram.css';
 import logoImg from '../../assets/images/logo.png';
 import { Image } from 'astro:assets';
 import Link from "../Link/Link.astro";
+import HystModal from "../HystModal/HystModal.astro";
+import Window from "../Window/Window.astro";
+import type { SocialNetworkData } from "../../data/socialNetworks";
 
 interface Props {
-	qrImage: string;
-	link: string;
-	username: string;
-	usernameFontSize: number;
-	label: string;
+	data: SocialNetworkData;
 }
 
-const { qrImage, username, usernameFontSize, label, link } = Astro.props;
+const { data } = Astro.props;
+const { id, qrImage, username, usernameFontSize = 22, label, link } = data;
 ---
 
-<div class="qr-modal-telegram">
-	<Image class="qr-modal-telegram__logo" src={logoImg} alt="Tony Brick Stitch Logo" />
-	<img class="qr-modal-telegram__image" src={qrImage} alt={`QR code for ${label}`} />
-	<div class="qr-modal-telegram__username" style={'font-size: ' + usernameFontSize + 'px'}>
-		<Link invertedTextAlike href={link} target="_blank">{username}</Link>
-	</div>
-</div>
+<HystModal id={id}>
+	<Window>
+		<div class="qr-modal-telegram">
+			<Image class="qr-modal-telegram__logo" src={logoImg} alt="Tony Brick Stitch Logo" />
+			<img class="qr-modal-telegram__image" src={qrImage} alt={`QR code for ${label}`} />
+			<div class="qr-modal-telegram__username" style={`font-size: ${usernameFontSize}px`}>
+				<Link invertedTextAlike href={link} target="_blank">{username}</Link>
+			</div>
+		</div>
+	</Window>
+</HystModal>

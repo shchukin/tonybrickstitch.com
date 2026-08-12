@@ -4,7 +4,9 @@ import Link from "../Link/Link.astro";
 import Title from "../Title/Title.astro";
 import Wysiwyg from "../Wysiwyg/Wysiwyg.astro";
 import QrHandler from "../QrHandler/QrHandler.astro";
-import QrModal from "../QrModal/QrModal.astro";
+import QrModalTiktok from "../QrModalTiktok/QrModalTiktok.astro";
+import QrModalTelegram from "../QrModalTelegram/QrModalTelegram.astro";
+import { socialNetworksData } from "../../data/socialNetworks";
 ---
 
 
@@ -26,7 +28,7 @@ import QrModal from "../QrModal/QrModal.astro";
             </p>
         </Wysiwyg>
     </div>
-    <QrModal option="tiktok" />
-    <QrModal option="telegram-en" />
-    <QrModal option="telegram-ru" />
+    <QrModalTiktok data={socialNetworksData.tiktok} />
+    <QrModalTelegram data={socialNetworksData['telegram-en']} />
+    <QrModalTelegram data={socialNetworksData['telegram-ru']} />
 </div>
