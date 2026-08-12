@@ -15,10 +15,14 @@ interface Props {
 
 const { data } = Astro.props;
 const { id, qrImage, username, usernameFontSize = 22, label, link } = data;
+const isEn = id.includes('en');
 ---
 
-<link rel="preload" href={beachSvg} as="image" type="image/svg+xml" />
-<link rel="preload" href={snowflakesSvg} as="image" type="image/svg+xml" />
+{isEn ? (
+	<link rel="preload" href={beachSvg} as="image" type="image/svg+xml" />
+) : (
+	<link rel="preload" href={snowflakesSvg} as="image" type="image/svg+xml" />
+)}
 
 <HystModal id={id}>
 	<Window>

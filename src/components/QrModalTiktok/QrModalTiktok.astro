@@ -6,6 +6,7 @@ import tiktokLogo from '../../assets/images/tiktok-logo.png';
 import Link from "../Link/Link.astro";
 import HystModal from "../HystModal/HystModal.astro";
 import Window from "../Window/Window.astro";
+import tiktokBgJpg from './tiktok-background.jpg?url';
 import type { SocialNetworkData } from "../../data/socialNetworks";
 
 interface Props {
@@ -15,6 +16,8 @@ interface Props {
 const { data } = Astro.props;
 const { id, qrImage, title = 'TonyBrickStitch', username, label, link } = data;
 ---
+
+<link rel="preload" href={tiktokBgJpg} as="image" type="image/jpeg" />
 
 <HystModal id={id}>
 	<Window>
