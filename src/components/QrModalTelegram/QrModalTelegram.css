@@ -1,0 +1,78 @@
+.hystmodal:has(.qr-modal-telegram)::before {
+    background-image: url("./telegram-background.jpg");
+    background-size: auto 896px;
+    background-color: #000000;
+    background-repeat: no-repeat;
+    background-position: center bottom;
+}
+
+.hystmodal--active:has(.qr-modal-telegram):before {
+    opacity: 100%;
+}
+
+
+.hystmodal__window:has(.qr-modal-telegram) {
+    width: 346px;
+}
+
+.hystmodal__window:has(.qr-modal-telegram) .window {
+    border-radius: 34px;
+    corner-shape: superellipse(1.5);
+}
+
+.hystmodal__window:has(.qr-modal-telegram) .window__body {
+    padding: 24px 24px 20px;
+}
+
+
+@media (width < 400px) {
+
+    .hystmodal__window:has(.qr-modal-telegram) {
+        width: calc(100% - 2 * var(--container-padding));
+    }
+}
+
+
+
+.qr-modal-telegram {
+    text-align: center;
+}
+    .qr-modal-telegram__logo {
+        margin-top: -106px;
+        width: 106px;
+        height: 106px;
+        border-radius: 50%;
+        border: 5px solid #ffffff;
+        background-color: var(--image-fallback);
+        object-fit: cover;
+    }
+
+    .qr-modal-telegram__title {
+        font-weight: bold;
+        font-size: 20px;
+        line-height: 26px;
+        color: #000000;
+        letter-spacing: -0.25px;
+    }
+
+    .qr-modal-telegram__username {
+        margin-top: 1px;
+        font-size: 16px;
+        line-height: 22px;
+        color: #7F7F7F;
+        letter-spacing: -0.25px;
+    }
+
+    .qr-modal-telegram__image {
+        display: block;
+        margin: 14px auto 0;
+        width: 240px;
+        height: 240px;
+    }
+
+    .qr-modal-telegram__platform-logo {
+        display: block;
+        margin: 12px auto 0;
+        width: 91px;
+        height: 38px;
+    }

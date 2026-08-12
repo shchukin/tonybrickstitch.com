@@ -1,0 +1,22 @@
+---
+import './QrModalTelegram.css';
+import logoImg from '../../assets/images/logo.png';
+import { Image } from 'astro:assets';
+import Link from "../Link/Link.astro";
+
+interface Props {
+	qrImage: string;
+	username: string;
+	label: string;
+}
+
+const { qrImage, username, label } = Astro.props;
+---
+
+<div class="qr-modal-telegram">
+	<Image class="qr-modal-telegram__logo" src={logoImg} alt="Tony Brick Stitch Logo" />
+	<img class="qr-modal-telegram__image" src={qrImage} alt={`QR code for ${label}`} />
+	<div class="qr-modal-telegram__username">
+		{username}
+	</div>
+</div>
