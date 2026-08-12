@@ -24,6 +24,7 @@ const optionsData = {
 		id: 'qr-modal-telegram-en',
 		qrImage: '/images/telegram-en.jpg',
 		username: '@TonyBrickStitch',
+		usernameFontSize: 22,
 		link: 'https://t.me/TonyBrickStitch',
 		label: 'TonyBrickStitch’s Telegram Channel',
 	},
@@ -31,6 +32,7 @@ const optionsData = {
 		id: 'qr-modal-telegram-ru',
 		qrImage: '/images/telegram-ru.jpg',
 		username: '@TonyBrickStitchRu',
+		usernameFontSize: 20,
 		link: 'https://t.me/TonyBrickStitchRu',
 		label: 'Телеграм канал TonyBrickStitch',
 	},
@@ -44,7 +46,7 @@ const data = optionsData[option];
 		{option === 'tiktok' ? (
 			<QrTiktok qrImage={data.qrImage} title={'TonyBrickStitch'} username={data.username} label={data.label} link={data.link} />
 		) : (
-			<QrModalTelegram qrImage={data.qrImage} username={data.username} label={data.label} link={data.link} />
+			<QrModalTelegram qrImage={data.qrImage} username={data.username} usernameFontSize={data.usernameFontSize} label={data.label} link={data.link} />
 		)}
 	</Window>
 </HystModal>

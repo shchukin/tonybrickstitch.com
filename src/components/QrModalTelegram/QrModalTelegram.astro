@@ -8,16 +8,17 @@ interface Props {
 	qrImage: string;
 	link: string;
 	username: string;
+	usernameFontSize: number;
 	label: string;
 }
 
-const { qrImage, username, label, link } = Astro.props;
+const { qrImage, username, usernameFontSize, label, link } = Astro.props;
 ---
 
 <div class="qr-modal-telegram">
 	<Image class="qr-modal-telegram__logo" src={logoImg} alt="Tony Brick Stitch Logo" />
 	<img class="qr-modal-telegram__image" src={qrImage} alt={`QR code for ${label}`} />
-	<div class="qr-modal-telegram__username">
+	<div class="qr-modal-telegram__username" style={'font-size: ' + usernameFontSize + 'px'}>
 		<Link invertedTextAlike href={link} target="_blank">{username}</Link>
 	</div>
 </div>
