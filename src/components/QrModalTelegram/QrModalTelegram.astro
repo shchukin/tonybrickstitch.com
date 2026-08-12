@@ -1,6 +1,8 @@
 ---
 import './QrModalTelegram.css';
 import logoImg from '../../assets/images/logo.png';
+import beachSvg from './beach.svg?url';
+import snowflakesSvg from './snowflakes.svg?url';
 import { Image } from 'astro:assets';
 import Link from "../Link/Link.astro";
 import HystModal from "../HystModal/HystModal.astro";
@@ -14,6 +16,9 @@ interface Props {
 const { data } = Astro.props;
 const { id, qrImage, username, usernameFontSize = 22, label, link } = data;
 ---
+
+<link rel="preload" href={beachSvg} as="image" type="image/svg+xml" />
+<link rel="preload" href={snowflakesSvg} as="image" type="image/svg+xml" />
 
 <HystModal id={id}>
 	<Window>
