@@ -6,17 +6,18 @@ import Link from "../Link/Link.astro";
 
 interface Props {
 	qrImage: string;
+	link: string;
 	username: string;
 	label: string;
 }
 
-const { qrImage, username, label } = Astro.props;
+const { qrImage, username, label, link } = Astro.props;
 ---
 
 <div class="qr-modal-telegram">
 	<Image class="qr-modal-telegram__logo" src={logoImg} alt="Tony Brick Stitch Logo" />
 	<img class="qr-modal-telegram__image" src={qrImage} alt={`QR code for ${label}`} />
 	<div class="qr-modal-telegram__username">
-		{username}
+		<Link invertedTextAlike href={link} target="_blank">{username}</Link>
 	</div>
 </div>
