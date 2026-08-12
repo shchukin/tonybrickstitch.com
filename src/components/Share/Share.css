@@ -6,8 +6,9 @@
 
 }
     .share__intro {
-
+         max-width: 550px;
     }
+
     .share__all-links {
         margin-top: 12px;
     }
