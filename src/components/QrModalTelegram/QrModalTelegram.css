@@ -1,12 +1,18 @@
 .hystmodal:has(.qr-modal-telegram)::before {
-    /*background-image: url("./telegram-background.jpg");*/
-    /*background-size: auto 896px;*/
-    /*background-color: #000000;*/
-    /*background-repeat: no-repeat;*/
-    /*background-position: center bottom;*/
+    background-image: 
+        url('./snowflakes.svg'),
+        radial-gradient(at 0% 0%, #B0DBD5 0%, transparent 70%),
+        radial-gradient(at 100% 0%, #C0C4EC 0%, transparent 70%),
+        radial-gradient(at 100% 100%, #83ADF0 0%, transparent 70%),
+        radial-gradient(at 0% 100%, #9ED4F4 0%, transparent 70%);
+    background-position: center center, 0 0, 0 0, 0 0, 0 0;
+    background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+    background-size: 420px auto, cover, cover, cover, cover;
+    background-blend-mode: soft-light, normal, normal, normal, normal;
+    background-color: #9ED4F4;
 }
 
-.hystmodal--active:has(.qr-modal-telegram):before {
+.hystmodal--active:has(.qr-modal-telegram)::before {
     opacity: 100%;
 }
 
