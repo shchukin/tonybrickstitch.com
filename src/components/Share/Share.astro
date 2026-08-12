@@ -36,7 +36,7 @@ const pdfRu = `https://tonybrickstitch.com/patterns/${alias}-ru.pdf`;
 						</div>
 					</div>
 					<div class="share__copy">
-						<Copy textToCopy={pdfEn} client:load />
+						<Copy textToCopy={pdfEn} />
 					</div>
 				</div>
 				<div class="share__item">
@@ -49,7 +49,7 @@ const pdfRu = `https://tonybrickstitch.com/patterns/${alias}-ru.pdf`;
 						</div>
 					</div>
 					<div class="share__copy">
-						<Copy textToCopy={pdfRu} client:load />
+						<Copy textToCopy={pdfRu} />
 					</div>
 				</div>
 			</div>
@@ -61,7 +61,7 @@ const pdfRu = `https://tonybrickstitch.com/patterns/${alias}-ru.pdf`;
 			</div>
 
 			<div class="share__preview">
-				<AppImage class="share__image" src={previewImage} width="560" height="420" alt="" />
+				<AppImage class="share__image" src={previewImage} width="560" height="420" alt={`Preview pattern image for ${title}`} />
 			</div>
 		</div>
 	</Window>
