@@ -1,0 +1,11 @@
+{
+  "alias": "silent-moon-mariners",
+  "title": "Silent Moon Mariners",
+  "description": "<ul>\n\t<li>Stretched vertically by 1.25x to adjust for the bead aspect ratio.</li>\n\t<li>The moon was redrawn to maintain its 1:1 circular ratio after the stretch.</li>\n\t<li>The bubble color was replaced with white (looks much better in beads).</li>\n\t<li>Three length options: conventionally 16cm, 15cm, and 13cm.</li>\n</ul>",
+  "author": {
+    "label": "Original Design",
+    "name": "Irisss on BraceletBook",
+    "href": "https://www.braceletbook.com/patterns/alpha/81416"
+  },
+  "previewImage": "./silent-moon-mariners.jpg"
+}
