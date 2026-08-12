@@ -1,19 +1,19 @@
 ---
 import './Share.css';
 import type { ModData } from '../../types/mod';
-import HystModal from "../HystModal/HystModal.astro";
 import Window from "../Window/Window.astro";
 import Wysiwyg from "../Wysiwyg/Wysiwyg.astro";
 import Copy from "../Copy/Copy.astro";
+import HystModal from "../HystModal/HystModal.astro";
+import Image from '../Image/Image.astro';
 
 interface Props extends ModData {}
 
-const { alias, title } = Astro.props;
+const { alias, title, previewImage } = Astro.props;
 
 const modalId = `share-${alias}`;
 const pdfEn = `https://tonybrickstitch.com/patterns/${alias}-en.pdf`;
 const pdfRu = `https://tonybrickstitch.com/patterns/${alias}-ru.pdf`;
-const previewImage = `/content/mods-preview/${alias}-pattern-mods-preview.jpg`;
 ---
 
 <HystModal id={modalId}>
@@ -62,13 +62,7 @@ const previewImage = `/content/mods-preview/${alias}-pattern-mods-preview.jpg`;
 			</div>
 
 			<div class="share__preview">
-				<img
-					class="share__image"
-					src={previewImage}
-					width="560"
-					height="420"
-					alt=""
-				>
+				<Image class="share__image" src={previewImage} width="560" height="420" alt="" />
 			</div>
 		</div>
 	</Window>

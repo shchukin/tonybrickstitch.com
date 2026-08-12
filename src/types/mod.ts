@@ -1,3 +1,5 @@
+import type { ImageMetadata } from 'astro';
+
 export interface ModAuthor {
 	label: string;
 	name: string;
@@ -9,4 +11,5 @@ export interface ModData {
 	title: string;
 	description: string;
 	author: ModAuthor;
+	previewImage: ImageMetadata;
 }

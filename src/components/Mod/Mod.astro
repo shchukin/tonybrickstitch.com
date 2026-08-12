@@ -6,20 +6,20 @@ import Button from '../Button/Button.astro';
 import Icon from '../Icon/Icon.astro';
 import type { ModData } from '../../types/mod';
 import Label from "../Label/Label.astro";
+import Image from '../Image/Image.astro';
 
 interface Props extends ModData {}
 
-const { alias, title, description, author } = Astro.props;
+const { alias, title, description, author, previewImage } = Astro.props;
 
 const modalId = `#share-${alias}`;
 const pdfEn = `/patterns/${alias}-en.pdf`;
 const pdfRu = `/patterns/${alias}-ru.pdf`;
-const previewImage = `/content/mods-preview/${alias}-pattern-mods-preview.jpg`;
 ---
 
 <article class="mod">
 	<a class="mod__preview" href={pdfEn}>
-		<img class="mod__image" src={previewImage} width="280" height="210" alt="">
+		<Image class="mod__image" src={previewImage} width="280" height="210" alt="" />
 	</a>
 	<div class="mod__body">
 		<h3 class="mod__heading">
