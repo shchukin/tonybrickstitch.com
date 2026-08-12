@@ -1,4 +1,6 @@
-.hystmodal:has(.qr-modal-telegram)::before {
+/* Telegram RU (Winter / Snowflakes) */
+.hystmodal:has(.qr-modal-telegram--qr-modal-telegram-ru)::before,
+.hystmodal#qr-modal-telegram-ru::before {
     background-image: 
         url('./snowflakes.svg'),
         radial-gradient(at 0% 0%, #B0DBD5 0%, transparent 70%),
@@ -10,6 +12,22 @@
     background-size: 420px auto, cover, cover, cover, cover;
     background-blend-mode: soft-light, normal, normal, normal, normal;
     background-color: #9ED4F4;
+}
+
+/* Telegram EN (Summer / Beach) */
+.hystmodal:has(.qr-modal-telegram--qr-modal-telegram-en)::before,
+.hystmodal#qr-modal-telegram-en::before {
+    background-image: 
+        url('./beach.svg'),
+        radial-gradient(at 0% 0%, #FFE599 0%, transparent 70%),
+        radial-gradient(at 100% 0%, #FF9B85 0%, transparent 70%),
+        radial-gradient(at 100% 100%, #3A86FF 0%, transparent 70%),
+        radial-gradient(at 0% 100%, #48E5C2 0%, transparent 70%);
+    background-position: center center, 0 0, 0 0, 0 0, 0 0;
+    background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+    background-size: 420px auto, cover, cover, cover, cover;
+    background-blend-mode: soft-light, normal, normal, normal, normal;
+    background-color: #48E5C2;
 }
 
 .hystmodal--active:has(.qr-modal-telegram)::before {
