@@ -1,6 +1,6 @@
 ---
 import './QrModalTiktok.css';
-import Image from "../Image/Image.astro";
+import AppImage from "../AppImage/AppImage.astro";
 import logoImg from '../../assets/images/logo.png';
 import tiktokLogo from '../../assets/images/tiktok-logo.png';
 import Link from "../Link/Link.astro";
@@ -22,7 +22,7 @@ const { id, qrImage, title = 'TonyBrickStitch', username, label, link } = data;
 <HystModal id={id}>
 	<Window>
 		<div class="qr-modal-tiktok">
-			<Image class="qr-modal-tiktok__logo" src={logoImg} width="106" height="106" alt="Tony Brick Stitch Logo" />
+			<AppImage class="qr-modal-tiktok__logo" src={logoImg} width="106" height="106" alt="Tony Brick Stitch Logo" />
 			<div class="qr-modal-tiktok__title">
 				<Link invertedTextAlike href={link} target="_blank">{title}</Link>
 			</div>
@@ -30,7 +30,7 @@ const { id, qrImage, title = 'TonyBrickStitch', username, label, link } = data;
 				<Link invertedTextAlike href={link} target="_blank">{username}</Link>
 			</div>
 			<img class="qr-modal-tiktok__image" src={qrImage} alt={`QR code for ${label}`} />
-			<Image class="qr-modal-tiktok__platform-logo" src={tiktokLogo} width="182" height="76" alt="" />
+			<AppImage class="qr-modal-tiktok__platform-logo" src={tiktokLogo} width="182" height="76" alt="" />
 		</div>
 	</Window>
 </HystModal>

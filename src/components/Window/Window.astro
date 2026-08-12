@@ -1,6 +1,6 @@
 ---
 import './Window.css';
-import Icon from '../Icon/Icon.astro';
+import AppIcon from '../AppIcon/AppIcon.astro';
 import Title from "../Title/Title.astro";
 
 interface Props {
@@ -13,7 +13,7 @@ const { heading, floatedCrossButton } = Astro.props;
 
 <div class:list={['window', { 'window--floated-cross-button': floatedCrossButton }]}>
   <button class="window__close" type="button" data-hystclose>
-    <Icon name="close"/>
+    <AppIcon name="close"/>
   </button>
   {heading && (
     <div class="window__heading">

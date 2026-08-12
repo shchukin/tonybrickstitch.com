@@ -3,7 +3,7 @@ import './QrModalTelegram.css';
 import logoImg from '../../assets/images/logo.png';
 import beachSvg from './beach.svg?url';
 import snowflakesSvg from './snowflakes.svg?url';
-import Image from "../Image/Image.astro";
+import AppImage from "../AppImage/AppImage.astro";
 import Link from "../Link/Link.astro";
 import HystModal from "../HystModal/HystModal.astro";
 import Window from "../Window/Window.astro";
@@ -27,7 +27,7 @@ const isEn = id.includes('en');
 <HystModal id={id}>
 	<Window>
 		<div class:list={['qr-modal-telegram', id && `qr-modal-telegram--${id}`]}>
-			<Image class="qr-modal-telegram__logo" src={logoImg} width="108" height="108" alt="Tony Brick Stitch Logo" />
+			<AppImage class="qr-modal-telegram__logo" src={logoImg} width="108" height="108" alt="Tony Brick Stitch Logo" />
 			<img class="qr-modal-telegram__image" src={qrImage} alt={`QR code for ${label}`} />
 			<div class="qr-modal-telegram__username" style={`font-size: ${usernameFontSize}px`}>
 				<Link invertedTextAlike href={link} target="_blank">{username}</Link>
