@@ -1,7 +1,7 @@
 .copy {
     display: inline-block;
     vertical-align: top;
-    border: 1px solid #CBD5E1;
+    border: 1px solid var(--border-color-light);
     padding: 8px 12px;
     min-width: 80px;
     background-color: #FFFFFF;
@@ -10,7 +10,7 @@
     font-size: 14px;
     line-height: 16px;
     letter-spacing: inherit; /* in case of <button> */
-    color: #1E293B;
+    color: var(--heading-color);
     text-align: center;
     text-decoration: none;
     white-space: nowrap;
@@ -25,8 +25,8 @@
 
 .copy--is-copied,
 .copy--is-copied:hover {
-    background-color: #22c55e;
-    border-color: #22c55e;
-    color: #ffffff;
+    background-color: var(--success-color);
+    border-color: var(--success-color);
+    color: #FFFFFF;
     cursor: default;
 }

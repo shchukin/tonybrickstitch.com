@@ -24,6 +24,9 @@
     --text-color: #374151;
     --text-gray: #6B7280;
     --text-lighter-gray: #9BA3AB;
+    --border-color: #E5E7EB;
+    --border-color-light: #CBD5E1;
+    --success-color: #22C55E;
     --bg-color: #FAF7F8;
 }
 
