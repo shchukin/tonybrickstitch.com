@@ -48,24 +48,46 @@
     }
 
     .qr-modal-tiktok__title {
+        display: block;
+        width: fit-content;
+        margin: -4px auto 0;
+        padding-top: 4px; /* expand clickable area */
         font-weight: bold;
         font-size: 20px;
         line-height: 26px;
         color: #000000;
         letter-spacing: -0.25px;
+        text-decoration: 1.5px underline transparent;
+        text-underline-offset: 3px;
+    }
+
+    .qr-modal-tiktok__title:hover {
+        text-decoration-color: currentColor;
     }
 
     .qr-modal-tiktok__username {
-        margin-top: 1px;
+        margin: 0 auto;
+        display: block;
+        width: fit-content;
+        padding: 1px 0 4px; /* expand clickable area */
         font-size: 16px;
         line-height: 22px;
         color: #7F7F7F;
         letter-spacing: -0.25px;
+        text-decoration: none;
     }
+        .qr-modal-tiktok__hover {
+            text-decoration: 1px underline transparent;
+            text-underline-offset: 3px;
+        }
+
+        .qr-modal-tiktok__username:hover .qr-modal-tiktok__hover {
+            text-decoration-color: currentColor;
+        }
 
     .qr-modal-tiktok__image {
         display: block;
-        margin: 14px auto 0;
+        margin: 10px auto 0;
         width: 240px;
         height: 240px;
     }

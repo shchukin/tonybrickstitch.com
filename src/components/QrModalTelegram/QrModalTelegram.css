@@ -45,7 +45,7 @@
 }
 
 .hystmodal__window:has(.qr-modal-telegram) .window__body {
-    padding: 16px 16px 24px;
+    padding: 16px 16px 20px;
 }
 
 
@@ -79,15 +79,23 @@
     }
 
     .qr-modal-telegram__username {
-        margin-top: 14px;
+        display: block;
+        width: fit-content;
+        margin: 6px auto 0;
+        padding: 4px 0;
         font-weight: 600;
         font-size: 22px;
         line-height: 28px;
         color: #7F7F7F;
-        text-transform: uppercase;
         letter-spacing: -0.25px;
+        text-transform: uppercase;
+        text-decoration: none;
     }
-        .qr-modal-telegram__username .link {
-            text-underline-offset: 5px;
-            text-decoration-thickness: 1.6px;
+        .qr-modal-telegram__hover {
+            text-decoration: 1.6px underline transparent;
+            text-underline-offset: 4px;
+        }
+
+        .qr-modal-telegram__username:hover .qr-modal-telegram__hover {
+            text-decoration-color: currentColor;
         }

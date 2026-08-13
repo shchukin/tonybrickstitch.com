@@ -23,12 +23,12 @@ const { id, qrImage, title = 'TonyBrickStitch', username, label, link } = data;
 	<Window>
 		<div class="qr-modal-tiktok">
 			<AppImage class="qr-modal-tiktok__logo" src={logoImg} width="106" height="106" alt="Tony Brick Stitch Logo" />
-			<div class="qr-modal-tiktok__title">
-				<Link invertedTextAlike href={link} target="_blank">{title}</Link>
-			</div>
-			<div class="qr-modal-tiktok__username">
-				<Link invertedTextAlike href={link} target="_blank">{username}</Link>
-			</div>
+			<a class="qr-modal-tiktok__title" href={link} target="_blank">
+				{title}
+			</a>
+			<a class="qr-modal-tiktok__username" href={link} target="_blank">
+				@<span class="qr-modal-tiktok__hover">{username}</span>
+			</a>
 			<img class="qr-modal-tiktok__image" src={qrImage} alt={`QR code for ${label}`} />
 			<AppImage class="qr-modal-tiktok__platform-logo" src={tiktokLogo} width="182" height="76" alt="TikTok logo" />
 		</div>
