@@ -49,6 +49,11 @@
     padding: 16px 16px 20px;
 }
 
+.hystmodal__window:has(.qr-modal-telegram) .window__close {
+    width: 60px;
+    height: 60px;
+}
+
 
 @media (width < 400px) {
 
