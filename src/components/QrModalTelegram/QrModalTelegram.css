@@ -37,6 +37,7 @@
 
 .hystmodal__window:has(.qr-modal-telegram) {
     width: 300px;
+    border-top: 74px solid transparent; /* Компенсируем отрицательный маргин */
 }
 
 .hystmodal__window:has(.qr-modal-telegram) .window {
