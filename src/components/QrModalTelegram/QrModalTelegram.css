@@ -74,15 +74,15 @@
 
     .qr-modal-telegram__image {
         display: block;
-        margin: 7px auto 0;
-        width: 226px;
-        height: 226px;
+        margin: 12px auto 0;
+        width: 206px;
+        height: 206px;
     }
 
     .qr-modal-telegram__username {
         display: block;
         width: fit-content;
-        margin: 6px auto 0;
+        margin: 11px auto 0;
         padding: 4px 0;
         font-weight: 600;
         font-size: 22px;

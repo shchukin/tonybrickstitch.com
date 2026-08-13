@@ -13,7 +13,7 @@ export type SocialNetworkOption = 'tiktok' | 'telegram-en' | 'telegram-ru';
 export const socialNetworksData: Record<SocialNetworkOption, SocialNetworkData> = {
 	tiktok: {
 		id: 'qr-modal-tiktok',
-		qrImage: '/images/tiktok.png',
+		qrImage: '/images/tonybrickstitch-tiktok.svg',
 		username: 'tonybrickstitch',
 		title: 'TonyBrickStitch',
 		link: 'https://www.tiktok.com/@tonybrickstitch',
@@ -21,7 +21,7 @@ export const socialNetworksData: Record<SocialNetworkOption, SocialNetworkData> 
 	},
 	'telegram-en': {
 		id: 'qr-modal-telegram-en',
-		qrImage: '/images/telegram-en.jpg',
+		qrImage: '/images/tonybrickstitch-telegram-en.svg',
 		username: 'TonyBrickStitch',
 		usernameFontSize: 22,
 		link: 'https://t.me/TonyBrickStitch',
@@ -29,9 +29,9 @@ export const socialNetworksData: Record<SocialNetworkOption, SocialNetworkData> 
 	},
 	'telegram-ru': {
 		id: 'qr-modal-telegram-ru',
-		qrImage: '/images/telegram-ru.jpg',
+		qrImage: '/images/tonybrickstitch-telegram-ru.svg',
 		username: 'TonyBrickStitchRu',
-		usernameFontSize: 20,
+		usernameFontSize: 19,
 		link: 'https://t.me/TonyBrickStitchRu',
 		label: 'Телеграм канал TonyBrickStitch',
 	},
