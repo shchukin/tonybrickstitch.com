@@ -3,17 +3,18 @@
     vertical-align: baseline;
     border: none;
     padding: 0;
-    margin: 0;
+    margin: 0 0 0 -2px;
     background-color: transparent;
     cursor: pointer;
 }
     .qr-handler__icon {
         position: relative;
-        top: 2px;
+        top: 5px;
         vertical-align: top;
-        font-size: 16px;
+        font-weight: 300;
+        font-size: 20px;
         line-height: 16px;
-        width: 16px;
+        width: 20px;
         height: 16px;
         color: var(--link-color);
         transition: color var(--transition-hover),

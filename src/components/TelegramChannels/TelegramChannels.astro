@@ -13,9 +13,9 @@ const { telegramEnLink, telegramRuLink } = Astro.props;
 
 <span class="telegram-channels">
 	<span class="telegram-channels__item">
-			<Link href={telegramEnLink}>Telegram&nbsp;<span class="desktop-only">Channel&nbsp;</span>in&nbsp;English</Link> <QrHandler option="telegram-en" />
+			<Link href={telegramEnLink} target="_blank">Telegram&nbsp;<span class="desktop-only">Channel&nbsp;</span>in&nbsp;English</Link> <QrHandler option="telegram-en" />
 	</span>
 	<span class="telegram-channels__item">
-			<Link href={telegramRuLink}>Телеграм&nbsp;на&nbsp;русском</Link> <QrHandler option="telegram-ru" />
+			<Link href={telegramRuLink} target="_blank">Телеграм&nbsp;на&nbsp;русском</Link> <QrHandler option="telegram-ru" />
 	</span>
 </span>
