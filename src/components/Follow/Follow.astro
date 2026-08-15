@@ -9,6 +9,10 @@ import QrModalTelegram from "../QrModalTelegram/QrModalTelegram.astro";
 import { socialNetworksData } from "../../data/socialNetworks";
 import Nobr from "../Nobr/Nobr.astro";
 import TelegramChannels from "../TelegramChannels/TelegramChannels.astro";
+
+const tiktokLink = socialNetworksData.tiktok.link;
+const telegramEnLink = socialNetworksData['telegram-en'].link;
+const telegramRuLink = socialNetworksData['telegram-ru'].link;
 ---
 
 
@@ -19,11 +23,11 @@ import TelegramChannels from "../TelegramChannels/TelegramChannels.astro";
     <div class="follow__content">
         <Wysiwyg halved>
             <p>
-                Check out my <Nobr><Link href="http://tiktok.com/@tonybrickstitch">TikTok</Link> <QrHandler option="tiktok" /></Nobr> for short videos of my latest pieces.
+                Check out my <Nobr><Link href={tiktokLink}>TikTok</Link> <QrHandler option="tiktok" /></Nobr> for short videos of my latest pieces.
             </p>
             <p>
                 Join my Telegram channel for tips, tricks, and a personal blog:<br>
-                <TelegramChannels/>
+                <TelegramChannels telegramEnLink={telegramEnLink} telegramRuLink={telegramRuLink} />
             </p>
             <p>
                 To contact me, please send a direct message right into the Telegram channel.
