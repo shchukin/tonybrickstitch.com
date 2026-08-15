@@ -3,7 +3,7 @@ import './Mod.css';
 import Link from '../Link/Link.astro';
 import Wysiwyg from '../Wysiwyg/Wysiwyg.astro';
 import Button from '../Button/Button.astro';
-import AppIcon from '../AppIcon/AppIcon.astro';
+import Icon from '../Icon/Icon.astro';
 import type { ModData } from '../../types/mod';
 import Label from "../Label/Label.astro";
 import AppImage from '../AppImage/AppImage.astro';
@@ -48,7 +48,7 @@ const pdfRu = `/patterns/${alias}-ru.pdf`;
 				</div>
 				<div class="mod__share">
 					<Button secondary square type="button" data-hystmodal={modalId} aria-label="Share pattern">
-						<AppIcon class="button__icon" name="share" />
+						<Icon class="button__icon" name="share" />
 					</Button>
 				</div>
 			</div>

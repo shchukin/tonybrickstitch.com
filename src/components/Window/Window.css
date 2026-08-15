@@ -37,8 +37,10 @@
         }
 
         /* icon */
-        .window__close svg {
+        .window__close .material-symbols-rounded {
             position: relative;
+            font-size: 26px;
+            line-height: 26px;
             width: 26px;
             height: 26px;
             color: var(--heading-color);

@@ -11,14 +11,16 @@
         position: relative;
         top: 2px;
         vertical-align: top;
+        font-size: 16px;
+        line-height: 16px;
         width: 16px;
         height: 16px;
-        stroke: var(--link-color);
-        transition: stroke var(--transition-hover),
-                   transform 400ms var(--ease-out-quint);
+        color: var(--link-color);
+        transition: color var(--transition-hover),
+                    transform 400ms var(--ease-out-quint);
     }
 
     .qr-handler:hover .qr-handler__icon {
         transform: scale(115%);
-        stroke: var(--link-color-hover);
+        color: var(--link-color-hover);
     }

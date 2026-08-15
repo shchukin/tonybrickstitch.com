@@ -1,5 +1,6 @@
 @import "@fontsource-variable/open-sans/wght.css";
 @import "@fontsource-variable/open-sans/wght-italic.css";
+@import "@fontsource-variable/material-symbols-rounded/index.css";
 
 @import "normalize.css";
 
@@ -14,5 +15,6 @@
 @import "global/hide-scrollbar.css";
 @import "global/smartphone-only.css";
 @import "global/desktop-only.css";
+@import "global/material-symbols.css";
 
 @import "overrides/hyst-modal.css";

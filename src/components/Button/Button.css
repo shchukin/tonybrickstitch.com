@@ -47,10 +47,13 @@
 .button--secondary:hover {
     background-color: var(--action-bg-light-hover);
 }
-
     .button__icon {
         vertical-align: top;
-        stroke: currentColor;
+        font-size: 24px;
+        line-height: 24px;
+        width: 24px;
+        height: 24px;
+        color: currentColor;
     }
 
 
