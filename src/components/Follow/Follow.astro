@@ -8,6 +8,7 @@ import QrModalTiktok from "../QrModalTiktok/QrModalTiktok.astro";
 import QrModalTelegram from "../QrModalTelegram/QrModalTelegram.astro";
 import { socialNetworksData } from "../../data/socialNetworks";
 import Nobr from "../Nobr/Nobr.astro";
+import TelegramChannels from "../TelegramChannels/TelegramChannels.astro";
 ---
 
 
@@ -22,10 +23,8 @@ import Nobr from "../Nobr/Nobr.astro";
             </p>
             <p>
                 Join my Telegram channel for tips, tricks, and a personal blog:<br>
+                <TelegramChannels/>
             </p>
-            <div>
-                <Nobr><Link href="https://t.me/TonyBrickStitch">Telegram&nbsp;<span class="desktop-only">Channel&nbsp;</span>in&nbsp;English</Link> <QrHandler option="telegram-en" /></Nobr> &nbsp;•&nbsp; <Nobr><Link href="https://t.me/TonyBrickStitchRu">Телеграм&nbsp;на&nbsp;русском</Link> <QrHandler option="telegram-ru" /></Nobr>
-            </div>
             <p>
                 To contact me, please send a direct message right into the Telegram channel.
             </p>

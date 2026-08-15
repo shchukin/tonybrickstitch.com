@@ -12,6 +12,4 @@ const { option } = Astro.props;
 const modalId = `#qr-modal-${option}`;
 ---
 
-<button class="qr-handler" type="button" data-hystmodal={modalId} aria-label={`Open QR code for ${option}`}>
-    <AppIcon class="qr-handler__icon" name="qr" />
-</button>
+<a class="qr-handler" data-hystmodal={modalId} href={modalId} aria-label={`Open QR code for ${option}`}><AppIcon class="qr-handler__icon" name="qr" /></a>

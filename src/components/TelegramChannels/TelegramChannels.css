@@ -1,0 +1,56 @@
+.telegram-channels {
+    display: flex;
+    align-items: flex-start;
+}
+    .telegram-channels__item {
+        position: relative;
+        padding-left: 24px;
+        display: block;
+        white-space: nowrap;
+    }
+        .telegram-channels__item::before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            flex-shrink: 0;
+            display: inline-block;
+            vertical-align: top;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background-color: currentColor;
+        }
+
+    @media (740px <= width) {
+
+        .telegram-channels__item:first-child {
+            padding-left: 0;
+        }
+
+            .telegram-channels__item:first-child::before {
+                display: none;
+            }
+    }
+
+
+
+@media (width < 740px) {
+
+    .telegram-channels {
+        display: block;
+    }
+        .telegram-channels__item {
+        }
+            .telegram-channels__item::before {
+
+            }
+
+        .telegram-channels__item:first-child {
+
+        }
+
+            .telegram-channels__item:first-child::before {
+
+            }
+}
