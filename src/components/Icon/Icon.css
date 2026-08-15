@@ -1,9 +1,8 @@
-.material-symbols-rounded {
+.icon {
   font-family: 'Material Symbols Rounded Variable', sans-serif;
-  font-weight: normal;
+  font-weight: 400;
   font-style: normal;
-  font-size: 24px;
-  text-align: center;
+  font-size: inherit;
   line-height: 1;
   letter-spacing: normal;
   text-transform: none;

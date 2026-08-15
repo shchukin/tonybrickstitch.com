@@ -15,6 +15,5 @@
 @import "global/hide-scrollbar.css";
 @import "global/smartphone-only.css";
 @import "global/desktop-only.css";
-@import "global/material-symbols.css";
 
 @import "overrides/hyst-modal.css";

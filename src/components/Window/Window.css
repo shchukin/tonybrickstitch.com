@@ -37,7 +37,7 @@
         }
 
         /* icon */
-        .window__close .material-symbols-rounded {
+        .window__close .icon {
             position: relative;
             font-size: 26px;
             line-height: 26px;

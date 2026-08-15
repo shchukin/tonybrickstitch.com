@@ -7,7 +7,7 @@
     background-color: transparent;
     cursor: pointer;
 }
-    .qr-handler__icon {
+    .qr-handler .icon {
         position: relative;
         top: 5px;
         vertical-align: top;

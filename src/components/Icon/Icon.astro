@@ -1,10 +1,11 @@
 ---
+import './Icon.css';
+
 interface Props {
 	name: string;
-	class?: string;
 }
 
-const { name, class: className } = Astro.props;
+const { name } = Astro.props;
 ---
 
-<span class:list={['material-symbols-rounded', className]}>{name}</span>
+<span class="icon">{name}</span>
