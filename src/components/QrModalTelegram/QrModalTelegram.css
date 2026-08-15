@@ -1,33 +1,51 @@
 /* Telegram RU (Winter / Snowflakes) */
 .hystmodal:has(.qr-modal-telegram--qr-modal-telegram-ru)::before,
-.hystmodal#qr-modal-telegram-ru::before {
-    background-image: 
-        url('./snowflakes.svg'),
+.hystmodal#qr-modal-telegram-ru::before,
+.qr-modal-telegram--qr-modal-telegram-ru {
+    --theme-gradient: 
         radial-gradient(at 0% 0%, #B0DBD5 0%, transparent 70%),
         radial-gradient(at 100% 0%, #C0C4EC 0%, transparent 70%),
         radial-gradient(at 100% 100%, #83ADF0 0%, transparent 70%),
         radial-gradient(at 0% 100%, #9ED4F4 0%, transparent 70%);
+    --theme-bg-color: #9ED4F4;
+    --theme-accent-color: #83ADF0;
+}
+
+.hystmodal:has(.qr-modal-telegram--qr-modal-telegram-ru)::before,
+.hystmodal#qr-modal-telegram-ru::before {
+    background-image: 
+        url('./snowflakes.svg'),
+        var(--theme-gradient);
     background-position: center center, 0 0, 0 0, 0 0, 0 0;
     background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
     background-size: 420px auto, cover, cover, cover, cover;
     background-blend-mode: soft-light, normal, normal, normal, normal;
-    background-color: #9ED4F4;
+    background-color: var(--theme-bg-color);
 }
 
 /* Telegram EN (Summer / Beach) */
 .hystmodal:has(.qr-modal-telegram--qr-modal-telegram-en)::before,
+.hystmodal#qr-modal-telegram-en::before,
+.qr-modal-telegram--qr-modal-telegram-en {
+    --theme-gradient: 
+        radial-gradient(at 0% 0%, #F7C495 0%, transparent 70%),
+        radial-gradient(at 100% 0%, #FFBBA7 0%, transparent 70%),
+        radial-gradient(at 100% 100%, #48CAE4 0%, transparent 70%),
+        radial-gradient(at 0% 100%, #48E5C2 0%, transparent 70%);
+    --theme-bg-color: #48E5C2;
+    --theme-accent-color: #48CAE4;
+}
+
+.hystmodal:has(.qr-modal-telegram--qr-modal-telegram-en)::before,
 .hystmodal#qr-modal-telegram-en::before {
     background-image: 
         url('./beach.svg'),
-        radial-gradient(at 0% 0%, #FFE599 0%, transparent 70%),
-        radial-gradient(at 100% 0%, #FF9B85 0%, transparent 70%),
-        radial-gradient(at 100% 100%, #3A86FF 0%, transparent 70%),
-        radial-gradient(at 0% 100%, #48E5C2 0%, transparent 70%);
+        var(--theme-gradient);
     background-position: center center, 0 0, 0 0, 0 0, 0 0;
     background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
     background-size: 420px auto, cover, cover, cover, cover;
     background-blend-mode: soft-light, normal, normal, normal, normal;
-    background-color: #48E5C2;
+    background-color: var(--theme-bg-color);
 }
 
 .hystmodal--active:has(.qr-modal-telegram)::before {
@@ -82,6 +100,15 @@
         margin: 12px auto 0;
         width: 206px;
         height: 206px;
+        object-position: -9999px;
+        background-image: var(--theme-gradient);
+        background-color: var(--theme-bg-color);
+        -webkit-mask-size: contain;
+        mask-size: contain;
+        -webkit-mask-repeat: no-repeat;
+        mask-repeat: no-repeat;
+        -webkit-mask-position: center;
+        mask-position: center;
     }
 
     .qr-modal-telegram__username {
@@ -92,10 +119,15 @@
         font-weight: 600;
         font-size: 22px;
         line-height: 28px;
-        color: #7F7F7F;
         letter-spacing: -0.25px;
         text-transform: uppercase;
         text-decoration: none;
+        background-image: var(--theme-gradient);
+        background-color: var(--theme-bg-color);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
     }
         .qr-modal-telegram__hover {
             text-decoration: 1.6px underline transparent;
@@ -103,5 +135,5 @@
         }
 
         .qr-modal-telegram__username:hover .qr-modal-telegram__hover {
-            text-decoration-color: currentColor;
+            text-decoration-color: var(--theme-accent-color);
         }
