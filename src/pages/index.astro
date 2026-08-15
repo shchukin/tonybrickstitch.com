@@ -3,14 +3,19 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Intro from "../components/Intro/Intro.astro";
 import Follow from "../components/Follow/Follow.astro";
 import Modifications from "../components/Modifications/Modifications.astro";
+import Hardware from "../components/Hardware/Hardware.astro";
 import { getCollection } from "astro:content";
 
 const modsEntries = await getCollection("mods");
 const mods = modsEntries.map((entry) => entry.data);
+
+const toolsEntries = await getCollection("tools");
+const tools = toolsEntries.map((entry) => entry.data);
 ---
 
 <BaseLayout>
 	<Intro />
 	<Follow />
+	<Hardware tools={tools} />
 	<Modifications mods={mods} />
 </BaseLayout>

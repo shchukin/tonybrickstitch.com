@@ -1,0 +1,48 @@
+---
+import './Tool.css';
+import Link from '../Link/Link.astro';
+import Wysiwyg from '../Wysiwyg/Wysiwyg.astro';
+import Button from '../Button/Button.astro';
+import Label from '../Label/Label.astro';
+import Image from '../Image/Image.astro';
+import type { ToolData } from '../../types/tool';
+
+interface Props extends ToolData {}
+
+const { title, description, previewImage, publicProjectUrl, downloads } = Astro.props;
+---
+
+<article class="tool">
+	<div class="tool__preview">
+		<Image class="tool__image" src={previewImage} width="280" height="210" alt={`Preview image for tool: ${title}`} />
+	</div>
+	<div class="tool__body">
+		<h3 class="tool__heading">
+			{title}
+		</h3>
+		<div class="tool__description">
+			<Wysiwyg smaller set:html={description} />
+		</div>
+	</div>
+	<div class="tool__sidebar">
+		<div class="tool__download">
+			<Label>
+				Download 3D Files
+			</Label>
+			<div class="tool__actions">
+				{downloads.map((file) => (
+					<Button href={file.href} secondary>
+						{file.format.toUpperCase()}
+					</Button>
+				))}
+			</div>
+		</div>
+		{publicProjectUrl && (
+			<div class="tool__tinkercad">
+				<Link href={publicProjectUrl} target="_blank" rel="noopener noreferrer">
+					Смотреть проект на tinkercad.com
+				</Link>
+			</div>
+		)}
+	</div>
+</article>

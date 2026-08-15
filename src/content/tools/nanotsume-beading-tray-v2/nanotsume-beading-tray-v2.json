@@ -1,0 +1,12 @@
+{
+  "alias": "nanotsume-beading-tray-v2",
+  "title": "nanotsume-beading-tray-v2",
+  "description": "<p>Улучшенная версия лотка с носиком-воронкой для удобного ссыпания бисера обратно в пакетики и органайзеры.</p>",
+  "previewImage": "./nanotsume-beading-tray-v2.jpg",
+  "publicProjectUrl": "https://www.tinkercad.com/things/nanotsume-beading-tray-v2",
+  "downloads": [
+    { "format": "stl", "href": "/tools/nanotsume-beading-tray-v2/nanotsume-beading-tray-v2.stl" },
+    { "format": "f3d", "href": "#" },
+    { "format": "step", "href": "#" }
+  ]
+}

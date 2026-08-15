@@ -1,0 +1,131 @@
+.tool {
+    display: flex;
+    align-items: stretch;
+    gap: 28px;
+    padding: 24px 28px;
+    background-color: #FFFFFF;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 16px rgba(0 0 0 / 3%),
+                0 1px 2px rgba(0 0 0 / 2%);
+}
+    .tool__preview {
+        flex-shrink: 0;
+        display: block;
+        width: 240px;
+    }
+        .tool__image {
+            vertical-align: top;
+            width: 100%;
+            height: auto;
+            background-color: var(--image-fallback);
+            border-radius: 12px;
+            transition: transform 600ms var(--ease-out-quint);
+        }
+
+        .tool__preview:hover .tool__image {
+            transform: scale(104%);
+        }
+
+    .tool__body {
+        padding-top: 4px;
+        flex-grow: 1;
+        align-items: start;
+    }
+        .tool__heading {
+            margin-top: 0;
+            margin-bottom: 0;
+            font-weight: bold;
+            font-size: 20px;
+            line-height: 28px;
+            color: var(--heading-color);
+        }
+
+        .tool__description {
+            margin-top: 12px;
+        }
+
+    .tool__sidebar {
+        flex-shrink: 0;
+        width: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+        .tool__download {
+
+        }
+            .tool__actions {
+                margin-top: 6px;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+                .tool__actions .button {
+                    flex: 1 1 calc(33.333% - 4px);
+                    min-width: 0;
+                    padding-left: 8px;
+                    padding-right: 8px;
+                    font-size: 13px;
+                    font-weight: 600;
+                    text-align: center;
+                }
+
+        .tool__tinkercad {
+            margin-top: 16px;
+            font-size: 13px;
+            line-height: 20px;
+        }
+
+
+@media (width < 740px) {
+
+    .tool {
+        display: block;
+        padding: 0;
+        border-radius: 16px;
+    }
+    
+        .tool__preview {
+            width: auto;
+        }
+            .tool__image {
+                max-height: 240px;
+                object-fit: cover;
+                border-radius: 15px 15px 0 0;
+            }
+
+            .tool__preview:hover .tool__image {
+                transform: none;
+            }
+
+        @media (480px <= width) {
+            .tool__preview {
+                padding: 24px;
+            }
+                .tool__image {
+                    border-radius: 16px;
+                }
+        }
+
+        .tool__body {
+            padding: 22px 20px;
+        }
+            .tool__heading {
+                font-size: 19px;
+                line-height: 24px;
+            }
+
+            .tool__description {
+                margin-top: 10px;
+            }
+
+        .tool__sidebar {
+            padding: 0 28px 20px;
+            width: auto;
+        }
+
+            .tool__tinkercad {
+                margin-top: 12px;
+            }
+}

@@ -1,0 +1,34 @@
+---
+import './Hardware.css';
+import Title from '../Title/Title.astro';
+import Wysiwyg from '../Wysiwyg/Wysiwyg.astro';
+import Tool from '../Tool/Tool.astro';
+import type { ToolData } from '../../types/tool';
+
+interface Props {
+	tools: ToolData[];
+}
+
+const { tools } = Astro.props;
+---
+
+<div class="hardware">
+	<div class="hardware__heading">
+		<Title as="h2">3D Tools & Hardware</Title>
+	</div>
+	<div class="hardware__description">
+		<Wysiwyg halved>
+			<p>
+				В процессе работы над проектами бисерного плетения я проектирую и создаю специализированные 3D-инструменты:
+				лотки, органайзеры и вспомогательные приспособления для комфортной работы.
+			</p>
+			<p>
+				Все исходные 3D-модели (STL, F3D, STEP) доступны бесплатно для некоммерческого использования
+				и самостоятельной печати на вашем 3D-принтере.
+			</p>
+		</Wysiwyg>
+	</div>
+	<div class="hardware__list">
+		{tools.map((tool) => <Tool {...tool} />)}
+	</div>
+</div>

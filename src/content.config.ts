@@ -16,4 +16,18 @@ export const collections = {
 			previewImage: image(),
 		}),
 	}),
+	tools: defineCollection({
+		loader: glob({ pattern: '**/*.json', base: './src/content/tools' }),
+		schema: ({ image }) => z.object({
+			alias: z.string(),
+			title: z.string(),
+			description: z.string(),
+			previewImage: image(),
+			publicProjectUrl: z.string().optional(),
+			downloads: z.array(z.object({
+				format: z.string(),
+				href: z.string(),
+			})),
+		}),
+	}),
 };
