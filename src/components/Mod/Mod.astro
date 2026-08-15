@@ -6,7 +6,7 @@ import Button from '../Button/Button.astro';
 import Icon from '../Icon/Icon.astro';
 import type { ModData } from '../../types/mod';
 import Label from "../Label/Label.astro";
-import AppImage from '../AppImage/AppImage.astro';
+import Image from '../Image/Image.astro';
 
 interface Props extends ModData {}
 
@@ -19,7 +19,7 @@ const pdfRu = `/patterns/${alias}-ru.pdf`;
 
 <article class="mod">
 	<a class="mod__preview" href={pdfEn}>
-		<AppImage class="mod__image" src={previewImage} width="280" height="210" alt={`Preview image for pattern: ${title}`} />
+		<Image class="mod__image" src={previewImage} width="280" height="210" alt={`Preview image for pattern: ${title}`} />
 	</a>
 	<div class="mod__body">
 		<h3 class="mod__heading">

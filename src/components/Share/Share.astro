@@ -5,7 +5,7 @@ import Window from "../Window/Window.astro";
 import Wysiwyg from "../Wysiwyg/Wysiwyg.astro";
 import Copy from "../Copy/Copy.astro";
 import HystModal from "../HystModal/HystModal.astro";
-import AppImage from '../AppImage/AppImage.astro';
+import Image from '../Image/Image.astro';
 
 interface Props extends ModData {}
 
@@ -61,7 +61,7 @@ const pdfRu = `https://tonybrickstitch.com/patterns/${alias}-ru.pdf`;
 			</div>
 
 			<div class="share__preview">
-				<AppImage class="share__image" src={previewImage} width="560" height="420" alt={`Preview pattern image for ${title}`} />
+				<Image class="share__image" src={previewImage} width="560" height="420" alt={`Preview pattern image for ${title}`} />
 			</div>
 		</div>
 	</Window>

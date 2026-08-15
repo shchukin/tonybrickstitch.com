@@ -1,0 +1,15 @@
+---
+/**
+ * Компонент-обертка над встроенным Astro <Image />.
+ * По умолчанию задает плотность пикселей (`densities={[1, 2]}`) и качество (`quality={90}`),
+ * чтобы Astro автоматически генерировал srcset с Retina-версиями графики (1x, 2x).
+ */
+import { Image as AstroImage } from 'astro:assets';
+import type { ComponentProps } from 'astro/types';
+
+type Props = ComponentProps<typeof AstroImage>;
+
+const { densities = [1, 2], quality = 90 } = Astro.props;
+---
+
+<AstroImage densities={densities} quality={quality} {...Astro.props} />
