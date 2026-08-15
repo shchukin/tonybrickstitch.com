@@ -1,17 +1,17 @@
-.all-mods {
+.modifications {
     padding-top: 24px;
     padding-bottom: 24px;
 }
-    .all-mods__heading {
+    .modifications__heading {
 
     }
 
-    .all-mods__description {
+    .modifications__description {
         margin-top: 24px;
         max-width: 780px;
     }
 
-    .all-mods__list {
+    .modifications__list {
         margin-top: 32px;
         display: flex;
         flex-direction: column;
@@ -22,19 +22,19 @@
 
 @media (width < 740px) {
 
-    .all-mods {
+    .modifications {
         padding-top: 16px;
         padding-bottom: 16px;
     }
-        .all-mods__heading {
+        .modifications__heading {
 
         }
 
-        .all-mods__description {
+        .modifications__description {
             margin-top: 16px;
         }
 
-        .all-mods__list {
+        .modifications__list {
             margin-top: 24px;
             gap: 24px;
         }

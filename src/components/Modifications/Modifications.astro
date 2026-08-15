@@ -1,5 +1,5 @@
 ---
-import './AllMods.css';
+import './Modifications.css';
 import Title from '../Title/Title.astro';
 import Wysiwyg from '../Wysiwyg/Wysiwyg.astro';
 import Mod from '../Mod/Mod.astro';
@@ -15,11 +15,11 @@ interface Props {
 const { mods } = Astro.props;
 ---
 
-<div class="all-mods">
-	<div class="all-mods__heading">
+<div class="modifications">
+	<div class="modifications__heading">
 		<Title as="h2">Pattern modifications</Title>
 	</div>
-	<div class="all-mods__description">
+	<div class="modifications__description">
 		<Wysiwyg halved>
 			<p>
 				When crafting with seed beads, I often adapt non‑beading patterns—like friendship bracelet charts
@@ -36,7 +36,7 @@ const { mods } = Astro.props;
 			</p>
 		</Wysiwyg>
 	</div>
-	<div class="all-mods__list">
+	<div class="modifications__list">
 		{mods.map((mod) => <Mod {...mod} />)}
 	</div>
 	{mods.map((mod) => <Share {...mod} />)}
