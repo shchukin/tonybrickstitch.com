@@ -17,6 +17,10 @@
   "date": "2026-03-22",
   "order": 2,
   "visible": true,
+  "license": {
+    "title": "CC0 1.0 Universal (Public Domain)",
+    "href": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
   "downloads": [
     { "format": "STL", "href": "/tools/skvrampel-tray/downloads/skvrampel-tray.stl" },
     { "format": "F3D", "href": "/tools/skvrampel-tray/downloads/skvrampel-tray.f3d" },

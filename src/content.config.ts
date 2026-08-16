@@ -30,7 +30,13 @@ export const collections = {
 			date: z.coerce.date(),
 			order: z.number().optional(),
 			visible: z.boolean().optional().default(true),
-			license: z.string().optional().default('CC0 1.0 Universal (Public Domain)'),
+			license: z.object({
+				title: z.string(),
+				href: z.string(),
+			}).optional().default({
+				title: 'CC0 1.0 Universal (Public Domain)',
+				href: 'https://creativecommons.org/publicdomain/zero/1.0/',
+			}),
 			downloadLayout: z.enum(['buttons', 'list']).optional().default('buttons'),
 			downloads: z.array(z.object({
 				format: z.string(),

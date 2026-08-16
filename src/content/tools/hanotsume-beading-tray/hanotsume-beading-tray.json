@@ -17,6 +17,10 @@
   "date": "2025-05-15",
   "order": 1,
   "visible": true,
+  "license": {
+    "title": "CC0 1.0 Universal (Public Domain)",
+    "href": "https://creativecommons.org/publicdomain/zero/1.0/"
+  },
   "downloadLayout": "list",
   "downloads": [
     { "format": "beading-tray.stl", "href": "/tools/hanotsume-beading-tray/downloads/hanotsume-beading-tray.stl" },

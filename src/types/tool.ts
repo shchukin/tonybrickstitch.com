@@ -10,6 +10,11 @@ export interface PublicProject {
 	href: string;
 }
 
+export interface ToolLicense {
+	title: string;
+	href: string;
+}
+
 export interface ToolData {
 	title: string;
 	alias: string;
@@ -19,7 +24,7 @@ export interface ToolData {
 	date: Date;
 	order?: number;
 	visible?: boolean;
-	license?: string;
+	license?: ToolLicense;
 	downloadLayout?: 'buttons' | 'list';
 	downloads: ToolDownload[];
 }

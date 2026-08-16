@@ -15,7 +15,7 @@ const {
 	description,
 	gallery = [],
 	publicProjectUrl,
-	license = 'CC0 1.0 Universal (Public Domain)',
+	license,
 	downloadLayout = 'buttons',
 	downloads,
 } = Astro.props;
@@ -115,16 +115,18 @@ const remainingCount = gallery.length > 4 ? gallery.length - 4 : 0;
 				</ul>
 			)}
 		</div>
-		<div class="tool__license">
-			<Label>
-				License
-			</Label>
-			<div class="tool__license-text">
-				<Link href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer">
-					{license}
-				</Link>
+		{license && (
+			<div class="tool__license">
+				<Label>
+					License
+				</Label>
+				<div class="tool__license-text">
+					<Link href={license.href} target="_blank" rel="noopener noreferrer">
+						{license.title}
+					</Link>
+				</div>
 			</div>
-		</div>
+		)}
 		{publicProjectUrl && (
 			<div class="tool__tinkercad">
 				<Link href={publicProjectUrl.href} target="_blank" rel="noopener noreferrer">
