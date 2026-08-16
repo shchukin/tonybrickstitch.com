@@ -1,5 +1,5 @@
 {
-  "title": "Nanotsume Beading Tray",
+  "title": "Hanotsume Beading Tray",
   "alias": "hanotsume-beading-tray",
   "description": "<p>Personally, I don't like beading mats because the needle gets stuck when picking up beads. I also avoid those small triangle trays since they easily flip over if you accidentally bump a corner. So, this model is my take on the ideal beading tray.</p>\n<p>In addition to the main tray body, you can also print a matching lid, which doubles as a second tray when taken off. Note it’s slightly wider and taller.</p>\n<p><strong>Print Tip:</strong> Set the Top <strong>surface angle</strong> to <strong>0°</strong> or <strong>180°</strong> so the extrusion lines run parallel to the long edge of the tray. This makes picking up beads super satisfying, as the needle tip glides smoothly right along the grooves!</p>",
   "gallery": [
@@ -11,9 +11,13 @@
     "./gallery/hanotsume-beading-tray-f.jpg"
   ],
   "publicProjectUrl": {
-    "title": "Project on tinkercad.com",
-    "href": "https://www.tinkercad.com/things/hanotsume-beading-tray"
+    "title": "Project on printables.com",
+    "href": "https://www.printables.com/model/1785033-hanotsume-beading-tray"
   },
+//  "publicProjectUrl": {
+//    "title": "Project on tinkercad.com",
+//    "href": "https://www.tinkercad.com/things/hanotsume-beading-tray"
+//  },
   "date": "2025-05-15",
   "order": 1,
   "visible": true,
