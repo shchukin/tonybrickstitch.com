@@ -1,0 +1,23 @@
+{
+  "alias": "brusetniki-beads",
+  "title": "brusetniki-beads",
+  "description": "<p>Эргономичный 3D-печатный органайзер для быстрой сортировки и калибровки бисера. Предотвращает рассыпание мелких деталей во время рукоделия.</p>",
+  "gallery": [
+    "./gallery/brusetniki-beads-a.jpg",
+    "./gallery/brusetniki-beads-b.jpg",
+    "./gallery/brusetniki-beads-c.jpg",
+    "./gallery/brusetniki-beads-d.jpg"
+  ],
+  "publicProjectUrl": {
+    "title": "Project on Fusion",
+    "href": "https://www.tinkercad.com/things/brusetniki-beads"
+  },
+  "date": "2024-09-15",
+  "order": 3,
+  "visible": true,
+  "downloads": [
+    { "format": "stl", "href": "/tools/brusetniki-beads/downloads/brusetniki-beads.stl" },
+    { "format": "f3d", "href": "/tools/brusetniki-beads/downloads/brusetniki-beads.f3d" },
+    { "format": "step", "href": "/tools/brusetniki-beads/downloads/brusetniki-beads.step" }
+  ]
+}
