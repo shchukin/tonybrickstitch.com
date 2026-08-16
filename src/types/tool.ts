@@ -11,8 +11,8 @@ export interface PublicProject {
 }
 
 export interface ToolData {
-	alias: string;
 	title: string;
+	alias: string;
 	description: string;
 	gallery: ImageMetadata[];
 	publicProjectUrl?: PublicProject;

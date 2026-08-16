@@ -19,8 +19,8 @@ export const collections = {
 	tools: defineCollection({
 		loader: glob({ pattern: '**/*.json', base: './src/content/tools' }),
 		schema: ({ image }) => z.object({
-			alias: z.string(),
 			title: z.string(),
+			alias: z.string(),
 			description: z.string(),
 			gallery: z.array(image()),
 			publicProjectUrl: z.object({
