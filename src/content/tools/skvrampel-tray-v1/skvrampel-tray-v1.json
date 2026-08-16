@@ -2,14 +2,21 @@
   "alias": "skvrampel-tray-v1",
   "title": "skvrampel-tray-v1",
   "description": "<p>Многофункциональная подставка Skvrampel для одновременного размещения нитей, игл, шпуль и бисера на рабочем столе.</p>",
-  "previewImage": "./skvrampel-tray-v1.jpg",
+  "gallery": [
+    "./gallery/skvrampel-tray-v1-a.jpg",
+    "./gallery/skvrampel-tray-v1-b.jpg",
+    "./gallery/skvrampel-tray-v1-c.jpg",
+    "./gallery/skvrampel-tray-v1-d.jpg",
+    "./gallery/skvrampel-tray-v1-e.jpg",
+    "./gallery/skvrampel-tray-v1-f.jpg"
+  ],
   "publicProjectUrl": "https://www.tinkercad.com/things/skvrampel-tray-v1",
   "date": "2026-03-22",
   "order": 2,
   "visible": true,
   "downloads": [
-    { "format": "stl", "href": "/tools/skvrampel-tray-v1/skvrampel-tray-v1.stl" },
-    { "format": "f3d", "href": "/tools/skvrampel-tray-v1/skvrampel-tray-v1.f3d" },
-    { "format": "step", "href": "/tools/skvrampel-tray-v1/skvrampel-tray-v1.step" }
+    { "format": "stl", "href": "/tools/skvrampel-tray-v1/downloads/skvrampel-tray-v1.stl" },
+    { "format": "f3d", "href": "/tools/skvrampel-tray-v1/downloads/skvrampel-tray-v1.f3d" },
+    { "format": "step", "href": "/tools/skvrampel-tray-v1/downloads/skvrampel-tray-v1.step" }
   ]
 }

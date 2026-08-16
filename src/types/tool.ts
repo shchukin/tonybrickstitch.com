@@ -9,7 +9,7 @@ export interface ToolData {
 	alias: string;
 	title: string;
 	description: string;
-	previewImage: ImageMetadata;
+	gallery: ImageMetadata[];
 	publicProjectUrl?: string;
 	date: Date;
 	order?: number;

@@ -22,7 +22,7 @@ export const collections = {
 			alias: z.string(),
 			title: z.string(),
 			description: z.string(),
-			previewImage: image(),
+			gallery: z.array(image()),
 			publicProjectUrl: z.string().optional(),
 			date: z.coerce.date(),
 			order: z.number().optional(),

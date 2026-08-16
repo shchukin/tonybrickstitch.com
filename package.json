@@ -16,6 +16,7 @@
     "@fontsource-variable/open-sans": "^5.3.0",
     "astro": "^7.1.6",
     "hystmodal": "^1.0.1",
-    "normalize.css": "^8.0.1"
+    "normalize.css": "^8.0.1",
+    "photoswipe": "^5.4.4"
   }
 }

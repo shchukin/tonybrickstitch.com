@@ -9,12 +9,69 @@ import type { ToolData } from '../../types/tool';
 
 interface Props extends ToolData {}
 
-const { title, description, previewImage, publicProjectUrl, downloads } = Astro.props;
+const { alias, title, description, gallery = [], publicProjectUrl, downloads } = Astro.props;
+
+const mainImage = gallery[0];
+const subImages = gallery.slice(1, 4); // max 3 thumbnails (indices 1, 2, 3)
+const hiddenImages = gallery.slice(4); // remaining images (indices 4+)
+const remainingCount = gallery.length > 4 ? gallery.length - 4 : 0;
 ---
 
 <article class="tool">
-	<div class="tool__preview">
-		<Image class="tool__image" src={previewImage} width="280" height="210" alt={`Preview image for tool: ${title}`} />
+	<div class="tool__gallery pswp-gallery" id={`gallery-${alias}`}>
+		{mainImage && (
+			<a
+				href={mainImage.src}
+				data-pswp-width={mainImage.width}
+				data-pswp-height={mainImage.height}
+				class="tool__preview-main"
+			>
+				<Image
+					class="tool__image"
+					src={mainImage}
+					width="280"
+					height="210"
+					alt={`Preview image for tool: ${title}`}
+				/>
+			</a>
+		)}
+		{subImages.length > 0 && (
+			<div class="tool__thumbs">
+				{subImages.map((img, idx) => {
+					const isLastThumb = idx === 2;
+					const showOverlay = isLastThumb && remainingCount > 0;
+					return (
+						<a
+							href={img.src}
+							data-pswp-width={img.width}
+							data-pswp-height={img.height}
+							class="tool__thumb-link"
+						>
+							<Image
+								class="tool__thumb-image"
+								src={img}
+								width="90"
+								height="68"
+								alt={`Thumbnail ${idx + 2} for ${title}`}
+							/>
+							{showOverlay && (
+								<span class="tool__thumb-overlay">
+									+{remainingCount}
+								</span>
+							)}
+						</a>
+					);
+				})}
+			</div>
+		)}
+		{hiddenImages.map((img) => (
+			<a
+				href={img.src}
+				data-pswp-width={img.width}
+				data-pswp-height={img.height}
+				style="display: none;"
+			/>
+		))}
 	</div>
 	<div class="tool__body">
 		<h3 class="tool__heading">
@@ -46,3 +103,19 @@ const { title, description, previewImage, publicProjectUrl, downloads } = Astro.
 		)}
 	</div>
 </article>
+
+<script>
+	import PhotoSwipeLightbox from 'photoswipe/lightbox';
+
+	function initPhotoSwipe() {
+		const lightbox = new PhotoSwipeLightbox({
+			gallery: '.tool__gallery',
+			children: 'a',
+			pswpModule: () => import('photoswipe'),
+		});
+		lightbox.init();
+	}
+
+	initPhotoSwipe();
+	document.addEventListener('astro:page-load', initPhotoSwipe);
+</script>

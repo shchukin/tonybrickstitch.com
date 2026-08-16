@@ -3,6 +3,7 @@
 @import "@fontsource-variable/material-symbols-rounded/index.css";
 
 @import "normalize.css";
+@import "photoswipe/style.css";
 
 @import "global/root.css";
 @import "global/box-sizing.css";

@@ -9,23 +9,75 @@
     box-shadow: 0 4px 16px rgba(0 0 0 / 3%),
                 0 1px 2px rgba(0 0 0 / 2%);
 }
-    .tool__preview {
+    .tool__gallery {
         flex-shrink: 0;
-        display: block;
+        display: flex;
+        flex-direction: column;
         width: 240px;
     }
-        .tool__image {
-            vertical-align: top;
+        .tool__preview-main {
+            display: block;
             width: 100%;
-            height: auto;
-            background-color: var(--image-fallback);
             border-radius: 12px;
-            transition: transform 600ms var(--ease-out-quint);
+            overflow: hidden;
         }
+            .tool__image {
+                vertical-align: top;
+                width: 100%;
+                height: auto;
+                background-color: var(--image-fallback);
+                border-radius: 12px;
+                transition: transform 600ms var(--ease-out-quint);
+            }
 
-        .tool__preview:hover .tool__image {
-            transform: scale(104%);
+            .tool__preview-main:hover .tool__image {
+                transform: scale(104%);
+            }
+
+        .tool__thumbs {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+            width: 100%;
         }
+            .tool__thumb-link {
+                flex: 1 1 0;
+                position: relative;
+                border-radius: 8px;
+                overflow: hidden;
+                display: block;
+                aspect-ratio: 4 / 3;
+                background-color: var(--image-fallback);
+            }
+                .tool__thumb-image {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    vertical-align: top;
+                    transition: transform 600ms var(--ease-out-quint);
+                }
+
+                .tool__thumb-link:hover .tool__thumb-image {
+                    transform: scale(108%);
+                }
+
+                .tool__thumb-overlay {
+                    position: absolute;
+                    inset: 0;
+                    background-color: rgba(0 0 0 / 55%);
+                    color: #FFFFFF;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 15px;
+                    font-weight: 700;
+                    border-radius: 8px;
+                    transition: background-color var(--transition-hover);
+                }
+
+                .tool__thumb-link:hover .tool__thumb-overlay {
+                    background-color: rgba(0 0 0 / 45%);
+                }
 
     .tool__body {
         padding-top: 4px;
@@ -86,7 +138,7 @@
         border-radius: 16px;
     }
     
-        .tool__preview {
+        .tool__gallery {
             width: auto;
         }
             .tool__image {
@@ -95,16 +147,24 @@
                 border-radius: 15px 15px 0 0;
             }
 
-            .tool__preview:hover .tool__image {
+            .tool__preview-main:hover .tool__image {
                 transform: none;
             }
 
+            .tool__thumbs {
+                padding: 10px 16px 0;
+            }
+
         @media (480px <= width) {
-            .tool__preview {
-                padding: 24px;
+            .tool__gallery {
+                padding: 24px 24px 0;
             }
                 .tool__image {
                     border-radius: 16px;
+                }
+
+                .tool__thumbs {
+                    padding: 0;
                 }
         }
 
