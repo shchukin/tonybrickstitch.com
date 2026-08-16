@@ -6,7 +6,7 @@
 
 .wysiwyg--smaller {
     --body-font-size: 14px;
-    --body-line-height: 18px;
+    --body-line-height: 20px;
 }
 
 
@@ -20,6 +20,17 @@
     margin-bottom: var(--body-line-height);
 }
 
+.wysiwyg--smaller p,
+.wysiwyg--smaller ul,
+.wysiwyg--smaller ol,
+.wysiwyg--smaller hr,
+.wysiwyg--smaller figure,
+.wysiwyg--smaller blockquote {
+    margin-top: calc(var(--body-line-height) * 2/3);
+    margin-bottom: calc(var(--body-line-height) * 2/3);
+}
+
+
 .wysiwyg--halved p,
 .wysiwyg--halved ul,
 .wysiwyg--halved ol,
@@ -29,6 +40,8 @@
     margin-top: calc(var(--body-line-height) / 2);
     margin-bottom: calc(var(--body-line-height) / 2);
 }
+
+
 
 
 .wysiwyg p:first-child,
