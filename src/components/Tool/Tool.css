@@ -123,6 +123,14 @@
                     text-align: center;
                 }
 
+        .tool__license {
+            margin-top: 18px;
+        }
+            .tool__license-text {
+                font-size: 13px;
+                line-height: 20px;
+            }
+
         .tool__tinkercad {
             margin-top: 16px;
             font-size: 13px;

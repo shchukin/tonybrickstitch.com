@@ -30,6 +30,7 @@ export const collections = {
 			date: z.coerce.date(),
 			order: z.number().optional(),
 			visible: z.boolean().optional().default(true),
+			license: z.string().optional().default('CC0 1.0 Universal (Public Domain)'),
 			downloads: z.array(z.object({
 				format: z.string(),
 				href: z.string(),

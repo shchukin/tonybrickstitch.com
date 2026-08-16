@@ -19,5 +19,6 @@ export interface ToolData {
 	date: Date;
 	order?: number;
 	visible?: boolean;
+	license?: string;
 	downloads: ToolDownload[];
 }

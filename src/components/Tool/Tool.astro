@@ -9,7 +9,7 @@ import type { ToolData } from '../../types/tool';
 
 interface Props extends ToolData {}
 
-const { alias, title, description, gallery = [], publicProjectUrl, downloads } = Astro.props;
+const { alias, title, description, gallery = [], publicProjectUrl, license = 'CC0 1.0 Universal (Public Domain)', downloads } = Astro.props;
 
 const mainImage = gallery[0];
 const subImages = gallery.slice(1, 4); // max 3 thumbnails (indices 1, 2, 3)
@@ -92,6 +92,16 @@ const remainingCount = gallery.length > 4 ? gallery.length - 4 : 0;
 						{file.format.toUpperCase()}
 					</Button>
 				))}
+			</div>
+		</div>
+		<div class="tool__license">
+			<Label>
+				License
+			</Label>
+			<div class="tool__license-text">
+				<Link href="https://creativecommons.org/publicdomain/zero/1.0/" target="_blank" rel="noopener noreferrer">
+					{license}
+				</Link>
 			</div>
 		</div>
 		{publicProjectUrl && (
