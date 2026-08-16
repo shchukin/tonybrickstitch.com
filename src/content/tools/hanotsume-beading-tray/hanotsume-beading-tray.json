@@ -14,15 +14,10 @@
     "title": "Project on printables.com",
     "href": "https://www.printables.com/model/1785033-hanotsume-beading-tray"
   },
-//  "publicProjectUrl": {
-//    "title": "Project on tinkercad.com",
-//    "href": "https://www.tinkercad.com/things/hanotsume-beading-tray"
-//  },
   "date": "2025-05-15",
   "order": 1,
   "visible": true,
   "downloads": [
-    { "format": "stl", "href": "/tools/hanotsume-beading-tray/downloads/brusetniki-beads.stl" },
-    { "format": "zip", "href": "/tools/hanotsume-beading-tray/downloads/hanotsume-beading-tray.zip" }
+    { "format": "stl", "href": "/tools/hanotsume-beading-tray/downloads/brusetniki-beads.stl" }
   ]
 }
