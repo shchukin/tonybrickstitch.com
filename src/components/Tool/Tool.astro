@@ -100,7 +100,7 @@ const remainingCount = gallery.length > 4 ? gallery.length - 4 : 0;
 				<div class="tool__actions">
 					{downloads.map((file) => (
 						<Button href={file.href}>
-							{file.format.toUpperCase()}
+							{file.format}
 						</Button>
 					))}
 				</div>
