@@ -10,7 +10,10 @@
     "./gallery/nanotsume-beading-tray-v3-e.jpg",
     "./gallery/nanotsume-beading-tray-v3-f.jpg"
   ],
-  "publicProjectUrl": "https://www.tinkercad.com/things/nanotsume-beading-tray-v3",
+  "publicProjectUrl": {
+    "title": "Project on tinkercad.com",
+    "href": "https://www.tinkercad.com/things/nanotsume-beading-tray-v3"
+  },
   "date": "2025-05-15",
   "order": 1,
   "visible": true,

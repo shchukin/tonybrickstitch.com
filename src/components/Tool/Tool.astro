@@ -96,8 +96,8 @@ const remainingCount = gallery.length > 4 ? gallery.length - 4 : 0;
 		</div>
 		{publicProjectUrl && (
 			<div class="tool__tinkercad">
-				<Link href={publicProjectUrl} target="_blank" rel="noopener noreferrer">
-					Смотреть проект на tinkercad.com
+				<Link href={publicProjectUrl.href} target="_blank" rel="noopener noreferrer">
+					{publicProjectUrl.title}
 				</Link>
 			</div>
 		)}

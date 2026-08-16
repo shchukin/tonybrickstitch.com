@@ -5,12 +5,17 @@ export interface ToolDownload {
 	href: string;
 }
 
+export interface PublicProject {
+	title: string;
+	href: string;
+}
+
 export interface ToolData {
 	alias: string;
 	title: string;
 	description: string;
 	gallery: ImageMetadata[];
-	publicProjectUrl?: string;
+	publicProjectUrl?: PublicProject;
 	date: Date;
 	order?: number;
 	visible?: boolean;

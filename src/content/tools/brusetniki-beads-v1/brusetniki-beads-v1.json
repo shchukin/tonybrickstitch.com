@@ -8,7 +8,10 @@
     "./gallery/brusetniki-beads-v1-c.jpg",
     "./gallery/brusetniki-beads-v1-d.jpg"
   ],
-  "publicProjectUrl": "https://www.tinkercad.com/things/brusetniki-beads-v1",
+  "publicProjectUrl": {
+    "title": "Project on Fusion",
+    "href": "https://www.tinkercad.com/things/brusetniki-beads-v1"
+  },
   "date": "2024-09-15",
   "order": 3,
   "visible": true,

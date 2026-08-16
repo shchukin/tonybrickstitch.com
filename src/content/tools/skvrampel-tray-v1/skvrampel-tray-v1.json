@@ -10,7 +10,10 @@
     "./gallery/skvrampel-tray-v1-e.jpg",
     "./gallery/skvrampel-tray-v1-f.jpg"
   ],
-  "publicProjectUrl": "https://www.tinkercad.com/things/skvrampel-tray-v1",
+  "publicProjectUrl": {
+    "title": "Project on Fusion",
+    "href": "https://www.tinkercad.com/things/skvrampel-tray-v1"
+  },
   "date": "2026-03-22",
   "order": 2,
   "visible": true,
