@@ -23,9 +23,9 @@
   },
   "downloadLayout": "list",
   "downloads": [
-    { "format": "beading-tray.stl", "href": "/tools/hanotsume-beading-tray/downloads/hanotsume-beading-tray.stl" },
-    { "format": "beading-tray-no-labels.stl", "href": "/tools/hanotsume-beading-tray/downloads/hanotsume-beading-tray-no-labels.stl" },
-    { "format": "main-body-only.stl", "href": "/tools/hanotsume-beading-tray/downloads/hanotsume-main-body-only.stl" },
-    { "format": "lid-only.stl", "href": "/tools/hanotsume-beading-tray/downloads/hanotsume-lid-only.stl" },
-    { "format": "alt-lid-only.stl", "href": "/tools/hanotsume-beading-tray/downloads/hanotsume-alt-lid-only.stl" }]
+    { "format": "beading-tray.stl", "href": "/tools/hanotsume-beading-tray.stl" },
+    { "format": "beading-tray-no-labels.stl", "href": "/tools/hanotsume-beading-tray-no-labels.stl" },
+    { "format": "main-body-only.stl", "href": "/tools/hanotsume-beading-tray-main-body-only.stl" },
+    { "format": "lid-only.stl", "href": "/tools/hanotsume-beading-tray-lid-only.stl" },
+    { "format": "alt-lid-only.stl", "href": "/tools/hanotsume-beading-tray-alt-lid-only.stl" }]
 }

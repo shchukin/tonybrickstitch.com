@@ -22,8 +22,8 @@
     "href": "https://creativecommons.org/publicdomain/zero/1.0/"
   },
   "downloads": [
-    { "format": "STL", "href": "/tools/skvrampel-tray/downloads/skvrampel-tray.stl" },
-    { "format": "F3D", "href": "/tools/skvrampel-tray/downloads/skvrampel-tray.f3d" },
-    { "format": "STEP", "href": "/tools/skvrampel-tray/downloads/skvrampel-tray.step" }
+    { "format": "STL", "href": "/tools/skvrampel-tray.stl" },
+    { "format": "F3D", "href": "/tools/skvrampel-tray.f3d" },
+    { "format": "STEP", "href": "/tools/skvrampel-tray.step" }
   ]
 }

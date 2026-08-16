@@ -20,8 +20,8 @@
     "href": "https://creativecommons.org/publicdomain/zero/1.0/"
   },
   "downloads": [
-    { "format": "STL", "href": "/tools/brusetniki-beads/downloads/brusetniki-beads.stl" },
-    { "format": "F3D", "href": "/tools/brusetniki-beads/downloads/brusetniki-beads.f3d" },
-    { "format": "STEP", "href": "/tools/brusetniki-beads/downloads/brusetniki-beads.step" }
+    { "format": "STL", "href": "/tools/brusetniki-beads.stl" },
+    { "format": "F3D", "href": "/tools/brusetniki-beads.f3d" },
+    { "format": "STEP", "href": "/tools/brusetniki-beads.step" }
   ]
 }
