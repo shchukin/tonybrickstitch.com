@@ -27,4 +27,5 @@ export interface ToolData {
 	license?: ToolLicense;
 	downloadLayout?: 'buttons' | 'list';
 	downloads: ToolDownload[];
+	downloadFiles?: ToolDownload[];
 }

@@ -128,6 +128,9 @@
                 flex-direction: column;
                 gap: 4px;
             }
+            .tool__actions + .tool__download-list {
+                margin-top: 10px;
+            }
                 .tool__download-item {
                     font-size: 13px;
                     line-height: 20px;

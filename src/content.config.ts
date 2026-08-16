@@ -42,6 +42,10 @@ export const collections = {
 				format: z.string(),
 				href: z.string(),
 			})),
+			downloadFiles: z.array(z.object({
+				format: z.string(),
+				href: z.string(),
+			})).optional(),
 		}),
 	}),
 };

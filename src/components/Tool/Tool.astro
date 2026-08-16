@@ -17,7 +17,8 @@ const {
 	publicProjectUrl,
 	license,
 	downloadLayout = 'buttons',
-	downloads,
+	downloads = [],
+	downloadFiles,
 } = Astro.props;
 
 const mainImage = gallery[0];
@@ -95,7 +96,7 @@ const remainingCount = gallery.length > 4 ? gallery.length - 4 : 0;
 			<Label>
 				Download 3D Files
 			</Label>
-			{downloadLayout === 'buttons' ? (
+			{downloadLayout === 'buttons' && downloads.length > 0 && (
 				<div class="tool__actions">
 					{downloads.map((file) => (
 						<Button href={file.href}>
@@ -103,9 +104,10 @@ const remainingCount = gallery.length > 4 ? gallery.length - 4 : 0;
 						</Button>
 					))}
 				</div>
-			) : (
+			)}
+			{(downloadFiles || downloadLayout === 'list') && (
 				<ul class="tool__download-list">
-					{downloads.map((file) => (
+					{(downloadFiles || downloads).map((file) => (
 						<li class="tool__download-item">
 							<Link href={file.href} download>
 								{file.format}

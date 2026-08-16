@@ -21,11 +21,14 @@
     "title": "CC0 1.0 Universal (Public Domain)",
     "href": "https://creativecommons.org/publicdomain/zero/1.0/"
   },
-  "downloadLayout": "list",
   "downloads": [
+    { "format": "Download All STL files", "href": "/tools/hanotsume-beading-tray-all-files.zip" }
+  ],
+  "downloadFiles": [
     { "format": "beading-tray.stl", "href": "/tools/hanotsume-beading-tray.stl" },
     { "format": "beading-tray-no-labels.stl", "href": "/tools/hanotsume-beading-tray-no-labels.stl" },
     { "format": "main-body-only.stl", "href": "/tools/hanotsume-beading-tray-main-body-only.stl" },
     { "format": "lid-only.stl", "href": "/tools/hanotsume-beading-tray-lid-only.stl" },
-    { "format": "alt-lid-only.stl", "href": "/tools/hanotsume-beading-tray-alt-lid-only.stl" }]
+    { "format": "alt-lid-only.stl", "href": "/tools/hanotsume-beading-tray-alt-lid-only.stl" }
+  ]
 }
