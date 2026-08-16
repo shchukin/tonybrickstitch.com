@@ -20,5 +20,6 @@ export interface ToolData {
 	order?: number;
 	visible?: boolean;
 	license?: string;
+	downloadLayout?: 'buttons' | 'list';
 	downloads: ToolDownload[];
 }

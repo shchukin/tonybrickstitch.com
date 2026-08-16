@@ -104,9 +104,6 @@
         flex-direction: column;
         justify-content: space-between;
     }
-        .tool__download {
-
-        }
             .tool__actions {
                 margin-top: 6px;
                 display: flex;
@@ -121,6 +118,19 @@
                     font-size: 13px;
                     font-weight: 600;
                     text-align: center;
+                }
+
+            .tool__download-list {
+                margin: 6px 0 0 0;
+                padding: 0;
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+                .tool__download-item {
+                    font-size: 13px;
+                    line-height: 20px;
                 }
 
         .tool__license {

@@ -17,7 +17,11 @@
   "date": "2025-05-15",
   "order": 1,
   "visible": true,
+  "downloadLayout": "list",
   "downloads": [
-    { "format": "stl", "href": "/tools/hanotsume-beading-tray/downloads/brusetniki-beads.stl" }
-  ]
+    { "format": "beading-tray.stl", "href": "/tools/hanotsume-beading-tray/downloads/hanotsume-beading-tray.stl" },
+    { "format": "beading-tray-no-labels.stl", "href": "/tools/hanotsume-beading-tray/downloads/hanotsume-beading-tray-no-labels.stl" },
+    { "format": "main-body-only.stl", "href": "/tools/hanotsume-beading-tray/downloads/hanotsume-main-body-only.stl" },
+    { "format": "lid-only.stl", "href": "/tools/hanotsume-beading-tray/downloads/hanotsume-lid-only.stl" },
+    { "format": "alt-lid-only.stl", "href": "/tools/hanotsume-beading-tray/downloads/hanotsume-alt-lid-only.stl" }]
 }

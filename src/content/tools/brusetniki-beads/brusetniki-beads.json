@@ -1,7 +1,7 @@
 {
   "title": "Brusetniki beads",
   "alias": "brusetniki-beads",
-  "description": "<p>If you are about to shoot a beadwork tutorial, you might want to use oversized beads for a clear demonstration. However, finding such beads is quite a task — especially finding ones without rounded edges that tilt and distort peyote stitch.</p><p>I never quite got around to making video tutorials myself, but these demo beads seem to work well. They align evenly. To be fair, they don't look that fancy, but they get the job done.</p>",
+  "description": "<p>Эргономичный 3D-печатный органайзер для быстрой сортировки и калибровки бисера. Предотвращает рассыпание мелких деталей во время рукоделия.</p>",
   "gallery": [
     "./gallery/brusetniki-beads-a.jpg",
     "./gallery/brusetniki-beads-b.jpg",
@@ -9,15 +9,15 @@
     "./gallery/brusetniki-beads-d.jpg"
   ],
   "publicProjectUrl": {
-    "title": "Project on printables.com",
-    "href": "https://www.printables.com/model/1812334-brusetniki-beads"
+    "title": "Project on Fusion",
+    "href": "https://www.tinkercad.com/things/brusetniki-beads"
   },
-  "date": "2025-08-07",
+  "date": "2024-09-15",
   "order": 3,
   "visible": true,
   "downloads": [
-    { "format": "stl", "href": "/tools/brusetniki-beads/downloads/brusetniki-beads.stl" },
-    { "format": "f3d", "href": "/tools/brusetniki-beads/downloads/brusetniki-beads.f3d" },
-    { "format": "step", "href": "/tools/brusetniki-beads/downloads/brusetniki-beads.step" }
+    { "format": "STL", "href": "/tools/brusetniki-beads/downloads/brusetniki-beads.stl" },
+    { "format": "F3D", "href": "/tools/brusetniki-beads/downloads/brusetniki-beads.f3d" },
+    { "format": "STEP", "href": "/tools/brusetniki-beads/downloads/brusetniki-beads.step" }
   ]
 }

@@ -9,7 +9,16 @@ import type { ToolData } from '../../types/tool';
 
 interface Props extends ToolData {}
 
-const { alias, title, description, gallery = [], publicProjectUrl, license = 'CC0 1.0 Universal (Public Domain)', downloads } = Astro.props;
+const {
+	alias,
+	title,
+	description,
+	gallery = [],
+	publicProjectUrl,
+	license = 'CC0 1.0 Universal (Public Domain)',
+	downloadLayout = 'buttons',
+	downloads,
+} = Astro.props;
 
 const mainImage = gallery[0];
 const subImages = gallery.slice(1, 4); // max 3 thumbnails (indices 1, 2, 3)
@@ -86,13 +95,25 @@ const remainingCount = gallery.length > 4 ? gallery.length - 4 : 0;
 			<Label>
 				Download 3D Files
 			</Label>
-			<div class="tool__actions">
-				{downloads.map((file) => (
-					<Button href={file.href} secondary>
-						{file.format.toUpperCase()}
-					</Button>
-				))}
-			</div>
+			{downloadLayout === 'buttons' ? (
+				<div class="tool__actions">
+					{downloads.map((file) => (
+						<Button href={file.href} secondary>
+							{file.format.toUpperCase()}
+						</Button>
+					))}
+				</div>
+			) : (
+				<ul class="tool__download-list">
+					{downloads.map((file) => (
+						<li class="tool__download-item">
+							<Link href={file.href} download>
+								{file.format}
+							</Link>
+						</li>
+					))}
+				</ul>
+			)}
 		</div>
 		<div class="tool__license">
 			<Label>

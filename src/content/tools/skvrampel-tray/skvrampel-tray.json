@@ -1,7 +1,8 @@
 {
   "title": "Skvrampel tray",
   "alias": "skvrampel-tray",
-  "description": "<p>This basic tray was originally designed as a sorting board, but I find myself using it daily for spreading out things: pouring out beads to check, laying out small findings for a project or when unboxing them, or catching spills when distributing beads. Sometimes I even use it as a plain white background to take quick photos.</p>\n<p>It is basically a simple box, but the key feature is its low profile and solid grip on the desk. It’s practically impossible to flip over by accident.</p>",  "gallery": [
+  "description": "<p>Многофункциональная подставка Skvrampel для одновременного размещения нитей, игл, шпуль и бисера на рабочем столе.</p>",
+  "gallery": [
     "./gallery/skvrampel-tray-a.jpg",
     "./gallery/skvrampel-tray-b.jpg",
     "./gallery/skvrampel-tray-c.jpg",
@@ -10,15 +11,15 @@
     "./gallery/skvrampel-tray-f.jpg"
   ],
   "publicProjectUrl": {
-    "title": "Project on printables.com",
-    "href": "https://www.printables.com/model/1812340-skvrampel-tray"
+    "title": "Project on Fusion",
+    "href": "https://www.tinkercad.com/things/skvrampel-tray"
   },
-  "date": "2025-07-03",
+  "date": "2026-03-22",
   "order": 2,
   "visible": true,
   "downloads": [
-    { "format": "stl", "href": "/tools/skvrampel-tray/downloads/skvrampel-tray.stl" },
-    { "format": "f3d", "href": "/tools/skvrampel-tray/downloads/skvrampel-tray.f3d" },
-    { "format": "step", "href": "/tools/skvrampel-tray/downloads/skvrampel-tray.step" }
+    { "format": "STL", "href": "/tools/skvrampel-tray/downloads/skvrampel-tray.stl" },
+    { "format": "F3D", "href": "/tools/skvrampel-tray/downloads/skvrampel-tray.f3d" },
+    { "format": "STEP", "href": "/tools/skvrampel-tray/downloads/skvrampel-tray.step" }
   ]
 }

@@ -31,6 +31,7 @@ export const collections = {
 			order: z.number().optional(),
 			visible: z.boolean().optional().default(true),
 			license: z.string().optional().default('CC0 1.0 Universal (Public Domain)'),
+			downloadLayout: z.enum(['buttons', 'list']).optional().default('buttons'),
 			downloads: z.array(z.object({
 				format: z.string(),
 				href: z.string(),
