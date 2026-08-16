@@ -10,7 +10,10 @@ const modsEntries = await getCollection("mods");
 const mods = modsEntries.map((entry) => entry.data);
 
 const toolsEntries = await getCollection("tools");
-const tools = toolsEntries.map((entry) => entry.data);
+const tools = toolsEntries
+	.map((entry) => entry.data)
+	.filter((tool) => tool.visible)
+	.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 ---
 
 <BaseLayout>

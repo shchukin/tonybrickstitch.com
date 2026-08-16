@@ -4,6 +4,9 @@
   "description": "<p>Флагманская модель лотка с защитной крышкой и несколькими отсеками для многоцветного бисерного плетения.</p>",
   "previewImage": "./nanotsume-beading-tray-v3.jpg",
   "publicProjectUrl": "https://www.tinkercad.com/things/nanotsume-beading-tray-v3",
+  "date": "2025-11-05",
+  "order": 4,
+  "visible": true,
   "downloads": [
     { "format": "stl", "href": "/tools/nanotsume-beading-tray-v3/hanotsume-beading-tray-v3.stl" },
     { "format": "f3d", "href": "#" },

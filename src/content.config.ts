@@ -24,6 +24,9 @@ export const collections = {
 			description: z.string(),
 			previewImage: image(),
 			publicProjectUrl: z.string().optional(),
+			date: z.coerce.date(),
+			order: z.number().optional(),
+			visible: z.boolean().optional().default(true),
 			downloads: z.array(z.object({
 				format: z.string(),
 				href: z.string(),

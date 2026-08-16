@@ -11,5 +11,8 @@ export interface ToolData {
 	description: string;
 	previewImage: ImageMetadata;
 	publicProjectUrl?: string;
+	date: Date;
+	order?: number;
+	visible?: boolean;
 	downloads: ToolDownload[];
 }
