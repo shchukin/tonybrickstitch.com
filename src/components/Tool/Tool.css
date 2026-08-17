@@ -199,6 +199,11 @@
 
                         }
 
+                    .tool__thumb-overlay {
+                        font-size: 18px;
+                        line-height: 28px;
+                    }
+
 
         @media (480px <= width) {
 
