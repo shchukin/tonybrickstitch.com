@@ -1,7 +1,7 @@
+/* Consts */
+
 /* Telegram RU (Winter / Snowflakes) */
-.hystmodal:has(.qr-modal-telegram--qr-modal-telegram-ru)::before,
-.hystmodal#qr-modal-telegram-ru::before,
-.qr-modal-telegram--qr-modal-telegram-ru {
+#qr-modal-telegram-ru {
     --theme-gradient: 
         radial-gradient(at 0% 0%, #B0DBD5 0%, transparent 70%),
         radial-gradient(at 100% 0%, #C0C4EC 0%, transparent 70%),
@@ -9,37 +9,28 @@
         radial-gradient(at 0% 100%, #9ED4F4 0%, transparent 70%);
     --theme-bg-color: #9ED4F4;
     --theme-accent-color: #83ADF0;
-}
-
-.hystmodal:has(.qr-modal-telegram--qr-modal-telegram-ru)::before,
-.hystmodal#qr-modal-telegram-ru::before {
-    background-image: 
-        url('./snowflakes.svg'),
-        var(--theme-gradient);
-    background-position: center center, 0 0, 0 0, 0 0, 0 0;
-    background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
-    background-size: 420px auto, cover, cover, cover, cover;
-    background-blend-mode: soft-light, normal, normal, normal, normal;
-    background-color: var(--theme-bg-color);
+    --theme-pattern: url('./snowflakes.svg');
 }
 
 /* Telegram EN (Summer / Beach) */
-.hystmodal:has(.qr-modal-telegram--qr-modal-telegram-en)::before,
-.hystmodal#qr-modal-telegram-en::before,
-.qr-modal-telegram--qr-modal-telegram-en {
-    --theme-gradient: 
+#qr-modal-telegram-en {
+    --theme-gradient:
         radial-gradient(at 0% 0%, #F7C495 0%, transparent 70%),
         radial-gradient(at 100% 0%, #FFBBA7 0%, transparent 70%),
         radial-gradient(at 100% 100%, #48CAE4 0%, transparent 70%),
         radial-gradient(at 0% 100%, #48E5C2 0%, transparent 70%);
     --theme-bg-color: #48E5C2;
     --theme-accent-color: #48CAE4;
+    --theme-pattern: url('./beach-fixed-edges.svg');
 }
 
-.hystmodal:has(.qr-modal-telegram--qr-modal-telegram-en)::before,
-.hystmodal#qr-modal-telegram-en::before {
-    background-image: 
-        url('./beach-fixed-edges.svg'),
+
+
+/* Code */
+
+.hystmodal:has(.qr-modal-telegram)::before {
+    background-image:
+        var(--theme-pattern),
         var(--theme-gradient);
     background-position: center center, 0 0, 0 0, 0 0, 0 0;
     background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
@@ -47,6 +38,7 @@
     background-blend-mode: soft-light, normal, normal, normal, normal;
     background-color: var(--theme-bg-color);
 }
+
 
 .hystmodal--active:has(.qr-modal-telegram)::before {
     opacity: 100%;
@@ -58,27 +50,34 @@
     border-top: 74px solid transparent; /* Компенсируем отрицательный маргин */
 }
 
-.hystmodal__window:has(.qr-modal-telegram) .window {
-    border-radius: 44px;
-    corner-shape: superellipse(1.3);
-}
-
-.hystmodal__window:has(.qr-modal-telegram) .window__body {
-    padding: 16px 16px 20px;
-}
-
-.hystmodal__window:has(.qr-modal-telegram) .window__close {
-    width: 60px;
-    height: 60px;
-}
-
-
 @media (width < 400px) {
 
     .hystmodal__window:has(.qr-modal-telegram) {
         width: calc(100% - 2 * var(--container-padding));
     }
 }
+    .hystmodal__window:has(.qr-modal-telegram) .window {
+        border-radius: 44px;
+        corner-shape: superellipse(1.3);
+    }
+
+        .hystmodal__window:has(.qr-modal-telegram) .window__body {
+            padding: 16px 16px 20px;
+        }
+
+        .hystmodal__window:has(.qr-modal-telegram) .window__close {
+            width: 60px;
+            height: 60px;
+        }
+            .hystmodal__window:has(.qr-modal-telegram) .window__close .icon {
+                background-image: var(--theme-gradient);
+                background-color: var(--theme-bg-color);
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                color: transparent;
+            }
+
 
 
 

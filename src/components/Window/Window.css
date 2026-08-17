@@ -26,10 +26,12 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
+            background-color: var(--action-bg-light);
+            opacity: 0;
         }
 
         .window__close:hover::before {
-            background-color: var(--action-bg-light);
+            opacity: 100%
         }
 
         .window__close:active {
