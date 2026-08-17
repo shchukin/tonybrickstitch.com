@@ -5,6 +5,7 @@ interface Props {
 	href?: string;
 	target?: string;
 	rel?: string;
+	download?: boolean | string;
 	secondary?: boolean;
 	square?: boolean;
 	type?: 'button' | 'submit';
@@ -15,6 +16,7 @@ const {
 	href,
 	target,
 	rel,
+	download,
 	secondary,
 	square,
 	type = 'button',
@@ -35,6 +37,7 @@ const classes = [
 	href={Tag === 'a' ? href : undefined}
 	target={Tag === 'a' ? target : undefined}
 	rel={Tag === 'a' ? computedRel : undefined}
+	download={Tag === 'a' && download ? download : undefined}
 	type={Tag === 'button' ? type : undefined}
 	class={classes}
 	{...rest}

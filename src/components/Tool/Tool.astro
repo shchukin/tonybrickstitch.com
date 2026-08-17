@@ -82,6 +82,8 @@ function isExternalUrl(url: string): boolean {
 				href={img.src}
 				data-pswp-width={img.width}
 				data-pswp-height={img.height}
+				tabindex="-1"
+				aria-hidden="true"
 				style="display: none;"
 			/>
 		))}
@@ -117,7 +119,7 @@ function isExternalUrl(url: string): boolean {
 			)}
 		</div>
 		{(downloadFiles || downloadLayout === 'list') && (
-			<div class="tools__list">
+			<div class="tool__files">
 				<Label>
 					Standalone files
 				</Label>
@@ -157,15 +159,10 @@ function isExternalUrl(url: string): boolean {
 <script>
 	import PhotoSwipeLightbox from 'photoswipe/lightbox';
 
-	function initPhotoSwipe() {
-		const lightbox = new PhotoSwipeLightbox({
-			gallery: '.tool__gallery',
-			children: 'a',
-			pswpModule: () => import('photoswipe'),
-		});
-		lightbox.init();
-	}
-
-	initPhotoSwipe();
-	document.addEventListener('astro:page-load', initPhotoSwipe);
+	const lightbox = new PhotoSwipeLightbox({
+		gallery: '.tool__gallery',
+		children: 'a',
+		pswpModule: () => import('photoswipe'),
+	});
+	lightbox.init();
 </script>

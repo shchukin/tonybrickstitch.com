@@ -5,6 +5,7 @@ interface Props {
     href?: string;
     target?: string;
     rel?: string;
+    download?: boolean | string;
     as?: 'a' | 'div' | 'span' | 'button';
     textAlike?: boolean;
     invertedTextAlike?: boolean;
@@ -17,6 +18,7 @@ const {
     href,
     target,
     rel,
+    download,
     as: Tag = 'a',
     textAlike,
     invertedTextAlike,
@@ -41,6 +43,7 @@ const classes = [
     href={Tag === 'a' ? href : undefined}
     target={Tag === 'a' ? target : undefined}
     rel={Tag === 'a' ? computedRel : undefined}
+    download={Tag === 'a' && download ? download : undefined}
     type={Tag === 'button' ? 'button' : undefined}
     class={classes}
     {...rest}
