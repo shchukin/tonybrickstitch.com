@@ -14,7 +14,6 @@ const {
 	title,
 	description,
 	gallery = [],
-	publicProjectUrl,
 	license,
 	downloadLayout = 'buttons',
 	downloads = [],
@@ -127,13 +126,6 @@ const remainingCount = gallery.length > 4 ? gallery.length - 4 : 0;
 						{license.title}
 					</Link>
 				</div>
-			</div>
-		)}
-		{publicProjectUrl && (
-			<div class="tool__tinkercad">
-				<Link href={publicProjectUrl.href} target="_blank" rel="noopener noreferrer">
-					{publicProjectUrl.title}
-				</Link>
 			</div>
 		)}
 	</div>

@@ -10,10 +10,6 @@
     "./gallery/hanotsume-beading-tray-e.jpg",
     "./gallery/hanotsume-beading-tray-f.jpg"
   ],
-  "publicProjectUrl": {
-    "title": "Project on printables.com",
-    "href": "https://www.printables.com/model/1785033-hanotsume-beading-tray"
-  },
   "date": "2025-05-15",
   "order": 1,
   "visible": true,
@@ -22,7 +18,8 @@
     "href": "https://creativecommons.org/publicdomain/zero/1.0/"
   },
   "downloads": [
-    { "format": "Download All STL files", "href": "/tools/hanotsume-beading-tray-all-files.zip" }
+    { "format": "All STL files", "href": "/tools/hanotsume-beading-tray-all-files.zip" },
+    { "format": "Tinkercad", "href": "https://www.tinkercad.com/things/5q2oNH6oJ5P-hanotsume-beading-tray" }
   ],
   "downloadFiles": [
     { "format": "beading-tray.stl", "href": "/tools/hanotsume-beading-tray.stl" },

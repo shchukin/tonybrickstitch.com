@@ -23,10 +23,6 @@ export const collections = {
 			alias: z.string(),
 			description: z.string(),
 			gallery: z.array(image()),
-			publicProjectUrl: z.object({
-				title: z.string(),
-				href: z.string(),
-			}).optional(),
 			date: z.coerce.date(),
 			order: z.number().optional(),
 			visible: z.boolean().optional().default(true),

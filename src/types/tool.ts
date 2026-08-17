@@ -5,11 +5,6 @@ export interface ToolDownload {
 	href: string;
 }
 
-export interface PublicProject {
-	title: string;
-	href: string;
-}
-
 export interface ToolLicense {
 	title: string;
 	href: string;
@@ -20,7 +15,6 @@ export interface ToolData {
 	alias: string;
 	description: string;
 	gallery: ImageMetadata[];
-	publicProjectUrl?: PublicProject;
 	date: Date;
 	order?: number;
 	visible?: boolean;
