@@ -40,8 +40,14 @@
             font-size: 28px;
             line-height: 32px;
         }
-            .intro__head::before {
+            .intro__logo {
+                width: 46px;
+                height: 46px;
+            }
 
+            .intro__heading {
+                font-size: 28px;
+                line-height: 32px;
             }
 
         .intro__content {

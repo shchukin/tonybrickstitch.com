@@ -169,25 +169,39 @@
         padding: 0;
         border-radius: 16px;
     }
-    
         .tool__gallery {
             width: auto;
         }
-            .tool__image {
-                max-height: 240px;
-                object-fit: cover;
+            .tool__preview {
+                width: auto;
                 border-radius: 15px 15px 0 0;
             }
+                .tool__image {
+                    max-height: 240px;
+                    object-fit: cover;
+                }
 
-            .tool__preview:hover .tool__image {
-                transform: none;
-            }
+                .tool__preview:hover .tool__image {
+                    transform: none;
+                }
 
-            .tool__thumbs {
-                padding: 10px 16px 0;
-            }
+                .tool__thumbs {
+                    margin-top: 10px;
+                    padding-left: 10px;
+                    padding-right: 10px;
+                    gap: 10px;
+                }
+                    .tool__thumb-link {
+                        width: 100%;
+                        height: 74px;
+                    }
+                        .tool__thumb-image {
+
+                        }
+
 
         @media (480px <= width) {
+
             .tool__gallery {
                 padding: 24px 24px 0;
             }
@@ -213,11 +227,42 @@
             }
 
         .tool__sidebar {
-            padding: 0 28px 20px;
+            padding: 0 20px 28px;
             width: auto;
         }
+            .tool__download {
 
-            .tool__tinkercad {
-                margin-top: 12px;
             }
+                .tool__download .label {
+
+                }
+
+                .tool__actions {
+
+                }
+                    .tool__actions .button {
+
+                    }
+
+            .tools__list {
+
+            }
+                .tools__list .label {
+
+                }
+
+                .tool__download-list {
+
+                }
+
+            .tool__license {
+
+            }
+                .tool__license .label {
+
+                }
+
+                .tool__license-text {
+
+                }
 }

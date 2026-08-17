@@ -116,11 +116,11 @@
     
         .mod__preview {
             width: auto;
+            border-radius: 15px 15px 0 0;
         }
             .mod__image {
                 max-height: 240px;
                 object-fit: cover;
-                border-radius: 15px 15px 0 0;
             }
 
             .mod__preview:hover .mod__image {
