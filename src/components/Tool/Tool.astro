@@ -104,7 +104,12 @@ const remainingCount = gallery.length > 4 ? gallery.length - 4 : 0;
 					))}
 				</div>
 			)}
-			{(downloadFiles || downloadLayout === 'list') && (
+		</div>
+		{(downloadFiles || downloadLayout === 'list') && (
+			<div class="tools__list">
+				<Label>
+					Standalone files
+				</Label>
 				<ul class="tool__download-list">
 					{(downloadFiles || downloads).map((file) => (
 						<li class="tool__download-item">
@@ -114,8 +119,8 @@ const remainingCount = gallery.length > 4 ? gallery.length - 4 : 0;
 						</li>
 					))}
 				</ul>
-			)}
-		</div>
+			</div>
+		)}
 		{license && (
 			<div class="tool__license">
 				<Label>

@@ -50,6 +50,7 @@
         width: 200px;
         display: flex;
         flex-direction: column;
+        gap: 18px;
     }
         .mod__original {
 
@@ -60,7 +61,7 @@
             }
 
         .mod__download {
-            margin-top: 18px;
+
         }
             .mod__actions {
                 margin-top: 4px;
