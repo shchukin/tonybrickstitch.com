@@ -11,11 +11,9 @@
 }
     .tool__gallery {
         flex-shrink: 0;
-        display: flex;
-        flex-direction: column;
         width: 240px;
     }
-        .tool__preview-main {
+        .tool__preview {
             display: block;
             width: 100%;
             border-radius: 12px;
@@ -26,22 +24,21 @@
                 width: 100%;
                 height: auto;
                 background-color: var(--image-fallback);
-                border-radius: 12px;
                 transition: transform 600ms var(--ease-out-quint);
             }
 
-            .tool__preview-main:hover .tool__image {
+            .tool__preview:hover .tool__image {
                 transform: scale(104%);
             }
 
         .tool__thumbs {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(30px, 1fr));
             gap: 6px;
-            margin-top: 8px;
+            margin-top: 6px;
             width: 100%;
         }
             .tool__thumb-link {
-                flex: 1 1 0;
                 position: relative;
                 border-radius: 8px;
                 overflow: hidden;
@@ -64,14 +61,14 @@
                 .tool__thumb-overlay {
                     position: absolute;
                     inset: 0;
-                    background-color: rgba(0 0 0 / 55%);
-                    color: #FFFFFF;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    font-size: 15px;
+                    background-color: rgba(0 0 0 / 55%);
                     font-weight: 700;
-                    border-radius: 8px;
+                    font-size: 15px;
+                    line-height: 22px;
+                    color: #FFFFFF;
                     transition: background-color var(--transition-hover);
                 }
 
@@ -120,8 +117,7 @@
                 .tool__actions .button {
                     flex: 1 1 calc(33.333% - 4px);
                     min-width: 0;
-                    padding-left: 8px;
-                    padding-right: 8px;
+                    padding: 9px 8px;
                     font-size: 13px;
                     font-weight: 600;
                     text-align: center;
@@ -146,7 +142,7 @@
             }
                 .tool__download-item {
                     font-size: 12px;
-                    line-height: 18px;
+                    line-height: 17px;
                 }
                     .tool__download-item .link {
                         padding-top: 1px;
@@ -159,7 +155,7 @@
             .tool__license .label {
 
             }
-            
+
             .tool__license-text {
                 font-size: 12.5px;
                 line-height: 20px;
@@ -183,7 +179,7 @@
                 border-radius: 15px 15px 0 0;
             }
 
-            .tool__preview-main:hover .tool__image {
+            .tool__preview:hover .tool__image {
                 transform: none;
             }
 

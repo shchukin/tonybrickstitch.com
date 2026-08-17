@@ -13,13 +13,14 @@
         flex-shrink: 0;
         display: block;
         width: 240px;
+        border-radius: 12px;
+        overflow: hidden;
     }
         .mod__image {
             vertical-align: top;
             width: 100%;
             height: auto;
             background-color: var(--image-fallback);
-            border-radius: 12px;
             transition: transform 600ms var(--ease-out-quint);
         }
 
