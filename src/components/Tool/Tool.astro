@@ -24,6 +24,10 @@ const mainImage = gallery[0];
 const subImages = gallery.slice(1, 4); // max 3 thumbnails (indices 1, 2, 3)
 const hiddenImages = gallery.slice(4); // remaining images (indices 4+)
 const remainingCount = gallery.length > 4 ? gallery.length - 4 : 0;
+
+function isExternalUrl(url: string): boolean {
+	return url.startsWith('http://') || url.startsWith('https://') || url.startsWith('//');
+}
 ---
 
 <article class="tool">
@@ -97,11 +101,18 @@ const remainingCount = gallery.length > 4 ? gallery.length - 4 : 0;
 			</Label>
 			{downloadLayout === 'buttons' && downloads.length > 0 && (
 				<div class="tool__actions">
-					{downloads.map((file) => (
-						<Button href={file.href}>
-							{file.format}
-						</Button>
-					))}
+					{downloads.map((file) => {
+						const isExternal = isExternalUrl(file.href);
+						return (
+							<Button
+								href={file.href}
+								download={!isExternal}
+								target={isExternal ? '_blank' : undefined}
+							>
+								{file.format}
+							</Button>
+						);
+					})}
 				</div>
 			)}
 		</div>
@@ -111,13 +122,20 @@ const remainingCount = gallery.length > 4 ? gallery.length - 4 : 0;
 					Standalone files
 				</Label>
 				<ul class="tool__download-list">
-					{(downloadFiles || downloads).map((file) => (
-						<li class="tool__download-item">
-							<Link href={file.href} download>
-								{file.format}
-							</Link>
-						</li>
-					))}
+					{(downloadFiles || downloads).map((file) => {
+						const isExternal = isExternalUrl(file.href);
+						return (
+							<li class="tool__download-item">
+								<Link
+									href={file.href}
+									download={!isExternal}
+									target={isExternal ? '_blank' : undefined}
+								>
+									{file.format}
+								</Link>
+							</li>
+						);
+					})}
 				</ul>
 			</div>
 		)}
