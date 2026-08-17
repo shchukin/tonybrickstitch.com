@@ -39,7 +39,7 @@
 .hystmodal:has(.qr-modal-telegram--qr-modal-telegram-en)::before,
 .hystmodal#qr-modal-telegram-en::before {
     background-image: 
-        url('./beach.svg'),
+        url('./beach-fixed-edges.svg'),
         var(--theme-gradient);
     background-position: center center, 0 0, 0 0, 0 0, 0 0;
     background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
