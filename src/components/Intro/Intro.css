@@ -1,6 +1,5 @@
 .intro {
-    padding-top: 24px;
-    padding-bottom: 24px;
+
 }
     .intro__head {
         display: flex;
@@ -27,7 +26,7 @@
         }
 
     .intro__content {
-        margin-top: 16px;
+        margin-top: calc(2/3 * var(--page-gap));
     }
 
 
@@ -35,8 +34,7 @@
 @media (width < 740px) {
 
     .intro {
-        padding-top: 16px;
-        padding-bottom: 16px;
+
     }
         .intro__head {
             font-size: 28px;
@@ -47,6 +45,6 @@
             }
 
         .intro__content {
-            margin-top: 14px;
+
         }
 }

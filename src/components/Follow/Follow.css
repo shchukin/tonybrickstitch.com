@@ -1,13 +1,12 @@
 .follow {
-    padding-top: 24px;
-    padding-bottom: 24px;
+
 }
     .follow__heading {
 
     }
 
     .follow__content {
-        margin-top: 24px;
+        margin-top: var(--page-gap);
     }
 
 
@@ -15,14 +14,13 @@
 @media (width < 740px) {
 
     .follow {
-        padding-top: 16px;
-        padding-bottom: 16px;
+
     }
         .follow__heading {
 
         }
 
         .follow__content {
-            margin-top: 16px;
+
         }
 }

@@ -8,6 +8,7 @@
     --image-fallback: #F3F5F4;
     --container-padding: 40px;
     --radius: 20px;
+    --page-gap: 24px;
     --action-color: #8B263E;
     --action-color-hover: #A6324F;
     --action-bg-light: #FDF2F4;
@@ -32,6 +33,7 @@
 
 @media (width < 740px) {
     :root {
+        --page-gap: 16px;
         --body-font-size: 15px;
         --body-line-height: 22px;
     }
