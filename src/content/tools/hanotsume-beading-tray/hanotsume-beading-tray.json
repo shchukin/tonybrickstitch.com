@@ -18,13 +18,11 @@
   },
   "downloads": [
     { "format": "All STL files", "href": "/tools/hanotsume-beading-tray-all-files.zip" },
-    { "format": "Tinkercad", "href": "https://www.tinkercad.com/things/5q2oNH6oJ5P-hanotsume-beading-tray" }
+    { "format": "Tinkercad", "href": "https://www.tinkercad.com/things/lGNOIQdgqWP-hanotsume-beading-tray" }
   ],
   "downloadFiles": [
     { "format": "beading-tray.stl", "href": "/tools/hanotsume-beading-tray.stl" },
-    { "format": "beading-tray-no-labels.stl", "href": "/tools/hanotsume-beading-tray-no-labels.stl" },
     { "format": "main-body-only.stl", "href": "/tools/hanotsume-beading-tray-main-body-only.stl" },
-    { "format": "lid-only.stl", "href": "/tools/hanotsume-beading-tray-lid-only.stl" },
-    { "format": "alt-lid-only.stl", "href": "/tools/hanotsume-beading-tray-alt-lid-only.stl" }
+    { "format": "lid-only.stl", "href": "/tools/hanotsume-beading-tray-lid-only.stl" }
   ]
 }
