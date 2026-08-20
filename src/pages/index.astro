@@ -2,12 +2,12 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Intro from "../components/Intro/Intro.astro";
 import Follow from "../components/Follow/Follow.astro";
-import Modifications from "../components/Modifications/Modifications.astro";
+import Library from "../components/Library/Library.astro";
 import Hardware from "../components/Hardware/Hardware.astro";
 import { getCollection } from "astro:content";
 
-const modsEntries = await getCollection("mods");
-const mods = modsEntries.map((entry) => entry.data);
+const patternsEntries = await getCollection("patterns");
+const patterns = patternsEntries.map((entry) => entry.data);
 
 const toolsEntries = await getCollection("tools");
 const tools = toolsEntries
@@ -20,5 +20,5 @@ const tools = toolsEntries
 	<Intro />
 	<Follow />
 	<Hardware tools={tools} />
-	<Modifications mods={mods} />
+	<Library patterns={patterns} />
 </BaseLayout>

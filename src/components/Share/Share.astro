@@ -1,13 +1,13 @@
 ---
 import './Share.css';
-import type { ModData } from '../../types/mod';
+import type { PatternData } from '../../types/pattern';
 import Window from "../Window/Window.astro";
 import Wysiwyg from "../Wysiwyg/Wysiwyg.astro";
 import Copy from "../Copy/Copy.astro";
 import HystModal from "../HystModal/HystModal.astro";
 import Image from '../Image/Image.astro';
 
-interface Props extends ModData {}
+interface Props extends PatternData {}
 
 const { alias, title, previewImage } = Astro.props;
 
