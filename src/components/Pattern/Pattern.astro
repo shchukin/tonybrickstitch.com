@@ -10,8 +10,9 @@ import Image from '../Image/Image.astro';
 
 interface Props extends PatternData {}
 
-const { alias, title, description, author, previewImage } = Astro.props;
+const { alias, title, description, author, downloadLabel, previewImage } = Astro.props;
 
+const labelText = downloadLabel ?? (author ? 'Beading-Ready Mods' : 'Pattern Files');
 const modalId = `#share-${alias}`;
 const pdfEn = `/patterns/${alias}-en.pdf`;
 const pdfRu = `/patterns/${alias}-ru.pdf`;
@@ -42,7 +43,7 @@ const pdfRu = `/patterns/${alias}-ru.pdf`;
 		)}
 		<div class="pattern__download">
 			<Label>
-				Beading Mods
+				{ labelText }
 			</Label>
 			<div class="pattern__actions">
 				<div class="pattern__main-link">

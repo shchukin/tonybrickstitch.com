@@ -11,5 +11,6 @@ export interface PatternData {
 	title: string;
 	description: string;
 	author?: PatternAuthor;
+	downloadLabel?: string;
 	previewImage: ImageMetadata;
 }

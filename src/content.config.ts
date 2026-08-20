@@ -2,8 +2,8 @@ import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
 export const collections = {
-	patterns: defineCollection({
-		loader: glob({ pattern: '**/*.json', base: './src/content/patterns' }),
+	mods: defineCollection({
+		loader: glob({ pattern: '**/*.json', base: './src/content/mods' }),
 		schema: ({ image }) => z.object({
 			alias: z.string(),
 			title: z.string(),
@@ -13,6 +13,22 @@ export const collections = {
 				name: z.string(),
 				href: z.string(),
 			}).optional(),
+			downloadLabel: z.string().optional(),
+			previewImage: image(),
+		}),
+	}),
+	designs: defineCollection({
+		loader: glob({ pattern: '**/*.json', base: './src/content/designs' }),
+		schema: ({ image }) => z.object({
+			alias: z.string(),
+			title: z.string(),
+			description: z.string(),
+			author: z.object({
+				label: z.string(),
+				name: z.string(),
+				href: z.string(),
+			}).optional(),
+			downloadLabel: z.string().optional(),
 			previewImage: image(),
 		}),
 	}),

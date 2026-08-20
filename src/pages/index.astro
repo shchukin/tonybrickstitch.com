@@ -4,10 +4,14 @@ import Intro from "../components/Intro/Intro.astro";
 import Follow from "../components/Follow/Follow.astro";
 import Library from "../components/Library/Library.astro";
 import Hardware from "../components/Hardware/Hardware.astro";
+import Link from "../components/Link/Link.astro";
 import { getCollection } from "astro:content";
 
-const patternsEntries = await getCollection("patterns");
-const patterns = patternsEntries.map((entry) => entry.data);
+const designsEntries = await getCollection("designs");
+const designs = designsEntries.map((entry) => entry.data);
+
+const modsEntries = await getCollection("mods");
+const mods = modsEntries.map((entry) => entry.data);
 
 const toolsEntries = await getCollection("tools");
 const tools = toolsEntries
@@ -17,8 +21,40 @@ const tools = toolsEntries
 ---
 
 <BaseLayout>
+	
 	<Intro />
+
 	<Follow />
+
 	<Hardware tools={tools} />
-	<Library patterns={patterns} />
+
+	<Library title="Original designs" patterns={designs}>
+		<Fragment slot="description">
+			<p>
+				Here are my original, self-designed seed bead patterns. Each pattern is created from scratch,
+				tailored specifically for brick stitch and peyote stitch techniques.
+			</p>
+			<p>
+				All downloadable charts are completely free for personal use and include detailed color keys.
+			</p>
+		</Fragment>
+	</Library>
+
+	<Library title="Pattern modifications" patterns={mods}>
+		<Fragment slot="description">
+			<p>
+				When crafting with seed beads, I often adapt non‑beading patterns—like friendship bracelet charts
+				from <Link href="https://www.braceletbook.com" target="_blank">Bracelet Book</Link> or retro pixel art. These designs usually need
+				a few tweaks: adding or removing rows, adjusting proportions to fit the seed bead aspect ratio, and fine-tuning
+				color palettes.
+			</p>
+			<p>
+				I compile these modded charts into PDF files and share them just like the originals: non-commercial and completely free.
+				These mods are created with a community-driven mindset, much like open‑source software.
+			</p>
+			<p>
+				Original design authors are always credited.
+			</p>
+		</Fragment>
+	</Library>
 </BaseLayout>
