@@ -1,16 +1,16 @@
-.modifications {
+.library {
 
 }
-    .modifications__heading {
+    .library__heading {
 
     }
 
-    .modifications__description {
+    .library__description {
         margin-top: var(--page-gap);
         max-width: 780px;
     }
 
-    .modifications__list {
+    .library__list {
         margin-top: var(--page-gap);
         display: flex;
         flex-direction: column;
@@ -21,18 +21,18 @@
 
 @media (width < 740px) {
 
-    .modifications {
+    .library {
 
     }
-        .modifications__heading {
+        .library__heading {
 
         }
 
-        .modifications__description {
+        .library__description {
 
         }
 
-        .modifications__list {
+        .library__list {
 
         }
 }

@@ -1,15 +1,15 @@
 import type { ImageMetadata } from 'astro';
 
-export interface ModAuthor {
+export interface PatternAuthor {
 	label: string;
 	name: string;
 	href: string;
 }
 
-export interface ModData {
+export interface PatternData {
 	alias: string;
 	title: string;
 	description: string;
-	author: ModAuthor;
+	author?: PatternAuthor;
 	previewImage: ImageMetadata;
 }

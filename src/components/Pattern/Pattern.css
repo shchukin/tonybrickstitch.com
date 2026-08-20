@@ -1,4 +1,4 @@
-.mod {
+.pattern {
     display: flex;
     align-items: stretch;
     gap: 28px;
@@ -9,14 +9,14 @@
     box-shadow: 0 4px 16px rgba(0 0 0 / 3%),
                 0 1px 2px rgba(0 0 0 / 2%);
 }
-    .mod__preview {
+    .pattern__preview {
         flex-shrink: 0;
         display: block;
         width: 240px;
         border-radius: 12px;
         overflow: hidden;
     }
-        .mod__image {
+        .pattern__image {
             vertical-align: top;
             width: 100%;
             height: auto;
@@ -24,16 +24,16 @@
             transition: transform 600ms var(--ease-out-quint);
         }
 
-        .mod__preview:hover .mod__image {
+        .pattern__preview:hover .pattern__image {
             transform: scale(104%);
         }
 
-    .mod__body {
+    .pattern__body {
         padding-top: 4px;
         flex-grow: 1;
         align-items: start;
     }
-        .mod__heading {
+        .pattern__heading {
             margin-top: 0;
             margin-bottom: 0;
             font-weight: bold;
@@ -42,55 +42,55 @@
             color: var(--heading-color);
         }
 
-        .mod__description {
+        .pattern__description {
             margin-top: 12px;
         }
 
-    .mod__sidebar {
+    .pattern__sidebar {
         flex-shrink: 0;
         width: 200px;
         display: flex;
         flex-direction: column;
         gap: 18px;
     }
-        .mod__original {
+        .pattern__original {
 
         }
-            .mod__author {
+            .pattern__author {
                 font-size: 13px;
                 line-height: 20px;
             }
 
-        .mod__download {
+        .pattern__download {
 
         }
-            .mod__actions {
+            .pattern__actions {
                 margin-top: 4px;
                 display: flex;
                 align-items: flex-start;
                 gap: 6px;
             }
-                .mod__main-link {
+                .pattern__main-link {
                     flex-grow: 1;
                 }
-                    .mod__main-link .button {
+                    .pattern__main-link .button {
                         width: 100%;
                         padding-left: 12px;
                         padding-right: 12px;
                     }
 
-                .mod__share {
+                .pattern__share {
                     margin-right: -12px;
                 }
 
-            .mod__alt-link {
+            .pattern__alt-link {
                 margin-top: 4px;
                 font-size: 13px;
                 line-height: 20px;
                 text-align: center;
             }
 
-        .mod__printing-hint {
+        .pattern__printing-hint {
             margin-top: auto;
             margin-bottom: -12px;
             padding-top: 4px;
@@ -101,87 +101,87 @@
             text-align: center;
             opacity: 75%;
         }
-            .mod__highlight {
+            .pattern__highlight {
                 font-weight: bold;
             }
 
 
 @media (width < 740px) {
 
-    .mod {
+    .pattern {
         display: block;
         padding: 0;
         border-radius: 16px;
     }
     
-        .mod__preview {
+        .pattern__preview {
             width: auto;
             border-radius: 15px 15px 0 0;
         }
-            .mod__image {
+            .pattern__image {
                 max-height: 240px;
                 object-fit: cover;
             }
 
-            .mod__preview:hover .mod__image {
+            .pattern__preview:hover .pattern__image {
                 transform: none;
             }
 
         @media (480px <= width) {
-            .mod__preview {
+            .pattern__preview {
                 padding: 24px;
             }
-                .mod__image {
+                .pattern__image {
                     border-radius: 16px;
                 }
         }
 
-        .mod__body {
+        .pattern__body {
             padding: 22px 20px;
         }
-            .mod__heading {
+            .pattern__heading {
                 font-size: 19px;
                 line-height: 24px;
             }
 
-            .mod__description {
+            .pattern__description {
                 margin-top: 10px;
             }
 
-        .mod__sidebar {
+        .pattern__sidebar {
             padding: 0 28px 20px;
             width: auto;
         }
-            .mod__original {
+            .pattern__original {
 
             }
-                .mod__author {
+                .pattern__author {
 
                 }
 
-            .mod__download {
+            .pattern__download {
 
             }
-                .mod__actions {
+                .pattern__actions {
 
                 }
-                    .mod__main-link {
+                    .pattern__main-link {
 
                     }
 
-                    .mod__share {
+                    .pattern__share {
 
                     }
 
-            .mod__alt-link {
+            .pattern__alt-link {
                 margin-top: 10px;
             }
 
-            .mod__printing-hint {
+            .pattern__printing-hint {
                 margin-bottom: 0;
                 padding-top: 24px;
             }
-                .mod__highlight {
+                .pattern__highlight {
 
                 }
 }
