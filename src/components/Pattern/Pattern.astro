@@ -24,7 +24,7 @@ const pdfRu = `/patterns/${alias}-ru.pdf`;
 	</a>
 	<div class="pattern__body">
 		<h3 class="pattern__heading">
-			{title}
+			<Link invertedTextAlike href={pdfEn}>{title}</Link>
 		</h3>
 		<div class="pattern__description">
 			<Wysiwyg smaller set:html={description} />
