@@ -1,0 +1,284 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Title from "../components/Title/Title.astro";
+import { Image } from "astro:assets";
+import originalImage from "../temp/image.svg";
+import { PATTERN_MATRIX, COLOR_PALETTE } from "../data/studioPattern";
+import { generateLoomSvg } from "../utils/loomSvgGenerator";
+import { generateWordChart, exportWordChartAsText } from "../utils/wordChartGenerator";
+import "../components/Studio/Studio.css";
+
+const numRows = PATTERN_MATRIX.length;
+const numCols = PATTERN_MATRIX[0]?.length || 0;
+const totalBeads = numRows * numCols;
+
+let countA = 0;
+let countB = 0;
+
+PATTERN_MATRIX.forEach((row) => {
+  row.forEach((cell) => {
+    if (cell === "a") countA++;
+    if (cell === "b") countB++;
+  });
+});
+
+// Generate new SVG grid for loom beadwork
+const newLoomSvg = generateLoomSvg(PATTERN_MATRIX, COLOR_PALETTE);
+
+// Generate Word Chart data
+const wordChartData = generateWordChart(PATTERN_MATRIX, COLOR_PALETTE);
+const wordChartText = exportWordChartAsText(PATTERN_MATRIX, COLOR_PALETTE);
+
+// Formatted string representation of the 2D array
+const formattedMatrixCode = `const patternMatrix = [\n` +
+  PATTERN_MATRIX.map((row, idx) => `  /* Row ${String(idx + 1).padStart(3, ' ')} */ [${row.map(c => `'${c}'`).join(', ')}]`).join(',\n') +
+  `\n];`;
+---
+
+<BaseLayout>
+  <div class="studio">
+    <header class="studio__header">
+      <Title as="h1">Studio</Title>
+      <p class="studio__description">
+        Веб-приложение для работы с схемами и паттернами из бисера (плетение на станке / loom beadwork).
+      </p>
+    </header>
+
+    <!-- SECTION 1: 2D Matrix Analysis -->
+    <section class="studio__section">
+      <h2 class="studio__section-title">
+        <span>📊</span> 1. Результат анализа исходного SVG (Двухмерный массив)
+      </h2>
+      <p class="studio__section-desc">
+        Исходный SVG-файл успешно распознан и преобразован в 2D-массив <code>matrix[100][18]</code> с указанием алиасов цветов.
+      </p>
+
+      <div class="studio__stats">
+        <div class="studio__stat-card">
+          <div class="studio__stat-label">Размер сетки</div>
+          <div class="studio__stat-value">{numCols} × {numRows}</div>
+        </div>
+        <div class="studio__stat-card">
+          <div class="studio__stat-label">Всего бусин</div>
+          <div class="studio__stat-value">{totalBeads} шт.</div>
+        </div>
+        <div class="studio__stat-card">
+          <div class="studio__stat-label">Алиас 'a' ({COLOR_PALETTE.a.fill})</div>
+          <div class="studio__stat-value">{countA} шт. ({((countA / totalBeads) * 100).toFixed(1)}%)</div>
+        </div>
+        <div class="studio__stat-card">
+          <div class="studio__stat-label">Алиас 'b' ({COLOR_PALETTE.b.fill})</div>
+          <div class="studio__stat-value">{countB} шт. ({((countB / totalBeads) * 100).toFixed(1)}%)</div>
+        </div>
+      </div>
+
+      <!-- Tabs for Matrix View -->
+      <div class="studio__tabs">
+        <button type="button" class="studio__tab-btn is-active" data-tab="grid">Интерактивная сетка (Визуал)</button>
+        <button type="button" class="studio__tab-btn" data-tab="code">Код массива (JS Array)</button>
+      </div>
+
+      <!-- Tab Content: Visual Grid -->
+      <div id="tab-grid" class="studio__tab-content">
+        <div class="studio__matrix-container">
+          <div
+            class="studio__matrix-grid"
+            style={`grid-template-columns: repeat(${numCols}, 22px);`}
+          >
+            {PATTERN_MATRIX.map((row, rIdx) =>
+              row.map((cell, cIdx) => (
+                <div
+                  class={`studio__matrix-cell studio__matrix-cell--${cell}`}
+                  title={`Ряд ${rIdx + 1}, Колонка ${cIdx + 1}: Цвет ${cell.toUpperCase()}`}
+                >
+                  {cell}
+                </div>
+              ))
+            )}
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Content: Raw JS Code -->
+      <div id="tab-code" class="studio__tab-content" style="display: none;">
+        <pre class="studio__code-block"><code>{formattedMatrixCode}</code></pre>
+      </div>
+    </section>
+
+    <!-- SECTION 2: Newly Generated SVG Loom Grid -->
+    <section class="studio__section">
+      <h2 class="studio__section-title">
+        <span>🧵</span> 2. Новое SVG изображение (Сетка для работы на станке)
+      </h2>
+      <p class="studio__section-desc">
+        Сгенерированная векторная схема для станочного плетения: с вертикальными нитями основы, разметкой рядов, нумерацией колонок и легендой цветов.
+      </p>
+
+      <div class="studio__svg-wrapper">
+        <Fragment set:html={newLoomSvg} />
+      </div>
+
+      <div class="studio__actions">
+        <button id="download-svg-btn" type="button" class="studio__btn">
+          <span>💾</span> Скачать новое SVG (Сетка для станка)
+        </button>
+      </div>
+    </section>
+
+    <!-- SECTION 3: Word Chart (Row-by-Row Text Instructions) -->
+    <section class="studio__section">
+      <h2 class="studio__section-title">
+        <span>📝</span> 3. Word Chart (Словесная инструкция по рядам)
+      </h2>
+      <p class="studio__section-desc">
+        Текстовая схема для мастериц, позволяющая набирать бисер по рядам сгруппированными сериями вместо штучного счёта.
+      </p>
+
+      <div class="word-chart">
+        <div class="word-chart__toolbar">
+          <div class="studio__tabs" style="margin-bottom: 0; border: none; padding: 0;">
+            <button type="button" class="studio__tab-btn is-active" data-wc-tab="visual">Бэйджи (Визуал)</button>
+            <button type="button" class="studio__tab-btn" data-wc-tab="text">Текст (Для печати/копирования)</button>
+          </div>
+
+          <div class="word-chart__search">
+            <input id="wc-search-input" type="text" class="word-chart__input" placeholder="Перейти к ряду (напр. 15)..." />
+            <button id="copy-wc-btn" type="button" class="studio__btn studio__btn--secondary" style="padding: 0.45rem 0.85rem; font-size: 0.85rem;">
+              <span>📋</span> Копировать Word Chart
+            </button>
+          </div>
+        </div>
+
+        <!-- Word Chart Visual List -->
+        <div id="wc-visual-tab" class="word-chart__list">
+          {wordChartData.rows.map((row) => (
+            <div class="word-chart__row" data-row-num={row.rowNumber}>
+              <div class="word-chart__row-num">Ряд {String(row.rowNumber).padStart(3, '0')}</div>
+              <div class="word-chart__runs">
+                {row.runs.map((run) => (
+                  <span class={`word-chart__badge word-chart__badge--${run.color}`}>
+                    ({run.count}) {run.color.toUpperCase()}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Word Chart Plain Text View -->
+        <div id="wc-text-tab" style="display: none;">
+          <pre class="word-chart__text-view"><code>{wordChartText}</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: Original SVG for reference -->
+    <section class="studio__section">
+      <h2 class="studio__section-title">
+        <span>🖼️</span> 4. Исходный SVG из папки temp
+      </h2>
+      <p class="studio__section-desc">
+        Оригинальный файл из <code>src/temp/image.svg</code>, послуживший источником данных.
+      </p>
+      <div class="studio__svg-wrapper">
+        <Image src={originalImage} alt="Original Pattern SVG" />
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  // Tab switching logic for Matrix
+  const tabBtns = document.querySelectorAll('[data-tab]');
+  const tabContents = {
+    grid: document.getElementById('tab-grid'),
+    code: document.getElementById('tab-code'),
+  };
+
+  tabBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const tabName = btn.getAttribute('data-tab');
+      
+      tabBtns.forEach((b) => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+
+      Object.entries(tabContents).forEach(([name, el]) => {
+        if (el) {
+          el.style.display = name === tabName ? 'block' : 'none';
+        }
+      });
+    });
+  });
+
+  // Tab switching logic for Word Chart
+  const wcTabBtns = document.querySelectorAll('[data-wc-tab]');
+  const wcTabContents = {
+    visual: document.getElementById('wc-visual-tab'),
+    text: document.getElementById('wc-text-tab'),
+  };
+
+  wcTabBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const tabName = btn.getAttribute('data-wc-tab');
+
+      wcTabBtns.forEach((b) => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+
+      Object.entries(wcTabContents).forEach(([name, el]) => {
+        if (el) {
+          el.style.display = name === tabName ? 'block' : 'none';
+        }
+      });
+    });
+  });
+
+  // Word Chart Search / Filter by Row
+  const wcSearchInput = document.getElementById('wc-search-input') as HTMLInputElement | null;
+  wcSearchInput?.addEventListener('input', (e) => {
+    const val = (e.target as HTMLInputElement).value.trim();
+    const rows = document.querySelectorAll('.word-chart__row');
+    
+    rows.forEach((row) => {
+      const rowNum = row.getAttribute('data-row-num');
+      if (!val || (rowNum && rowNum.includes(val))) {
+        (row as HTMLElement).style.display = 'flex';
+      } else {
+        (row as HTMLElement).style.display = 'none';
+      }
+    });
+  });
+
+  // Copy Word Chart to Clipboard
+  const copyWcBtn = document.getElementById('copy-wc-btn');
+  copyWcBtn?.addEventListener('click', () => {
+    const codeEl = document.querySelector('#wc-text-tab code');
+    if (!codeEl) return;
+    
+    navigator.clipboard.writeText(codeEl.textContent || '').then(() => {
+      const origText = copyWcBtn.innerHTML;
+      copyWcBtn.innerHTML = '<span>✅</span> Скопировано!';
+      setTimeout(() => {
+        copyWcBtn.innerHTML = origText;
+      }, 2000);
+    });
+  });
+
+  // SVG Download Logic
+  const downloadBtn = document.getElementById('download-svg-btn');
+  downloadBtn?.addEventListener('click', () => {
+    const svgEl = document.querySelector('.studio__section:nth-of-type(2) svg');
+    if (!svgEl) return;
+
+    const svgData = new XMLSerializer().serializeToString(svgEl);
+    const blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'loom-beadwork-pattern.svg';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+</script>
