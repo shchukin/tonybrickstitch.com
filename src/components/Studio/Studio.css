@@ -143,6 +143,7 @@
   transition: transform 0.1s ease;
 }
 
+.studio__matrix-cell--g,
 .studio__matrix-cell--a {
   background-color: #F1D397;
   color: #332200;
@@ -327,6 +328,7 @@
   border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
+.word-chart__badge--g,
 .word-chart__badge--a {
   background-color: #F1D397;
   color: #332200;

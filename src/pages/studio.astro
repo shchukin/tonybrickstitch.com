@@ -5,19 +5,19 @@ import { Image } from "astro:assets";
 import originalImage from "../temp/image3.svg";
 import { PATTERN_MATRIX, COLOR_PALETTE } from "../data/studioPattern";
 import { generateLoomSvg } from "../utils/loomSvgGenerator";
-import { generateWordChart, exportWordChartAsText } from "../utils/wordChartGenerator";
+import { generateWordChart, exportWordChartAsText, exportWordChartAsHtml } from "../utils/wordChartGenerator";
 import "../components/Studio/Studio.css";
 
 const numRows = PATTERN_MATRIX.length;
 const numCols = PATTERN_MATRIX[0]?.length || 0;
 const totalBeads = numRows * numCols;
 
-let countA = 0;
+let countG = 0;
 let countB = 0;
 
 PATTERN_MATRIX.forEach((row) => {
   row.forEach((cell) => {
-    if (cell === "a") countA++;
+    if (cell === "g") countG++;
     if (cell === "b") countB++;
   });
 });
@@ -27,12 +27,7 @@ const newLoomSvg = generateLoomSvg(PATTERN_MATRIX, COLOR_PALETTE);
 
 // Generate Word Chart data
 const wordChartData = generateWordChart(PATTERN_MATRIX, COLOR_PALETTE);
-const wordChartText = exportWordChartAsText(PATTERN_MATRIX, COLOR_PALETTE);
-
-// Formatted string representation of the 2D array
-const formattedMatrixCode = `const patternMatrix = [\n` +
-  PATTERN_MATRIX.map((row, idx) => `  /* Row ${String(idx + 1).padStart(3, ' ')} */ [${row.map(c => `'${c}'`).join(', ')}]`).join(',\n') +
-  `\n];`;
+const wordChartHtml = exportWordChartAsHtml(PATTERN_MATRIX, COLOR_PALETTE);
 ---
 
 <BaseLayout>
@@ -63,8 +58,8 @@ const formattedMatrixCode = `const patternMatrix = [\n` +
           <div class="studio__stat-value">{totalBeads} шт.</div>
         </div>
         <div class="studio__stat-card">
-          <div class="studio__stat-label">Алиас 'a' ({COLOR_PALETTE.a.fill})</div>
-          <div class="studio__stat-value">{countA} шт. ({((countA / totalBeads) * 100).toFixed(1)}%)</div>
+          <div class="studio__stat-label">Алиас 'g' ({COLOR_PALETTE.g.fill})</div>
+          <div class="studio__stat-value">{countG} шт. ({((countG / totalBeads) * 100).toFixed(1)}%)</div>
         </div>
         <div class="studio__stat-card">
           <div class="studio__stat-label">Алиас 'b' ({COLOR_PALETTE.b.fill})</div>
@@ -101,7 +96,9 @@ const formattedMatrixCode = `const patternMatrix = [\n` +
 
       <!-- Tab Content: Raw JS Code -->
       <div id="tab-code" class="studio__tab-content" style="display: none;">
-        <pre class="studio__code-block"><code>{formattedMatrixCode}</code></pre>
+        <pre class="studio__code-block"><code>const patternMatrix = [
+{PATTERN_MATRIX.map((row, idx) => `  /* Row ${String(idx + 1).padStart(3, ' ')} */ [${row.map(c => `'${c}'`).join(', ')}]`).join(',\n')}
+];</code></pre>
       </div>
     </section>
 
@@ -138,7 +135,7 @@ const formattedMatrixCode = `const patternMatrix = [\n` +
         <div class="word-chart__toolbar">
           <div class="studio__tabs" style="margin-bottom: 0; border: none; padding: 0;">
             <button type="button" class="studio__tab-btn is-active" data-wc-tab="visual">Бэйджи (Визуал)</button>
-            <button type="button" class="studio__tab-btn" data-wc-tab="text">Текст (Для печати/копирования)</button>
+            <button type="button" class="studio__tab-btn" data-wc-tab="text">Печатная версия (Текст)</button>
           </div>
 
           <div class="word-chart__search">
@@ -153,11 +150,11 @@ const formattedMatrixCode = `const patternMatrix = [\n` +
         <div id="wc-visual-tab" class="word-chart__list">
           {wordChartData.rows.map((row) => (
             <div class="word-chart__row" data-row-num={row.rowNumber}>
-              <div class="word-chart__row-num">Ряд {String(row.rowNumber).padStart(3, '0')}</div>
+              <div class="word-chart__row-num">{String(row.rowNumber).padStart(3, '0')}:</div>
               <div class="word-chart__runs">
                 {row.runs.map((run) => (
                   <span class={`word-chart__badge word-chart__badge--${run.color}`}>
-                    ({run.count}) {run.color.toUpperCase()}
+                    <strong>({run.count})</strong>{run.color.toUpperCase()}
                   </span>
                 ))}
               </div>
@@ -165,9 +162,9 @@ const formattedMatrixCode = `const patternMatrix = [\n` +
           ))}
         </div>
 
-        <!-- Word Chart Plain Text View -->
+        <!-- Word Chart Plain Text / Printable View -->
         <div id="wc-text-tab" style="display: none;">
-          <pre class="word-chart__text-view"><code>{wordChartText}</code></pre>
+          <pre class="word-chart__text-view"><code set:html={wordChartHtml} /></pre>
         </div>
       </div>
     </section>
@@ -248,13 +245,15 @@ const formattedMatrixCode = `const patternMatrix = [\n` +
     });
   });
 
-  // Copy Word Chart to Clipboard
+  // Copy Word Chart to Clipboard (Copies clean plain text)
   const copyWcBtn = document.getElementById('copy-wc-btn');
   copyWcBtn?.addEventListener('click', () => {
     const codeEl = document.querySelector('#wc-text-tab code');
     if (!codeEl) return;
     
-    navigator.clipboard.writeText(codeEl.textContent || '').then(() => {
+    // Copy innerText to preserve clean plain text format without HTML tags
+    const textToCopy = (codeEl as HTMLElement).innerText || codeEl.textContent || '';
+    navigator.clipboard.writeText(textToCopy).then(() => {
       const origText = copyWcBtn.innerHTML;
       copyWcBtn.innerHTML = '<span>✅</span> Скопировано!';
       setTimeout(() => {

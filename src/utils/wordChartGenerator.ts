@@ -9,6 +9,7 @@ export interface WordChartRow {
   rowNumber: number;
   runs: ColorRun[];
   rawText: string;
+  htmlText: string;
 }
 
 export interface WordChartData {
@@ -55,14 +56,21 @@ export function generateWordChart(
       runs.push({ color: currentColor, count: currentCount });
     }
 
+    // Plain text format: (18)G
     const rawText = runs
-      .map((run) => `(${run.count}) ${run.color.toUpperCase()}`)
+      .map((run) => `(${run.count})${run.color.toUpperCase()}`)
+      .join(", ");
+
+    // HTML format with bold quantity: <b>(18)</b>G
+    const htmlText = runs
+      .map((run) => `<b>(${run.count})</b>${run.color.toUpperCase()}`)
       .join(", ");
 
     rowsData.push({
       rowNumber,
       runs,
       rawText,
+      htmlText,
     });
   });
 
@@ -93,7 +101,34 @@ export function exportWordChartAsText(
   lines.push(`==========================================\n`);
 
   chartData.rows.forEach((row) => {
-    lines.push(`Ряд ${String(row.rowNumber).padStart(3, " ")}: ${row.rawText}`);
+    const rowStr = String(row.rowNumber).padStart(3, "0");
+    lines.push(`${rowStr}: ${row.rawText}`);
+  });
+
+  return lines.join("\n");
+}
+
+export function exportWordChartAsHtml(
+  matrix: string[][],
+  palette: Record<string, ColorDefinition> = COLOR_PALETTE
+): string {
+  const chartData = generateWordChart(matrix, palette, false);
+  const lines: string[] = [];
+
+  lines.push(`==========================================`);
+  lines.push(`WORD CHART / СЛОВЕСНАЯ ИНСТРУКЦИЯ ДЛЯ СТАНКА`);
+  lines.push(`==========================================`);
+  lines.push(`Размер: ${chartData.totalCols} колонок × ${chartData.totalRows} рядов`);
+  lines.push(`Всего бусин: ${chartData.totalBeads} шт.`);
+  lines.push(`Легенда цветов:`);
+  Object.entries(palette).forEach(([key, colorDef]) => {
+    lines.push(`  [${key.toUpperCase()}] : ${colorDef.name} (${colorDef.fill})`);
+  });
+  lines.push(`==========================================\n`);
+
+  chartData.rows.forEach((row) => {
+    const rowStr = String(row.rowNumber).padStart(3, "0");
+    lines.push(`${rowStr}: ${row.htmlText}`);
   });
 
   return lines.join("\n");
