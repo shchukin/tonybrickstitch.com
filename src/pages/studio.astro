@@ -5,7 +5,7 @@ import { Image } from "astro:assets";
 import originalImage from "../temp/image3.svg";
 import { PATTERN_MATRIX, COLOR_PALETTE } from "../data/studioPattern";
 import { generateLoomSvg } from "../utils/loomSvgGenerator";
-import { generateWordChart, exportWordChartAsText, exportWordChartAsHtml } from "../utils/wordChartGenerator";
+import { generateWordChart, exportWordChartAsText, exportWordChartAsHtml, exportWordChartAsMarkdown } from "../utils/wordChartGenerator";
 import "../components/Studio/Studio.css";
 
 const numRows = PATTERN_MATRIX.length;
@@ -28,6 +28,7 @@ const newLoomSvg = generateLoomSvg(PATTERN_MATRIX, COLOR_PALETTE);
 // Generate Word Chart data
 const wordChartData = generateWordChart(PATTERN_MATRIX, COLOR_PALETTE);
 const wordChartHtml = exportWordChartAsHtml(PATTERN_MATRIX, COLOR_PALETTE);
+const wordChartMd = exportWordChartAsMarkdown(PATTERN_MATRIX, COLOR_PALETTE);
 ---
 
 <BaseLayout>
@@ -135,7 +136,8 @@ const wordChartHtml = exportWordChartAsHtml(PATTERN_MATRIX, COLOR_PALETTE);
         <div class="word-chart__toolbar">
           <div class="studio__tabs" style="margin-bottom: 0; border: none; padding: 0;">
             <button type="button" class="studio__tab-btn is-active" data-wc-tab="visual">Бэйджи (Визуал)</button>
-            <button type="button" class="studio__tab-btn" data-wc-tab="text">Печатная версия (Текст)</button>
+            <button type="button" class="studio__tab-btn" data-wc-tab="text">Печатная версия (&lt;pre&gt;)</button>
+            <button type="button" class="studio__tab-btn" data-wc-tab="md">Markdown (для Figma)</button>
           </div>
 
           <div class="word-chart__search">
@@ -162,9 +164,14 @@ const wordChartHtml = exportWordChartAsHtml(PATTERN_MATRIX, COLOR_PALETTE);
           ))}
         </div>
 
-        <!-- Word Chart Plain Text / Printable View -->
+        <!-- Word Chart Plain Text / Pre View -->
         <div id="wc-text-tab" style="display: none;">
           <pre class="word-chart__text-view"><code set:html={wordChartHtml} /></pre>
+        </div>
+
+        <!-- Word Chart Markdown View (for Figma) -->
+        <div id="wc-md-tab" style="display: none;">
+          <pre class="word-chart__text-view"><code>{wordChartMd}</code></pre>
         </div>
       </div>
     </section>
@@ -207,11 +214,12 @@ const wordChartHtml = exportWordChartAsHtml(PATTERN_MATRIX, COLOR_PALETTE);
     });
   });
 
-  // Tab switching logic for Word Chart
+  // Tab switching logic for Word Chart (visual, text, md)
   const wcTabBtns = document.querySelectorAll('[data-wc-tab]');
   const wcTabContents = {
     visual: document.getElementById('wc-visual-tab'),
     text: document.getElementById('wc-text-tab'),
+    md: document.getElementById('wc-md-tab'),
   };
 
   wcTabBtns.forEach((btn) => {
@@ -245,21 +253,49 @@ const wordChartHtml = exportWordChartAsHtml(PATTERN_MATRIX, COLOR_PALETTE);
     });
   });
 
-  // Copy Word Chart to Clipboard (Copies clean plain text)
+  // Copy Word Chart to Clipboard
   const copyWcBtn = document.getElementById('copy-wc-btn');
-  copyWcBtn?.addEventListener('click', () => {
-    const codeEl = document.querySelector('#wc-text-tab code');
-    if (!codeEl) return;
+  copyWcBtn?.addEventListener('click', async () => {
+    const activeTab = document.querySelector('[data-wc-tab].is-active')?.getAttribute('data-wc-tab');
     
-    // Copy innerText to preserve clean plain text format without HTML tags
-    const textToCopy = (codeEl as HTMLElement).innerText || codeEl.textContent || '';
-    navigator.clipboard.writeText(textToCopy).then(() => {
-      const origText = copyWcBtn.innerHTML;
-      copyWcBtn.innerHTML = '<span>✅</span> Скопировано!';
-      setTimeout(() => {
-        copyWcBtn.innerHTML = origText;
-      }, 2000);
-    });
+    if (activeTab === 'md') {
+      const mdCodeEl = document.querySelector('#wc-md-tab code');
+      const textToCopy = mdCodeEl?.textContent || '';
+      await navigator.clipboard.writeText(textToCopy);
+    } else {
+      let htmlContent = '';
+      let textContent = '';
+
+      if (activeTab === 'text') {
+        const codeEl = document.querySelector('#wc-text-tab code');
+        htmlContent = codeEl?.innerHTML || '';
+        textContent = (codeEl as HTMLElement)?.innerText || codeEl?.textContent || '';
+      } else {
+        const visualEl = document.getElementById('wc-visual-tab');
+        htmlContent = visualEl?.innerHTML || '';
+        textContent = visualEl?.innerText || visualEl?.textContent || '';
+      }
+
+      try {
+        const htmlBlob = new Blob([htmlContent], { type: 'text/html' });
+        const textBlob = new Blob([textContent], { type: 'text/plain' });
+
+        await navigator.clipboard.write([
+          new ClipboardItem({
+            'text/html': htmlBlob,
+            'text/plain': textBlob,
+          }),
+        ]);
+      } catch (err) {
+        await navigator.clipboard.writeText(textContent);
+      }
+    }
+
+    const origText = copyWcBtn.innerHTML;
+    copyWcBtn.innerHTML = '<span>✅</span> Скопировано!';
+    setTimeout(() => {
+      copyWcBtn.innerHTML = origText;
+    }, 2000);
   });
 
   // SVG Download Logic

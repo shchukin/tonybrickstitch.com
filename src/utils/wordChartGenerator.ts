@@ -10,6 +10,7 @@ export interface WordChartRow {
   runs: ColorRun[];
   rawText: string;
   htmlText: string;
+  mdText: string;
 }
 
 export interface WordChartData {
@@ -63,7 +64,12 @@ export function generateWordChart(
 
     // HTML format with bold quantity: <b>(18)</b>G
     const htmlText = runs
-      .map((run) => `<b>(${run.count})</b>${run.color.toUpperCase()}`)
+      .map((run) => `<strong style="font-weight: 700;">(${run.count})</strong>${run.color.toUpperCase()}`)
+      .join(", ");
+
+    // Markdown format with bold quantity: **(18)**G
+    const mdText = runs
+      .map((run) => `**(${run.count})**${run.color.toUpperCase()}`)
       .join(", ");
 
     rowsData.push({
@@ -71,6 +77,7 @@ export function generateWordChart(
       runs,
       rawText,
       htmlText,
+      mdText,
     });
   });
 
@@ -132,4 +139,15 @@ export function exportWordChartAsHtml(
   });
 
   return lines.join("\n");
+}
+
+export function exportWordChartAsMarkdown(
+  matrix: string[][],
+  palette: Record<string, ColorDefinition> = COLOR_PALETTE
+): string {
+  const chartData = generateWordChart(matrix, palette, false);
+  
+  return chartData.rows
+    .map((row) => row.mdText)
+    .join("\n");
 }
