@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Title from "../components/Title/Title.astro";
 import { Image } from "astro:assets";
-import originalImage from "../temp/image.svg";
+import originalImage from "../temp/image3.svg";
 import { PATTERN_MATRIX, COLOR_PALETTE } from "../data/studioPattern";
 import { generateLoomSvg } from "../utils/loomSvgGenerator";
 import { generateWordChart, exportWordChartAsText } from "../utils/wordChartGenerator";
@@ -50,7 +50,7 @@ const formattedMatrixCode = `const patternMatrix = [\n` +
         <span>📊</span> 1. Результат анализа исходного SVG (Двухмерный массив)
       </h2>
       <p class="studio__section-desc">
-        Исходный SVG-файл успешно распознан и преобразован в 2D-массив <code>matrix[100][18]</code> с указанием алиасов цветов.
+        Исходный SVG-файл <code>image3.svg</code> успешно распознан и преобразован в 2D-массив <code>matrix[100][18]</code> с указанием алиасов цветов.
       </p>
 
       <div class="studio__stats">
@@ -175,13 +175,13 @@ const formattedMatrixCode = `const patternMatrix = [\n` +
     <!-- SECTION 4: Original SVG for reference -->
     <section class="studio__section">
       <h2 class="studio__section-title">
-        <span>🖼️</span> 4. Исходный SVG из папки temp
+        <span>🖼️</span> 4. Исходный SVG из папки temp (image3.svg)
       </h2>
       <p class="studio__section-desc">
-        Оригинальный файл из <code>src/temp/image.svg</code>, послуживший источником данных.
+        Обновленный файл из <code>src/temp/image3.svg</code>, послуживший источником данных.
       </p>
       <div class="studio__svg-wrapper">
-        <Image src={originalImage} alt="Original Pattern SVG" />
+        <Image src={originalImage} alt="Updated Pattern SVG (image3.svg)" />
       </div>
     </section>
   </div>

@@ -1,4 +1,4 @@
-// Auto-generated 2D matrix extracted from src/temp/image.svg
+// Auto-generated 2D matrix extracted from src/temp/image3.svg
 
 export interface ColorDefinition {
   alias: string;
@@ -1156,7 +1156,7 @@ export const PATTERN_MATRIX: string[][] = [
     "b",
     "b",
     "b",
-    "b",
+    "a",
     "b",
     "b",
     "b",
@@ -1555,7 +1555,7 @@ export const PATTERN_MATRIX: string[][] = [
   [
     "b",
     "b",
-    "b",
+    "a",
     "b",
     "b",
     "b",
