@@ -196,6 +196,7 @@
   box-shadow: 0 2px 6px rgba(37, 99, 235, 0.3);
 }
 
+.studio__matrix-cell--e,
 .studio__matrix-cell--g {
   background-color: #383838;
   color: #ffffff;
@@ -414,6 +415,7 @@
   border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
+.word-chart__badge--e,
 .word-chart__badge--g {
   background-color: #383838;
   color: #ffffff;

@@ -59,6 +59,14 @@ const queryId = Astro.url.searchParams.get("pattern");
 const requestedId = paramId || queryId;
 const initialPattern = getPatternById(requestedId);
 const initialData = renderedPatternsMap[initialPattern.id];
+
+// Helper to check if fill/cell represents white background
+function isWhiteColor(cell: string, fill?: string): boolean {
+  if (cell === 'f' || cell === 'w' || cell === 'a') return true;
+  if (!fill) return false;
+  const normalized = fill.trim().toLowerCase();
+  return normalized === '#ffffff' || normalized === '#fff' || normalized === 'white';
+}
 ---
 
 <BaseLayout>
@@ -136,7 +144,7 @@ const initialData = renderedPatternsMap[initialPattern.id];
                 const isClasp = rIdx === 0 || rIdx === initialData.extendedMatrix.length - 1;
                 const colorDef = initialData.palette[cell];
                 const fill = colorDef?.fill || '#ffffff';
-                const textColor = fill === '#FFFFFF' || fill === 'white' ? '#111111' : '#ffffff';
+                const textColor = isWhiteColor(cell, fill) ? '#000000' : '#ffffff';
                 return (
                   <div
                     class={`studio__matrix-cell ${isClasp ? 'studio__matrix-cell--clasp' : `studio__matrix-cell--${cell}`}`}
@@ -214,7 +222,7 @@ const initialData = renderedPatternsMap[initialPattern.id];
                 {row.runs.map((run: any) => {
                   const colorDef = initialData.palette[run.color];
                   const fill = colorDef?.fill;
-                  const textColor = fill === '#FFFFFF' || fill === 'white' ? '#111111' : '#ffffff';
+                  const textColor = isWhiteColor(run.color, fill) ? '#000000' : '#ffffff';
                   const badgeStyle = fill && !run.isClasp ? `background-color: ${fill}; color: ${textColor};` : '';
                   return (
                     <span class={`word-chart__badge word-chart__badge--${run.color}`} style={badgeStyle}>
@@ -261,6 +269,13 @@ const initialData = renderedPatternsMap[initialPattern.id];
   // Retrieve pre-rendered data map for all patterns
   const patternsDataScript = document.getElementById('patterns-data');
   const PATTERNS_DATA = patternsDataScript ? JSON.parse(patternsDataScript.textContent || '{}') : {};
+
+  function isWhiteColorClient(cell: string, fill?: string): boolean {
+    if (cell === 'f' || cell === 'w' || cell === 'a') return true;
+    if (!fill) return false;
+    const normalized = fill.trim().toLowerCase();
+    return normalized === '#ffffff' || normalized === '#fff' || normalized === 'white';
+  }
 
   // Function to format bead weight helper in client JS
   function formatBeadWeight(count: number): string {
@@ -331,7 +346,7 @@ const initialData = renderedPatternsMap[initialPattern.id];
           const isClasp = rIdx === 0 || rIdx === data.extendedMatrix.length - 1;
           const colorDef = data.palette[cell];
           const fill = colorDef?.fill || '#ffffff';
-          const textColor = fill === '#FFFFFF' || fill === 'white' ? '#111111' : '#ffffff';
+          const textColor = isWhiteColorClient(cell, fill) ? '#000000' : '#ffffff';
           const cellClass = isClasp ? 'studio__matrix-cell--clasp' : `studio__matrix-cell--${cell}`;
           const cellStyle = isClasp ? '' : `style="background-color: ${fill}; color: ${textColor};"`;
           const title = isClasp ? `Ряд clasp, Колонка ${cIdx + 1}: Clasp` : `Ряд ${rIdx}, Колонка ${cIdx + 1}: Цвет ${cell.toUpperCase()}`;
@@ -363,7 +378,7 @@ const initialData = renderedPatternsMap[initialPattern.id];
         row.runs.forEach((run: any) => {
           const colorDef = data.palette[run.color];
           const fill = colorDef?.fill;
-          const textColor = fill === '#FFFFFF' || fill === 'white' ? '#111111' : '#ffffff';
+          const textColor = isWhiteColorClient(run.color, fill) ? '#000000' : '#ffffff';
           const badgeStyle = fill && !run.isClasp ? `style="background-color: ${fill}; color: ${textColor};"` : '';
           badgesHtml += `<span class="word-chart__badge word-chart__badge--${run.color}" ${badgeStyle}><strong>(${run.count})</strong>${run.color.toUpperCase()} ${run.isClasp ? 'Any / Culled beads' : ''}</span>`;
         });

@@ -20,3 +20,10 @@ Consult these guides before working on related tasks:
 - [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)
 - [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
 - [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)
+
+## Pattern Color Aliasing Standards
+
+- For all new and existing multi-color beadwork patterns (4+ colors), ALWAYS use color aliases from the first 6 letters of the English alphabet: `a, b, c, d, e, f`.
+- **Rationale**: Crafters and beadwork masters use physical beading mats/trays with pre-printed letter labels `A, B, C, D, E, F` for organizing beads.
+- **Exception**: Simple elementary patterns with 2–3 colors may use mnemonic color initials (e.g. `g` for Gold in `bezier-gold`).
+
