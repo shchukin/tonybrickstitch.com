@@ -32,4 +32,9 @@ Consult these guides before working on related tasks:
 - **Loom Beadwork (Станочное плетение)**: Always use a **1 : 1.2** Width-to-Height bead aspect ratio (beads are slightly elongated vertically: `Height = Width × 1.2`).
 - **Other Techniques (Mosaic / Peyote, Brickstitch, etc.)**: Always use a **1 : 1.25** aspect ratio for future non-loom weaving styles.
 
+## Bead Weight Standards
+
+- **Miyuki Delica 11/0 Weight Standard**: Always calculate bead weight using **10g = 1850 beads** (`185 beads / gram`).
+
+
 

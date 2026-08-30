@@ -94,9 +94,10 @@ export function generateLoomSvg(
     let swatchX = 24;
     const swatchY = 68;
 
-    Object.entries(palette).forEach(([key, colorDef]) => {
+    Object.entries(palette)
+      .sort(([keyA], [keyB]) => keyA.localeCompare(keyB))
+      .forEach(([key, colorDef]) => {
       const count = colorCounts[key] || 0;
-      const pct = ((count / patternBeadCount) * 100).toFixed(1);
       const weightStr = formatBeadWeight(count);
 
       // Color box
@@ -104,7 +105,7 @@ export function generateLoomSvg(
         `<rect x="${swatchX}" y="${swatchY - 8}" width="16" height="16" rx="3" fill="${colorDef.fill}" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1"/>`
       );
       
-      const labelText = `[${key.toUpperCase()}] ${colorDef.name}: ${count} шт. (${weightStr}, ${pct}%)`;
+      const labelText = `[${key.toUpperCase()}] ${colorDef.name}: ${count} шт. (${weightStr})`;
       svgParts.push(
         `<text x="${swatchX + 22}" y="${swatchY}" class="swatch-label">${labelText}</text>`
       );

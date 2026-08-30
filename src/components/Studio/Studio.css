@@ -42,9 +42,16 @@
 /* Palette & Stats */
 .studio__stats {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 1rem;
   margin-bottom: 1.5rem;
+}
+
+.studio__stats-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
 }
 
 .studio__stat-card {

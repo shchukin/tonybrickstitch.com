@@ -53,9 +53,9 @@ export function generateWordChart(
         rowLabel,
         isClasp: true,
         runs: [{ color: "X", count: numCols, isClasp: true }],
-        rawText: `(${numCols})X Any / Culled beads`,
-        htmlText: `<b>(${numCols})X</b> Any / Culled beads`,
-        mdText: `**(${numCols})X** Any / Culled beads`,
+        rawText: `(${numCols})Any / Culled beads`,
+        htmlText: `<strong style="font-weight: 700;">(${numCols})</strong>Any / Culled beads`,
+        mdText: `**(${numCols})**Any / Culled beads`,
       });
     } else {
       const runs: ColorRun[] = [];
@@ -137,7 +137,6 @@ export function exportWordChartAsText(
     const count = colorCounts[key] || 0;
     lines.push(`  [${key.toUpperCase()}] : ${colorDef.name} — ${count} шт. (${formatBeadWeight(count)})`);
   });
-  lines.push(`  [X] : Любые / остаточные бусины для застёжки (Clasp)`);
   lines.push(`==========================================\n`);
 
   chartData.rows.forEach((row) => {
@@ -173,7 +172,6 @@ export function exportWordChartAsHtml(
     const count = colorCounts[key] || 0;
     lines.push(`  [${key.toUpperCase()}] : ${colorDef.name} — ${count} шт. (${formatBeadWeight(count)})`);
   });
-  lines.push(`  [X] : Любые / остаточные бусины для застёжки (Clasp)`);
   lines.push(`==========================================\n`);
 
   chartData.rows.forEach((row) => {

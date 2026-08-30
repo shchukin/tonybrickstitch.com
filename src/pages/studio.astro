@@ -112,28 +112,33 @@ function isWhiteColor(cell: string, fill?: string): boolean {
       </h2>
       <p id="studio-section1-desc" class="studio__section-desc">
         {initialData.description} Источником истины является массив <code>matrix[{initialData.numPatternRows}][{initialData.numCols}]</code>.
-        Вес рассчитан из стандарта Miyuki Delica 11/0 (~200 шт./грамм).
+        Вес рассчитан из стандарта Miyuki Delica 11/0 (10 г = 1850 шт.).
       </p>
 
       <div id="studio-stats" class="studio__stats">
-        <div class="studio__stat-card">
-          <div class="studio__stat-label">Размер схемы</div>
-          <div class="studio__stat-value">{initialData.numCols} × {initialData.numPatternRows} (+2 clasp)</div>
+        <div class="studio__stats-row studio__stats-row--general">
+          <div class="studio__stat-card">
+            <div class="studio__stat-label">Размер схемы</div>
+            <div class="studio__stat-value">{initialData.numCols} × {initialData.numPatternRows} (+2 clasp)</div>
+          </div>
+          <div class="studio__stat-card">
+            <div class="studio__stat-label">Бусин в схеме</div>
+            <div class="studio__stat-value">{initialData.totalPatternBeads} шт. ({initialData.totalPatternBeadsWeight})</div>
+          </div>
         </div>
-        <div class="studio__stat-card">
-          <div class="studio__stat-label">Бусин в схеме</div>
-          <div class="studio__stat-value">{initialData.totalPatternBeads} шт. ({initialData.totalPatternBeadsWeight})</div>
+        <div class="studio__stats-row studio__stats-row--colors">
+          {Object.entries(initialData.palette)
+            .sort(([keyA], [keyB]) => keyA.localeCompare(keyB))
+            .map(([key, colorDef]: [string, any]) => {
+              const count = initialData.colorCounts[key] || 0;
+              return (
+                <div class="studio__stat-card">
+                  <div class="studio__stat-label">Алиас '{key}' ({colorDef.fill})</div>
+                  <div class="studio__stat-value">{count} шт. ({formatBeadWeight(count)})</div>
+                </div>
+              );
+            })}
         </div>
-        {Object.entries(initialData.palette).map(([key, colorDef]: [string, any]) => {
-          const count = initialData.colorCounts[key] || 0;
-          const pct = ((count / initialData.totalPatternBeads) * 100).toFixed(1);
-          return (
-            <div class="studio__stat-card">
-              <div class="studio__stat-label">Алиас '{key}' ({colorDef.fill})</div>
-              <div class="studio__stat-value">{count} шт. ({formatBeadWeight(count)}) • {pct}%</div>
-            </div>
-          );
-        })}
       </div>
 
       <!-- Tabs for Matrix View -->
@@ -236,7 +241,7 @@ function isWhiteColor(cell: string, fill?: string): boolean {
                   const badgeStyle = fill && !run.isClasp ? `background-color: ${fill}; color: ${textColor};` : '';
                   return (
                     <span class={`word-chart__badge word-chart__badge--${run.color}`} style={badgeStyle}>
-                      <strong>({run.count})</strong>{run.color.toUpperCase()} {run.isClasp ? 'Any / Culled beads' : ''}
+                      <strong>({run.count})</strong>{run.isClasp ? 'Any / Culled beads' : run.color.toUpperCase()}
                     </span>
                   );
                 })}
@@ -289,8 +294,10 @@ function isWhiteColor(cell: string, fill?: string): boolean {
 
   // Function to format bead weight helper in client JS
   function formatBeadWeight(count: number): string {
-    const grams = count / 200;
-    return `~${grams < 10 ? grams.toFixed(1) : Math.round(grams)} г`;
+    const grams = count / 185;
+    if (grams === 0) return "0 г";
+    const rounded = Math.round(grams * 10) / 10;
+    return `~${rounded} г`;
   }
 
   // Active pattern state
@@ -316,34 +323,39 @@ function isWhiteColor(cell: string, fill?: string): boolean {
     if (sec1Title) sec1Title.innerHTML = `<span>📊</span> 1. Текущий паттерн: ${data.name} (Двухмерный массив + Clasp)`;
 
     const sec1Desc = document.getElementById('studio-section1-desc');
-    if (sec1Desc) sec1Desc.innerHTML = `${data.description} Источником истины является массив <code>matrix[${data.numPatternRows}][${data.numCols}]</code>. Вес рассчитан из стандарта Miyuki Delica 11/0 (~200 шт./грамм).`;
+    if (sec1Desc) sec1Desc.innerHTML = `${data.description} Источником истины является массив <code>matrix[${data.numPatternRows}][${data.numCols}]</code>. Вес рассчитан из стандарта Miyuki Delica 11/0 (10 г = 1850 шт.).`;
 
     // 3. Stats Cards
     const statsContainer = document.getElementById('studio-stats');
     if (statsContainer) {
-      let statsHtml = `
-        <div class="studio__stat-card">
-          <div class="studio__stat-label">Размер схемы</div>
-          <div class="studio__stat-value">${data.numCols} × ${data.numPatternRows} (+2 clasp)</div>
+      let colorsHtml = '';
+      Object.entries(data.palette)
+        .sort(([keyA], [keyB]) => keyA.localeCompare(keyB))
+        .forEach(([key, colorDef]: [string, any]) => {
+          const count = data.colorCounts[key] || 0;
+          colorsHtml += `
+            <div class="studio__stat-card">
+              <div class="studio__stat-label">Алиас '${key}' (${colorDef.fill})</div>
+              <div class="studio__stat-value">${count} шт. (${formatBeadWeight(count)})</div>
+            </div>
+          `;
+        });
+
+      statsContainer.innerHTML = `
+        <div class="studio__stats-row studio__stats-row--general">
+          <div class="studio__stat-card">
+            <div class="studio__stat-label">Размер схемы</div>
+            <div class="studio__stat-value">${data.numCols} × ${data.numPatternRows} (+2 clasp)</div>
+          </div>
+          <div class="studio__stat-card">
+            <div class="studio__stat-label">Бусин в схеме</div>
+            <div class="studio__stat-value">${data.totalPatternBeads} шт. (${data.totalPatternBeadsWeight})</div>
+          </div>
         </div>
-        <div class="studio__stat-card">
-          <div class="studio__stat-label">Бусин в схеме</div>
-          <div class="studio__stat-value">${data.totalPatternBeads} шт. (${data.totalPatternBeadsWeight})</div>
+        <div class="studio__stats-row studio__stats-row--colors">
+          ${colorsHtml}
         </div>
       `;
-
-      Object.entries(data.palette).forEach(([key, colorDef]: [string, any]) => {
-        const count = data.colorCounts[key] || 0;
-        const pct = ((count / data.totalPatternBeads) * 100).toFixed(1);
-        statsHtml += `
-          <div class="studio__stat-card">
-            <div class="studio__stat-label">Алиас '${key}' (${colorDef.fill})</div>
-            <div class="studio__stat-value">${count} шт. (${formatBeadWeight(count)}) • ${pct}%</div>
-          </div>
-        `;
-      });
-
-      statsContainer.innerHTML = statsHtml;
     }
 
     // 4. Matrix Grid
@@ -389,7 +401,7 @@ function isWhiteColor(cell: string, fill?: string): boolean {
           const fill = colorDef?.fill;
           const textColor = isWhiteColorClient(run.color, fill) ? '#000000' : '#ffffff';
           const badgeStyle = fill && !run.isClasp ? `style="background-color: ${fill}; color: ${textColor};"` : '';
-          badgesHtml += `<span class="word-chart__badge word-chart__badge--${run.color}" ${badgeStyle}><strong>(${run.count})</strong>${run.color.toUpperCase()} ${run.isClasp ? 'Any / Culled beads' : ''}</span>`;
+          badgesHtml += `<span class="word-chart__badge word-chart__badge--${run.color}" ${badgeStyle}><strong>(${run.count})</strong>${run.isClasp ? 'Any / Culled beads' : run.color.toUpperCase()}</span>`;
         });
         wcRowsHtml += `<div class="${rowClass}" data-row-num="${row.rowLabel}"><div class="${numClass}">${row.rowLabel}:</div><div class="word-chart__runs">${badgesHtml}</div></div>`;
       });
