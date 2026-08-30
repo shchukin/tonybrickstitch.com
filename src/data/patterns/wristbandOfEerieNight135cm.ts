@@ -2,8 +2,8 @@ import type { PatternDefinition } from "./types";
 
 export const WRISTBAND_OF_EERIE_NIGHT_135CM_PATTERN: PatternDefinition = {
   id: "wristband-of-eerie-night-13.5cm",
-  name: "Wristband of Eerie Night 13.5cm wrist version",
-  description: "Яркий узорный браслет на станочном плетении (серый, чёрный, белый, розовый, голубой), версия на запястье 13.5см.",
+  name: "Wristband of Eerie Night 13.5+ cm wrist version",
+  description: "Яркий узорный браслет на станочном плетении (серый, чёрный, белый, розовый, голубой), версия на запястье 13.5+ см.",
   matrix: [
   [
     "e",

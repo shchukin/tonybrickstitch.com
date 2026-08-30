@@ -25,7 +25,7 @@ export function generateLoomSvg(
 
   const {
     colWidth = 22,
-    rowHeight = 26,
+    rowHeight = 26.4, // 1:1.2 ratio (22 * 1.2 = 26.4)
     beadGap = 3,
     marginLeft = 65,
     marginRight = 65,
@@ -259,15 +259,16 @@ export function generateOriginalPatternSvg(
   const claspData = wrapMatrixWithClasp(matrix);
   const { extendedMatrix, numCols, totalRows, getBeadFill } = claspData;
 
-  const canvasWidth = 448;
-  const stepY = 31.9757;
-  const beadH = 29.5158;
-  const startY = 34.4343;
-  const totalHeight = Math.ceil(startY + (totalRows - 1) * stepY + beadH + 2);
-
   const stepX = 24.875;
   const beadW = 22.877;
   const startX = 1.877;
+
+  // 1 : 1.2 aspect ratio for loom beadwork
+  const stepY = stepX * 1.2; // 29.85
+  const beadH = beadW * 1.2; // 27.4524
+  const startY = 32.0;
+  const totalHeight = Math.ceil(startY + (totalRows - 1) * stepY + beadH + 2);
+  const canvasWidth = Math.ceil(startX + (numCols - 1) * stepX + beadW + 2);
 
   const svgParts: string[] = [];
   svgParts.push(

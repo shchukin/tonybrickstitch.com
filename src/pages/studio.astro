@@ -4,7 +4,7 @@ import Title from "../components/Title/Title.astro";
 import { PATTERNS_LIST, getPatternById, DEFAULT_PATTERN_ID } from "../data/patterns";
 import { generateLoomSvg, generateOriginalPatternSvg } from "../utils/loomSvgGenerator";
 import { generateWordChart, exportWordChartAsHtml, exportWordChartAsMarkdown } from "../utils/wordChartGenerator";
-import { wrapMatrixWithClasp } from "../utils/claspUtils";
+import { wrapMatrixWithClasp, getClaspColor } from "../utils/claspUtils";
 import { formatBeadWeight } from "../utils/beadWeight";
 import "../components/Studio/Studio.css";
 
@@ -16,6 +16,16 @@ PATTERNS_LIST.forEach((pattern) => {
   const claspData = wrapMatrixWithClasp(matrix);
   const { extendedMatrix, numCols, totalRows, numPatternRows, isClaspRow, getBeadFill } = claspData;
   const totalPatternBeads = numPatternRows * numCols;
+
+  const extendedMatrixFills = extendedMatrix.map((row, rIdx) =>
+    row.map((cell, cIdx) => {
+      const isClasp = rIdx === 0 || rIdx === extendedMatrix.length - 1;
+      if (isClasp) {
+        return getClaspColor(cIdx, rIdx === 0 ? "top" : "bottom");
+      }
+      return palette[cell]?.fill || "#ffffff";
+    })
+  );
 
   const colorCounts: Record<string, number> = {};
   Object.keys(palette).forEach((key) => (colorCounts[key] = 0));
@@ -44,6 +54,7 @@ PATTERNS_LIST.forEach((pattern) => {
     palette,
     colorCounts,
     extendedMatrix,
+    extendedMatrixFills,
     newLoomSvg,
     originalStyleSvg,
     wordChartData,
@@ -142,13 +153,12 @@ function isWhiteColor(cell: string, fill?: string): boolean {
             {initialData.extendedMatrix.map((row: string[], rIdx: number) =>
               row.map((cell: string, cIdx: number) => {
                 const isClasp = rIdx === 0 || rIdx === initialData.extendedMatrix.length - 1;
-                const colorDef = initialData.palette[cell];
-                const fill = colorDef?.fill || '#ffffff';
-                const textColor = isWhiteColor(cell, fill) ? '#000000' : '#ffffff';
+                const fill = initialData.extendedMatrixFills[rIdx][cIdx];
+                const textColor = isClasp ? '#ffffff' : (isWhiteColor(cell, fill) ? '#000000' : '#ffffff');
                 return (
                   <div
                     class={`studio__matrix-cell ${isClasp ? 'studio__matrix-cell--clasp' : `studio__matrix-cell--${cell}`}`}
-                    style={!isClasp ? `background-color: ${fill}; color: ${textColor};` : ''}
+                    style={`background-color: ${fill}; color: ${textColor}; ${isClasp ? 'text-shadow: 0 1px 2px rgba(0,0,0,0.8); font-weight: bold;' : ''}`}
                     title={isClasp ? `Ряд clasp, Колонка ${cIdx + 1}: Clasp` : `Ряд ${rIdx}, Колонка ${cIdx + 1}: Цвет ${cell.toUpperCase()}`}
                   >
                     {isClasp ? 'x' : cell}
@@ -344,11 +354,10 @@ function isWhiteColor(cell: string, fill?: string): boolean {
       data.extendedMatrix.forEach((row: string[], rIdx: number) => {
         row.forEach((cell: string, cIdx: number) => {
           const isClasp = rIdx === 0 || rIdx === data.extendedMatrix.length - 1;
-          const colorDef = data.palette[cell];
-          const fill = colorDef?.fill || '#ffffff';
-          const textColor = isWhiteColorClient(cell, fill) ? '#000000' : '#ffffff';
+          const fill = data.extendedMatrixFills ? data.extendedMatrixFills[rIdx][cIdx] : '#475569';
+          const textColor = isClasp ? '#ffffff' : (isWhiteColorClient(cell, fill) ? '#000000' : '#ffffff');
           const cellClass = isClasp ? 'studio__matrix-cell--clasp' : `studio__matrix-cell--${cell}`;
-          const cellStyle = isClasp ? '' : `style="background-color: ${fill}; color: ${textColor};"`;
+          const cellStyle = `style="background-color: ${fill}; color: ${textColor}; ${isClasp ? 'text-shadow: 0 1px 2px rgba(0,0,0,0.8); font-weight: bold;' : ''}"`;
           const title = isClasp ? `Ряд clasp, Колонка ${cIdx + 1}: Clasp` : `Ряд ${rIdx}, Колонка ${cIdx + 1}: Цвет ${cell.toUpperCase()}`;
           gridHtml += `<div class="studio__matrix-cell ${cellClass}" ${cellStyle} title="${title}">${isClasp ? 'x' : cell}</div>`;
         });

@@ -133,7 +133,7 @@
 
 .studio__matrix-cell {
   width: 22px;
-  height: 22px;
+  height: 26.4px; /* 1:1.2 loom aspect ratio (22px x 26.4px) */
   display: flex;
   align-items: center;
   justify-content: center;
