@@ -1,4 +1,6 @@
 import { COLOR_PALETTE, type ColorDefinition } from "../data/studioPattern";
+import { wrapMatrixWithClasp } from "./claspUtils";
+import { formatBeadWeight } from "./beadWeight";
 
 export interface LoomSvgOptions {
   colWidth?: number;
@@ -18,15 +20,15 @@ export function generateLoomSvg(
   palette: Record<string, ColorDefinition> = COLOR_PALETTE,
   options: LoomSvgOptions = {}
 ): string {
-  const numRows = matrix.length;
-  const numCols = matrix[0]?.length || 0;
+  const claspData = wrapMatrixWithClasp(matrix);
+  const { extendedMatrix, numCols, totalRows, isClaspRow, getRowLabel, getBeadFill } = claspData;
 
   const {
     colWidth = 22,
     rowHeight = 26,
     beadGap = 3,
-    marginLeft = 55,
-    marginRight = 55,
+    marginLeft = 65,
+    marginRight = 65,
     marginTop = 95,
     marginBottom = 45,
     showRowNumbers = true,
@@ -35,17 +37,19 @@ export function generateLoomSvg(
   } = options;
 
   const gridWidth = numCols * colWidth;
-  const gridHeight = numRows * rowHeight;
+  const gridHeight = totalRows * rowHeight;
 
   const totalSvgWidth = gridWidth + marginLeft + marginRight;
   const totalSvgHeight = gridHeight + marginTop + marginBottom;
 
-  // Calculate bead counts
+  // Calculate bead counts for pattern rows only
   const colorCounts: Record<string, number> = {};
   Object.keys(palette).forEach((key) => (colorCounts[key] = 0));
 
+  let patternBeadCount = 0;
   matrix.forEach((row) => {
     row.forEach((cell) => {
+      patternBeadCount++;
       if (colorCounts[cell] !== undefined) {
         colorCounts[cell]++;
       } else {
@@ -54,8 +58,6 @@ export function generateLoomSvg(
     });
   });
 
-  const totalBeads = numRows * numCols;
-
   const svgParts: string[] = [];
 
   // SVG Header
@@ -63,11 +65,12 @@ export function generateLoomSvg(
     `<svg width="${totalSvgWidth}" height="${totalSvgHeight}" viewBox="0 0 ${totalSvgWidth} ${totalSvgHeight}" fill="none" xmlns="http://www.w3.org/2000/svg" style="background-color: #1a1a1c; font-family: system-ui, -apple-system, sans-serif;">`
   );
 
-  // Definitions for filters/effects if needed
+  // Definitions for filters/styles
   svgParts.push(`<defs>
     <style>
       .loom-text { font-family: system-ui, sans-serif; fill: #d0d0d0; font-size: 11px; text-anchor: middle; dominant-baseline: middle; }
       .loom-num-highlight { fill: #f1d397; font-weight: bold; font-size: 12px; }
+      .loom-clasp-text { fill: #ff7777; font-weight: bold; font-size: 11px; font-family: monospace; }
       .header-title { font-size: 16px; font-weight: 700; fill: #ffffff; text-anchor: start; }
       .header-sub { font-size: 12px; fill: #a0a0a0; text-anchor: start; }
       .swatch-label { font-size: 12px; fill: #e0e0e0; dominant-baseline: middle; }
@@ -84,7 +87,7 @@ export function generateLoomSvg(
       `<text x="24" y="28" class="header-title">Сетка для плетения на станке (Loom Beadwork)</text>`
     );
     svgParts.push(
-      `<text x="24" y="48" class="header-sub">Размер: ${numCols} колонок × ${numRows} рядов • Всего бусин: ${totalBeads}</text>`
+      `<text x="24" y="48" class="header-sub">Схема: ${numCols} колонок × ${claspData.numPatternRows} рядов (+2 clasp) • Всего бусин: ${patternBeadCount} шт. (${formatBeadWeight(patternBeadCount)})</text>`
     );
 
     // Color Swatches
@@ -93,14 +96,15 @@ export function generateLoomSvg(
 
     Object.entries(palette).forEach(([key, colorDef]) => {
       const count = colorCounts[key] || 0;
-      const pct = ((count / totalBeads) * 100).toFixed(1);
+      const pct = ((count / patternBeadCount) * 100).toFixed(1);
+      const weightStr = formatBeadWeight(count);
 
       // Color box
       svgParts.push(
         `<rect x="${swatchX}" y="${swatchY - 8}" width="16" height="16" rx="3" fill="${colorDef.fill}" stroke="#ffffff" stroke-opacity="0.3" stroke-width="1"/>`
       );
       
-      const labelText = `[${key.toUpperCase()}] ${colorDef.name}: ${count} шт. (${pct}%)`;
+      const labelText = `[${key.toUpperCase()}] ${colorDef.name}: ${count} шт. (${weightStr}, ${pct}%)`;
       svgParts.push(
         `<text x="${swatchX + 22}" y="${swatchY}" class="swatch-label">${labelText}</text>`
       );
@@ -113,19 +117,26 @@ export function generateLoomSvg(
   const originX = marginLeft;
   const originY = marginTop;
 
-  // 1. Grid Background & Row highlights (every 5th/10th row)
-  for (let r = 0; r < numRows; r++) {
+  // 1. Grid Background & Row highlights
+  for (let r = 0; r < totalRows; r++) {
     const y = originY + r * rowHeight;
-    const rowNum = r + 1; // 1-indexed
+    const isClasp = isClaspRow(r);
 
-    if (rowNum % 10 === 0) {
+    if (isClasp) {
       svgParts.push(
-        `<rect x="${originX}" y="${y}" width="${gridWidth}" height="${rowHeight}" fill="#ffffff" fill-opacity="0.06" />`
+        `<rect x="${originX}" y="${y}" width="${gridWidth}" height="${rowHeight}" fill="#ff0000" fill-opacity="0.12" stroke="#ff4444" stroke-opacity="0.3" stroke-width="1" />`
       );
-    } else if (rowNum % 5 === 0) {
-      svgParts.push(
-        `<rect x="${originX}" y="${y}" width="${gridWidth}" height="${rowHeight}" fill="#ffffff" fill-opacity="0.03" />`
-      );
+    } else {
+      const patternRowNum = r; // 1-indexed for pattern
+      if (patternRowNum % 10 === 0) {
+        svgParts.push(
+          `<rect x="${originX}" y="${y}" width="${gridWidth}" height="${rowHeight}" fill="#ffffff" fill-opacity="0.06" />`
+        );
+      } else if (patternRowNum % 5 === 0) {
+        svgParts.push(
+          `<rect x="${originX}" y="${y}" width="${gridWidth}" height="${rowHeight}" fill="#ffffff" fill-opacity="0.03" />`
+        );
+      }
     }
   }
 
@@ -141,12 +152,11 @@ export function generateLoomSvg(
   }
 
   // 3. Weft Guide Lines (Горизонтальные нити/линии)
-  for (let r = 0; r <= numRows; r++) {
+  for (let r = 0; r <= totalRows; r++) {
     const y = originY + r * rowHeight;
-    const isMajor = r % 10 === 0;
-    const isMedium = r % 5 === 0;
-    const strokeColor = isMajor ? "#777777" : isMedium ? "#555555" : "#333333";
-    const strokeWidth = isMajor ? "1.5" : "1";
+    const isClaspLine = r === 0 || r === 1 || r === totalRows - 1 || r === totalRows;
+    const strokeColor = isClaspLine ? "#ff5555" : (r - 1) % 10 === 0 ? "#777777" : (r - 1) % 5 === 0 ? "#555555" : "#333333";
+    const strokeWidth = isClaspLine ? "1.5" : "1";
     svgParts.push(
       `<line x1="${originX - 6}" y1="${y}" x2="${originX + gridWidth + 6}" y2="${y}" stroke="${strokeColor}" stroke-width="${strokeWidth}" />`
     );
@@ -173,26 +183,38 @@ export function generateLoomSvg(
 
   // 5. Row numbers (Left & Right margins)
   if (showRowNumbers) {
-    for (let r = 0; r < numRows; r++) {
+    for (let r = 0; r < totalRows; r++) {
       const cy = originY + r * rowHeight + rowHeight / 2;
-      const rowNum = r + 1;
-      const isKeyRow = rowNum % 10 === 0 || rowNum === 1 || rowNum === numRows;
-      const isSubKeyRow = rowNum % 5 === 0;
-      const textClass = isKeyRow
-        ? "loom-text loom-num-highlight"
-        : isSubKeyRow
-        ? "loom-text"
-        : "loom-text";
-      const opacity = isKeyRow ? "1" : isSubKeyRow ? "0.9" : "0.5";
+      const isClasp = isClaspRow(r);
+      const rowLabel = getRowLabel(r, false);
 
-      // Left margin row number
-      svgParts.push(
-        `<text x="${originX - 24}" y="${cy}" class="${textClass}" opacity="${opacity}">${rowNum}</text>`
-      );
-      // Right margin row number
-      svgParts.push(
-        `<text x="${originX + gridWidth + 24}" y="${cy}" class="${textClass}" opacity="${opacity}">${rowNum}</text>`
-      );
+      if (isClasp) {
+        // Left margin
+        svgParts.push(
+          `<text x="${originX - 30}" y="${cy}" class="loom-clasp-text">clasp</text>`
+        );
+        // Right margin
+        svgParts.push(
+          `<text x="${originX + gridWidth + 30}" y="${cy}" class="loom-clasp-text">clasp</text>`
+        );
+      } else {
+        const patternRowNum = r; // 1 to 98
+        const isKeyRow = patternRowNum % 10 === 0 || patternRowNum === 1 || patternRowNum === claspData.numPatternRows;
+        const isSubKeyRow = patternRowNum % 5 === 0;
+        const textClass = isKeyRow
+          ? "loom-text loom-num-highlight"
+          : "loom-text";
+        const opacity = isKeyRow ? "1" : isSubKeyRow ? "0.9" : "0.5";
+
+        // Left margin row number
+        svgParts.push(
+          `<text x="${originX - 30}" y="${cy}" class="${textClass}" opacity="${opacity}">${rowLabel}</text>`
+        );
+        // Right margin row number
+        svgParts.push(
+          `<text x="${originX + gridWidth + 30}" y="${cy}" class="${textClass}" opacity="${opacity}">${rowLabel}</text>`
+        );
+      }
     }
   }
 
@@ -201,19 +223,21 @@ export function generateLoomSvg(
   const beadH = rowHeight - beadGap;
   const beadRx = 3;
 
-  for (let r = 0; r < numRows; r++) {
+  for (let r = 0; r < totalRows; r++) {
     for (let c = 0; c < numCols; c++) {
-      const cellAlias = matrix[r][c];
+      const cellAlias = extendedMatrix[r][c];
       const colorDef = palette[cellAlias] || { fill: "#ffffff", name: "Unknown" };
+      const beadFill = getBeadFill(r, c, colorDef.fill);
+
       const bx = originX + c * colWidth + beadGap / 2;
       const by = originY + r * rowHeight + beadGap / 2;
 
       // Draw bead rectangle
       svgParts.push(
-        `<rect x="${bx.toFixed(1)}" y="${by.toFixed(1)}" width="${beadW.toFixed(1)}" height="${beadH.toFixed(1)}" rx="${beadRx}" fill="${colorDef.fill}" stroke="#000000" stroke-opacity="0.35" stroke-width="0.8" />`
+        `<rect x="${bx.toFixed(1)}" y="${by.toFixed(1)}" width="${beadW.toFixed(1)}" height="${beadH.toFixed(1)}" rx="${beadRx}" fill="${beadFill}" stroke="#000000" stroke-opacity="0.35" stroke-width="0.8" />`
       );
 
-      // Subtle inner bead highlight (to simulate rounded seed bead reflection on loom)
+      // Inner highlight
       svgParts.push(
         `<rect x="${(bx + 2).toFixed(1)}" y="${(by + 2).toFixed(1)}" width="${(beadW - 4).toFixed(1)}" height="${(beadH / 3).toFixed(1)}" rx="1.5" fill="#ffffff" fill-opacity="0.15" />`
       );
@@ -222,5 +246,53 @@ export function generateLoomSvg(
 
   svgParts.push(`</svg>`);
 
+  return svgParts.join("\n");
+}
+
+/**
+ * Generates exact original-style SVG image with vibrant random clasp rows.
+ */
+export function generateOriginalPatternSvg(
+  matrix: string[][],
+  palette: Record<string, ColorDefinition> = COLOR_PALETTE
+): string {
+  const claspData = wrapMatrixWithClasp(matrix);
+  const { extendedMatrix, numCols, totalRows, getBeadFill } = claspData;
+
+  const canvasWidth = 448;
+  const stepY = 31.9757;
+  const beadH = 29.5158;
+  const startY = 34.4343;
+  const totalHeight = Math.ceil(startY + (totalRows - 1) * stepY + beadH + 2);
+
+  const stepX = 24.875;
+  const beadW = 22.877;
+  const startX = 1.877;
+
+  const svgParts: string[] = [];
+  svgParts.push(
+    `<svg width="${canvasWidth}" height="${totalHeight}" viewBox="0 0 ${canvasWidth} ${totalHeight}" fill="none" xmlns="http://www.w3.org/2000/svg">`
+  );
+  svgParts.push(`<rect width="${canvasWidth}" height="${totalHeight}" fill="black"/>`);
+
+  for (let r = 0; r < totalRows; r++) {
+    const y1 = (startY + r * stepY).toFixed(4);
+    const y2 = (parseFloat(y1) + beadH).toFixed(4);
+
+    for (let c = 0; c < numCols; c++) {
+      const cellAlias = extendedMatrix[r][c];
+      const colorDef = palette[cellAlias] || { fill: "#F1D397" };
+      const beadFill = getBeadFill(r, c, colorDef.fill);
+
+      const x1 = (startX + c * stepX).toFixed(3);
+      const x2 = (parseFloat(x1) + beadW).toFixed(3);
+
+      svgParts.push(
+        `<path d="M${x2} ${y2}L${x2} ${y1}L${x1} ${y1}L${x1} ${y2}Z" fill="${beadFill}"/>`
+      );
+    }
+  }
+
+  svgParts.push(`</svg>`);
   return svgParts.join("\n");
 }

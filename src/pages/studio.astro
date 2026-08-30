@@ -1,34 +1,64 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Title from "../components/Title/Title.astro";
-import { Image } from "astro:assets";
-import originalImage from "../temp/image3.svg";
-import { PATTERN_MATRIX, COLOR_PALETTE } from "../data/studioPattern";
-import { generateLoomSvg } from "../utils/loomSvgGenerator";
-import { generateWordChart, exportWordChartAsText, exportWordChartAsHtml, exportWordChartAsMarkdown } from "../utils/wordChartGenerator";
+import { PATTERNS_LIST, getPatternById, DEFAULT_PATTERN_ID } from "../data/patterns";
+import { generateLoomSvg, generateOriginalPatternSvg } from "../utils/loomSvgGenerator";
+import { generateWordChart, exportWordChartAsHtml, exportWordChartAsMarkdown } from "../utils/wordChartGenerator";
+import { wrapMatrixWithClasp } from "../utils/claspUtils";
+import { formatBeadWeight } from "../utils/beadWeight";
 import "../components/Studio/Studio.css";
 
-const numRows = PATTERN_MATRIX.length;
-const numCols = PATTERN_MATRIX[0]?.length || 0;
-const totalBeads = numRows * numCols;
+// 1. Prepare rendered data for ALL patterns at build time so client JS can instantly switch
+const renderedPatternsMap: Record<string, any> = {};
 
-let countG = 0;
-let countB = 0;
+PATTERNS_LIST.forEach((pattern) => {
+  const { matrix, palette, name, id, description } = pattern;
+  const claspData = wrapMatrixWithClasp(matrix);
+  const { extendedMatrix, numCols, totalRows, numPatternRows, isClaspRow, getBeadFill } = claspData;
+  const totalPatternBeads = numPatternRows * numCols;
 
-PATTERN_MATRIX.forEach((row) => {
-  row.forEach((cell) => {
-    if (cell === "g") countG++;
-    if (cell === "b") countB++;
+  const colorCounts: Record<string, number> = {};
+  Object.keys(palette).forEach((key) => (colorCounts[key] = 0));
+
+  matrix.forEach((row) => {
+    row.forEach((cell) => {
+      if (colorCounts[cell] !== undefined) colorCounts[cell]++;
+      else colorCounts[cell] = 1;
+    });
   });
+
+  const newLoomSvg = generateLoomSvg(matrix, palette);
+  const originalStyleSvg = generateOriginalPatternSvg(matrix, palette);
+  const wordChartData = generateWordChart(matrix, palette);
+  const wordChartHtml = exportWordChartAsHtml(matrix, palette);
+  const wordChartMd = exportWordChartAsMarkdown(matrix, palette);
+
+  renderedPatternsMap[id] = {
+    id,
+    name,
+    description,
+    numCols,
+    numPatternRows,
+    totalPatternBeads,
+    totalPatternBeadsWeight: formatBeadWeight(totalPatternBeads),
+    palette,
+    colorCounts,
+    extendedMatrix,
+    newLoomSvg,
+    originalStyleSvg,
+    wordChartData,
+    wordChartHtml,
+    wordChartMd,
+    matrixCode: `// Pattern ID: ${id} (${name})\nconst patternMatrix = [\n${matrix.map((row, idx) => `  /* Row ${String(idx + 1).padStart(3, " ")} */ [${row.map((c) => `'${c}'`).join(", ")}]`).join(",\n")}\n];`
+  };
 });
 
-// Generate new SVG grid for loom beadwork
-const newLoomSvg = generateLoomSvg(PATTERN_MATRIX, COLOR_PALETTE);
-
-// Generate Word Chart data
-const wordChartData = generateWordChart(PATTERN_MATRIX, COLOR_PALETTE);
-const wordChartHtml = exportWordChartAsHtml(PATTERN_MATRIX, COLOR_PALETTE);
-const wordChartMd = exportWordChartAsMarkdown(PATTERN_MATRIX, COLOR_PALETTE);
+// Determine initial pattern from param or searchParam
+const paramId = Astro.params.pattern;
+const queryId = Astro.url.searchParams.get("pattern");
+const requestedId = paramId || queryId;
+const initialPattern = getPatternById(requestedId);
+const initialData = renderedPatternsMap[initialPattern.id];
 ---
 
 <BaseLayout>
@@ -38,34 +68,53 @@ const wordChartMd = exportWordChartAsMarkdown(PATTERN_MATRIX, COLOR_PALETTE);
       <p class="studio__description">
         Веб-приложение для работы с схемами и паттернами из бисера (плетение на станке / loom beadwork).
       </p>
+
+      <!-- Pattern Selector Bar -->
+      <div class="studio__pattern-selector">
+        <span class="studio__pattern-label">Выбор паттерна:</span>
+        <div class="studio__pattern-pills">
+          {PATTERNS_LIST.map((p) => (
+            <button
+              type="button"
+              data-pattern-id={p.id}
+              class={`studio__pattern-pill ${p.id === initialData.id ? 'is-active' : ''}`}
+            >
+              <span>🎨</span> {p.name} ({p.matrix[0].length}×{p.matrix.length})
+            </button>
+          ))}
+        </div>
+      </div>
     </header>
 
     <!-- SECTION 1: 2D Matrix Analysis -->
     <section class="studio__section">
-      <h2 class="studio__section-title">
-        <span>📊</span> 1. Результат анализа исходного SVG (Двухмерный массив)
+      <h2 id="studio-section1-title" class="studio__section-title">
+        <span>📊</span> 1. Текущий паттерн: {initialData.name} (Двухмерный массив + Clasp)
       </h2>
-      <p class="studio__section-desc">
-        Исходный SVG-файл <code>image3.svg</code> успешно распознан и преобразован в 2D-массив <code>matrix[100][18]</code> с указанием алиасов цветов.
+      <p id="studio-section1-desc" class="studio__section-desc">
+        {initialData.description} Источником истины является массив <code>matrix[{initialData.numPatternRows}][{initialData.numCols}]</code>.
+        Вес рассчитан из стандарта Miyuki Delica 11/0 (~200 шт./грамм).
       </p>
 
-      <div class="studio__stats">
+      <div id="studio-stats" class="studio__stats">
         <div class="studio__stat-card">
-          <div class="studio__stat-label">Размер сетки</div>
-          <div class="studio__stat-value">{numCols} × {numRows}</div>
+          <div class="studio__stat-label">Размер схемы</div>
+          <div class="studio__stat-value">{initialData.numCols} × {initialData.numPatternRows} (+2 clasp)</div>
         </div>
         <div class="studio__stat-card">
-          <div class="studio__stat-label">Всего бусин</div>
-          <div class="studio__stat-value">{totalBeads} шт.</div>
+          <div class="studio__stat-label">Бусин в схеме</div>
+          <div class="studio__stat-value">{initialData.totalPatternBeads} шт. ({initialData.totalPatternBeadsWeight})</div>
         </div>
-        <div class="studio__stat-card">
-          <div class="studio__stat-label">Алиас 'g' ({COLOR_PALETTE.g.fill})</div>
-          <div class="studio__stat-value">{countG} шт. ({((countG / totalBeads) * 100).toFixed(1)}%)</div>
-        </div>
-        <div class="studio__stat-card">
-          <div class="studio__stat-label">Алиас 'b' ({COLOR_PALETTE.b.fill})</div>
-          <div class="studio__stat-value">{countB} шт. ({((countB / totalBeads) * 100).toFixed(1)}%)</div>
-        </div>
+        {Object.entries(initialData.palette).map(([key, colorDef]: [string, any]) => {
+          const count = initialData.colorCounts[key] || 0;
+          const pct = ((count / initialData.totalPatternBeads) * 100).toFixed(1);
+          return (
+            <div class="studio__stat-card">
+              <div class="studio__stat-label">Алиас '{key}' ({colorDef.fill})</div>
+              <div class="studio__stat-value">{count} шт. ({formatBeadWeight(count)}) • {pct}%</div>
+            </div>
+          );
+        })}
       </div>
 
       <!-- Tabs for Matrix View -->
@@ -78,18 +127,26 @@ const wordChartMd = exportWordChartAsMarkdown(PATTERN_MATRIX, COLOR_PALETTE);
       <div id="tab-grid" class="studio__tab-content">
         <div class="studio__matrix-container">
           <div
+            id="studio-matrix-grid"
             class="studio__matrix-grid"
-            style={`grid-template-columns: repeat(${numCols}, 22px);`}
+            style={`grid-template-columns: repeat(${initialData.numCols}, 22px);`}
           >
-            {PATTERN_MATRIX.map((row, rIdx) =>
-              row.map((cell, cIdx) => (
-                <div
-                  class={`studio__matrix-cell studio__matrix-cell--${cell}`}
-                  title={`Ряд ${rIdx + 1}, Колонка ${cIdx + 1}: Цвет ${cell.toUpperCase()}`}
-                >
-                  {cell}
-                </div>
-              ))
+            {initialData.extendedMatrix.map((row: string[], rIdx: number) =>
+              row.map((cell: string, cIdx: number) => {
+                const isClasp = rIdx === 0 || rIdx === initialData.extendedMatrix.length - 1;
+                const colorDef = initialData.palette[cell];
+                const fill = colorDef?.fill || '#ffffff';
+                const textColor = fill === '#FFFFFF' || fill === 'white' ? '#111111' : '#ffffff';
+                return (
+                  <div
+                    class={`studio__matrix-cell ${isClasp ? 'studio__matrix-cell--clasp' : `studio__matrix-cell--${cell}`}`}
+                    style={!isClasp ? `background-color: ${fill}; color: ${textColor};` : ''}
+                    title={isClasp ? `Ряд clasp, Колонка ${cIdx + 1}: Clasp` : `Ряд ${rIdx}, Колонка ${cIdx + 1}: Цвет ${cell.toUpperCase()}`}
+                  >
+                    {isClasp ? 'x' : cell}
+                  </div>
+                );
+              })
             )}
           </div>
         </div>
@@ -97,28 +154,26 @@ const wordChartMd = exportWordChartAsMarkdown(PATTERN_MATRIX, COLOR_PALETTE);
 
       <!-- Tab Content: Raw JS Code -->
       <div id="tab-code" class="studio__tab-content" style="display: none;">
-        <pre class="studio__code-block"><code>const patternMatrix = [
-{PATTERN_MATRIX.map((row, idx) => `  /* Row ${String(idx + 1).padStart(3, ' ')} */ [${row.map(c => `'${c}'`).join(', ')}]`).join(',\n')}
-];</code></pre>
+        <pre class="studio__code-block"><code id="studio-code-block">{initialData.matrixCode}</code></pre>
       </div>
     </section>
 
     <!-- SECTION 2: Newly Generated SVG Loom Grid -->
     <section class="studio__section">
       <h2 class="studio__section-title">
-        <span>🧵</span> 2. Новое SVG изображение (Сетка для работы на станке)
+        <span>🧵</span> 2. Сгенерированное SVG изображение (Сетка для станка)
       </h2>
-      <p class="studio__section-desc">
-        Сгенерированная векторная схема для станочного плетения: с вертикальными нитями основы, разметкой рядов, нумерацией колонок и легендой цветов.
+      <p id="studio-section2-desc" class="studio__section-desc">
+        Векторная схема для станочного плетения ({initialData.name}): с нитями основы, разметкой рядов (включая <code>clasp</code> строки со случайным цветным бисером), нумерацией колонок, весом в граммах и легендой цветов.
       </p>
 
-      <div class="studio__svg-wrapper">
-        <Fragment set:html={newLoomSvg} />
+      <div id="studio-loom-svg-container" class="studio__svg-wrapper">
+        <Fragment set:html={initialData.newLoomSvg} />
       </div>
 
       <div class="studio__actions">
         <button id="download-svg-btn" type="button" class="studio__btn">
-          <span>💾</span> Скачать новое SVG (Сетка для станка)
+          <span>💾</span> Скачать SVG (Сетка для станка)
         </button>
       </div>
     </section>
@@ -150,15 +205,23 @@ const wordChartMd = exportWordChartAsMarkdown(PATTERN_MATRIX, COLOR_PALETTE);
 
         <!-- Word Chart Visual List -->
         <div id="wc-visual-tab" class="word-chart__list">
-          {wordChartData.rows.map((row) => (
-            <div class="word-chart__row" data-row-num={row.rowNumber}>
-              <div class="word-chart__row-num">{String(row.rowNumber).padStart(3, '0')}:</div>
+          {initialData.wordChartData.rows.map((row: any) => (
+            <div class={`word-chart__row ${row.isClasp ? 'word-chart__row--clasp' : ''}`} data-row-num={row.rowLabel}>
+              <div class={`word-chart__row-num ${row.isClasp ? 'word-chart__row-num--clasp' : ''}`}>
+                {row.rowLabel}:
+              </div>
               <div class="word-chart__runs">
-                {row.runs.map((run) => (
-                  <span class={`word-chart__badge word-chart__badge--${run.color}`}>
-                    <strong>({run.count})</strong>{run.color.toUpperCase()}
-                  </span>
-                ))}
+                {row.runs.map((run: any) => {
+                  const colorDef = initialData.palette[run.color];
+                  const fill = colorDef?.fill;
+                  const textColor = fill === '#FFFFFF' || fill === 'white' ? '#111111' : '#ffffff';
+                  const badgeStyle = fill && !run.isClasp ? `background-color: ${fill}; color: ${textColor};` : '';
+                  return (
+                    <span class={`word-chart__badge word-chart__badge--${run.color}`} style={badgeStyle}>
+                      <strong>({run.count})</strong>{run.color.toUpperCase()} {run.isClasp ? 'Any / Culled beads' : ''}
+                    </span>
+                  );
+                })}
               </div>
             </div>
           ))}
@@ -166,32 +229,190 @@ const wordChartMd = exportWordChartAsMarkdown(PATTERN_MATRIX, COLOR_PALETTE);
 
         <!-- Word Chart Plain Text / Pre View -->
         <div id="wc-text-tab" style="display: none;">
-          <pre class="word-chart__text-view"><code set:html={wordChartHtml} /></pre>
+          <pre class="word-chart__text-view"><code id="wc-text-code" set:html={initialData.wordChartHtml} /></pre>
         </div>
 
         <!-- Word Chart Markdown View (for Figma) -->
         <div id="wc-md-tab" style="display: none;">
-          <pre class="word-chart__text-view"><code>{wordChartMd}</code></pre>
+          <pre class="word-chart__text-view"><code id="wc-md-code">{initialData.wordChartMd}</code></pre>
         </div>
       </div>
     </section>
 
-    <!-- SECTION 4: Original SVG for reference -->
+    <!-- SECTION 4: Original-style Pattern SVG generated dynamically from array -->
     <section class="studio__section">
-      <h2 class="studio__section-title">
-        <span>🖼️</span> 4. Исходный SVG из папки temp (image3.svg)
+      <h2 id="studio-section4-title" class="studio__section-title">
+        <span>🖼️</span> 4. Исходное SVG изображение ({initialData.name})
       </h2>
-      <p class="studio__section-desc">
-        Обновленный файл из <code>src/temp/image3.svg</code>, послуживший источником данных.
+      <p id="studio-section4-desc" class="studio__section-desc">
+        Векторная схема в оригинальном формате (на чёрном фоне, без нитей и меток), сгенерированная напрямую из массива <code>{initialData.id}</code> с добавленными разноцветными строками <code>clasp</code>.
       </p>
-      <div class="studio__svg-wrapper">
-        <Image src={originalImage} alt="Updated Pattern SVG (image3.svg)" />
+      <div id="studio-original-svg-container" class="studio__svg-wrapper">
+        <Fragment set:html={initialData.originalStyleSvg} />
       </div>
     </section>
   </div>
+
+  <!-- Embed JSON data for all patterns for instant client-side switching -->
+  <script id="patterns-data" type="application/json" is:inline set:html={JSON.stringify(renderedPatternsMap)}></script>
 </BaseLayout>
 
 <script>
+  // Retrieve pre-rendered data map for all patterns
+  const patternsDataScript = document.getElementById('patterns-data');
+  const PATTERNS_DATA = patternsDataScript ? JSON.parse(patternsDataScript.textContent || '{}') : {};
+
+  // Function to format bead weight helper in client JS
+  function formatBeadWeight(count: number): string {
+    const grams = count / 200;
+    return `~${grams < 10 ? grams.toFixed(1) : Math.round(grams)} г`;
+  }
+
+  // Active pattern state
+  let currentPatternId = 'bezier-gold';
+
+  function updateStudioDOM(patternId: string, updateUrl = true) {
+    const data = PATTERNS_DATA[patternId];
+    if (!data) return;
+
+    currentPatternId = patternId;
+
+    // 1. Update pattern pills active state
+    document.querySelectorAll('[data-pattern-id]').forEach((btn) => {
+      if (btn.getAttribute('data-pattern-id') === patternId) {
+        btn.classList.add('is-active');
+      } else {
+        btn.classList.remove('is-active');
+      }
+    });
+
+    // 2. Section 1 Titles & Descriptions
+    const sec1Title = document.getElementById('studio-section1-title');
+    if (sec1Title) sec1Title.innerHTML = `<span>📊</span> 1. Текущий паттерн: ${data.name} (Двухмерный массив + Clasp)`;
+
+    const sec1Desc = document.getElementById('studio-section1-desc');
+    if (sec1Desc) sec1Desc.innerHTML = `${data.description} Источником истины является массив <code>matrix[${data.numPatternRows}][${data.numCols}]</code>. Вес рассчитан из стандарта Miyuki Delica 11/0 (~200 шт./грамм).`;
+
+    // 3. Stats Cards
+    const statsContainer = document.getElementById('studio-stats');
+    if (statsContainer) {
+      let statsHtml = `
+        <div class="studio__stat-card">
+          <div class="studio__stat-label">Размер схемы</div>
+          <div class="studio__stat-value">${data.numCols} × ${data.numPatternRows} (+2 clasp)</div>
+        </div>
+        <div class="studio__stat-card">
+          <div class="studio__stat-label">Бусин в схеме</div>
+          <div class="studio__stat-value">${data.totalPatternBeads} шт. (${data.totalPatternBeadsWeight})</div>
+        </div>
+      `;
+
+      Object.entries(data.palette).forEach(([key, colorDef]: [string, any]) => {
+        const count = data.colorCounts[key] || 0;
+        const pct = ((count / data.totalPatternBeads) * 100).toFixed(1);
+        statsHtml += `
+          <div class="studio__stat-card">
+            <div class="studio__stat-label">Алиас '${key}' (${colorDef.fill})</div>
+            <div class="studio__stat-value">${count} шт. (${formatBeadWeight(count)}) • ${pct}%</div>
+          </div>
+        `;
+      });
+
+      statsContainer.innerHTML = statsHtml;
+    }
+
+    // 4. Matrix Grid
+    const matrixGrid = document.getElementById('studio-matrix-grid');
+    if (matrixGrid) {
+      matrixGrid.style.gridTemplateColumns = `repeat(${data.numCols}, 22px)`;
+      let gridHtml = '';
+      data.extendedMatrix.forEach((row: string[], rIdx: number) => {
+        row.forEach((cell: string, cIdx: number) => {
+          const isClasp = rIdx === 0 || rIdx === data.extendedMatrix.length - 1;
+          const colorDef = data.palette[cell];
+          const fill = colorDef?.fill || '#ffffff';
+          const textColor = fill === '#FFFFFF' || fill === 'white' ? '#111111' : '#ffffff';
+          const cellClass = isClasp ? 'studio__matrix-cell--clasp' : `studio__matrix-cell--${cell}`;
+          const cellStyle = isClasp ? '' : `style="background-color: ${fill}; color: ${textColor};"`;
+          const title = isClasp ? `Ряд clasp, Колонка ${cIdx + 1}: Clasp` : `Ряд ${rIdx}, Колонка ${cIdx + 1}: Цвет ${cell.toUpperCase()}`;
+          gridHtml += `<div class="studio__matrix-cell ${cellClass}" ${cellStyle} title="${title}">${isClasp ? 'x' : cell}</div>`;
+        });
+      });
+      matrixGrid.innerHTML = gridHtml;
+    }
+
+    // 5. Code Block
+    const codeBlock = document.getElementById('studio-code-block');
+    if (codeBlock) codeBlock.textContent = data.matrixCode;
+
+    // 6. Section 2 Loom SVG
+    const sec2Desc = document.getElementById('studio-section2-desc');
+    if (sec2Desc) sec2Desc.innerHTML = `Векторная схема для станочного плетения (${data.name}): с нитями основы, разметкой рядов (включая <code>clasp</code> строки со случайным цветным бисером), нумерацией колонок, весом в граммах и легендой цветов.`;
+
+    const loomSvgContainer = document.getElementById('studio-loom-svg-container');
+    if (loomSvgContainer) loomSvgContainer.innerHTML = data.newLoomSvg;
+
+    // 7. Word Chart
+    const wcVisualTab = document.getElementById('wc-visual-tab');
+    if (wcVisualTab) {
+      let wcRowsHtml = '';
+      data.wordChartData.rows.forEach((row: any) => {
+        const rowClass = row.isClasp ? 'word-chart__row word-chart__row--clasp' : 'word-chart__row';
+        const numClass = row.isClasp ? 'word-chart__row-num word-chart__row-num--clasp' : 'word-chart__row-num';
+        let badgesHtml = '';
+        row.runs.forEach((run: any) => {
+          const colorDef = data.palette[run.color];
+          const fill = colorDef?.fill;
+          const textColor = fill === '#FFFFFF' || fill === 'white' ? '#111111' : '#ffffff';
+          const badgeStyle = fill && !run.isClasp ? `style="background-color: ${fill}; color: ${textColor};"` : '';
+          badgesHtml += `<span class="word-chart__badge word-chart__badge--${run.color}" ${badgeStyle}><strong>(${run.count})</strong>${run.color.toUpperCase()} ${run.isClasp ? 'Any / Culled beads' : ''}</span>`;
+        });
+        wcRowsHtml += `<div class="${rowClass}" data-row-num="${row.rowLabel}"><div class="${numClass}">${row.rowLabel}:</div><div class="word-chart__runs">${badgesHtml}</div></div>`;
+      });
+      wcVisualTab.innerHTML = wcRowsHtml;
+    }
+
+    const wcTextCode = document.getElementById('wc-text-code');
+    if (wcTextCode) wcTextCode.innerHTML = data.wordChartHtml;
+
+    const wcMdCode = document.getElementById('wc-md-code');
+    if (wcMdCode) wcMdCode.textContent = data.wordChartMd;
+
+    // 8. Section 4 Original SVG
+    const sec4Title = document.getElementById('studio-section4-title');
+    if (sec4Title) sec4Title.innerHTML = `<span>🖼️</span> 4. Исходное SVG изображение (${data.name})`;
+
+    const sec4Desc = document.getElementById('studio-section4-desc');
+    if (sec4Desc) sec4Desc.innerHTML = `Векторная схема в оригинальном формате (на чёрном фоне, без нитей и меток), сгенерированная напрямую из массива <code>${data.id}</code> с добавленными разноцветными строками <code>clasp</code>.`;
+
+    const origSvgContainer = document.getElementById('studio-original-svg-container');
+    if (origSvgContainer) origSvgContainer.innerHTML = data.originalStyleSvg;
+
+    // 9. Update URL query parameter
+    if (updateUrl && window.history) {
+      const url = new URL(window.location.href);
+      url.searchParams.set('pattern', patternId);
+      window.history.replaceState({}, '', url.toString());
+    }
+  }
+
+  // Handle click on pattern pills
+  document.querySelectorAll('[data-pattern-id]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const patternId = btn.getAttribute('data-pattern-id');
+      if (patternId) {
+        updateStudioDOM(patternId, true);
+      }
+    });
+  });
+
+  // On page load, check URL parameter
+  const urlParams = new URLSearchParams(window.location.search);
+  const initialUrlPattern = urlParams.get('pattern');
+  if (initialUrlPattern && PATTERNS_DATA[initialUrlPattern]) {
+    updateStudioDOM(initialUrlPattern, false);
+  }
+
   // Tab switching logic for Matrix
   const tabBtns = document.querySelectorAll('[data-tab]');
   const tabContents = {
@@ -202,14 +423,10 @@ const wordChartMd = exportWordChartAsMarkdown(PATTERN_MATRIX, COLOR_PALETTE);
   tabBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
       const tabName = btn.getAttribute('data-tab');
-      
       tabBtns.forEach((b) => b.classList.remove('is-active'));
       btn.classList.add('is-active');
-
       Object.entries(tabContents).forEach(([name, el]) => {
-        if (el) {
-          el.style.display = name === tabName ? 'block' : 'none';
-        }
+        if (el) el.style.display = name === tabName ? 'block' : 'none';
       });
     });
   });
@@ -225,14 +442,10 @@ const wordChartMd = exportWordChartAsMarkdown(PATTERN_MATRIX, COLOR_PALETTE);
   wcTabBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
       const tabName = btn.getAttribute('data-wc-tab');
-
       wcTabBtns.forEach((b) => b.classList.remove('is-active'));
       btn.classList.add('is-active');
-
       Object.entries(wcTabContents).forEach(([name, el]) => {
-        if (el) {
-          el.style.display = name === tabName ? 'block' : 'none';
-        }
+        if (el) el.style.display = name === tabName ? 'block' : 'none';
       });
     });
   });
@@ -242,7 +455,6 @@ const wordChartMd = exportWordChartAsMarkdown(PATTERN_MATRIX, COLOR_PALETTE);
   wcSearchInput?.addEventListener('input', (e) => {
     const val = (e.target as HTMLInputElement).value.trim();
     const rows = document.querySelectorAll('.word-chart__row');
-    
     rows.forEach((row) => {
       const rowNum = row.getAttribute('data-row-num');
       if (!val || (rowNum && rowNum.includes(val))) {
@@ -257,7 +469,6 @@ const wordChartMd = exportWordChartAsMarkdown(PATTERN_MATRIX, COLOR_PALETTE);
   const copyWcBtn = document.getElementById('copy-wc-btn');
   copyWcBtn?.addEventListener('click', async () => {
     const activeTab = document.querySelector('[data-wc-tab].is-active')?.getAttribute('data-wc-tab');
-    
     if (activeTab === 'md') {
       const mdCodeEl = document.querySelector('#wc-md-tab code');
       const textToCopy = mdCodeEl?.textContent || '';
@@ -265,7 +476,6 @@ const wordChartMd = exportWordChartAsMarkdown(PATTERN_MATRIX, COLOR_PALETTE);
     } else {
       let htmlContent = '';
       let textContent = '';
-
       if (activeTab === 'text') {
         const codeEl = document.querySelector('#wc-text-tab code');
         htmlContent = codeEl?.innerHTML || '';
@@ -279,38 +489,34 @@ const wordChartMd = exportWordChartAsMarkdown(PATTERN_MATRIX, COLOR_PALETTE);
       try {
         const htmlBlob = new Blob([htmlContent], { type: 'text/html' });
         const textBlob = new Blob([textContent], { type: 'text/plain' });
-
         await navigator.clipboard.write([
-          new ClipboardItem({
-            'text/html': htmlBlob,
-            'text/plain': textBlob,
-          }),
+          new ClipboardItem({ 'text/html': htmlBlob, 'text/plain': textBlob }),
         ]);
       } catch (err) {
         await navigator.clipboard.writeText(textContent);
       }
     }
 
-    const origText = copyWcBtn.innerHTML;
-    copyWcBtn.innerHTML = '<span>✅</span> Скопировано!';
-    setTimeout(() => {
-      copyWcBtn.innerHTML = origText;
-    }, 2000);
+    if (copyWcBtn) {
+      const origText = copyWcBtn.innerHTML;
+      copyWcBtn.innerHTML = '<span>✅</span> Скопировано!';
+      setTimeout(() => {
+        copyWcBtn.innerHTML = origText;
+      }, 2000);
+    }
   });
 
   // SVG Download Logic
   const downloadBtn = document.getElementById('download-svg-btn');
   downloadBtn?.addEventListener('click', () => {
-    const svgEl = document.querySelector('.studio__section:nth-of-type(2) svg');
+    const svgEl = document.querySelector('#studio-loom-svg-container svg');
     if (!svgEl) return;
-
     const svgData = new XMLSerializer().serializeToString(svgEl);
     const blob = new Blob([svgData], { type: 'image/svg+xml;charset=utf-8' });
     const url = URL.createObjectURL(blob);
-
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'loom-beadwork-pattern.svg';
+    a.download = `loom-beadwork-${currentPatternId}.svg`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

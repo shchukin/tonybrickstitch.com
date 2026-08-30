@@ -1,12 +1,17 @@
 import { COLOR_PALETTE, type ColorDefinition } from "../data/studioPattern";
+import { wrapMatrixWithClasp } from "./claspUtils";
+import { formatBeadWeight } from "./beadWeight";
 
 export interface ColorRun {
   color: string;
   count: number;
+  isClasp?: boolean;
 }
 
 export interface WordChartRow {
   rowNumber: number;
+  rowLabel: string;
+  isClasp: boolean;
   runs: ColorRun[];
   rawText: string;
   htmlText: string;
@@ -17,6 +22,7 @@ export interface WordChartData {
   totalRows: number;
   totalCols: number;
   totalBeads: number;
+  numPatternRows: number;
   rows: WordChartRow[];
 }
 
@@ -25,9 +31,9 @@ export function generateWordChart(
   palette: Record<string, ColorDefinition> = COLOR_PALETTE,
   bottomToTop: boolean = false
 ): WordChartData {
-  const totalRows = matrix.length;
-  const totalCols = matrix[0]?.length || 0;
-  const totalBeads = totalRows * totalCols;
+  const claspData = wrapMatrixWithClasp(matrix);
+  const { extendedMatrix, numCols, totalRows, isClaspRow, getRowLabel } = claspData;
+  const totalBeads = totalRows * numCols;
 
   const rowsData: WordChartRow[] = [];
 
@@ -37,54 +43,70 @@ export function generateWordChart(
   }
 
   rowIndices.forEach((rIdx) => {
-    const row = matrix[rIdx];
-    const rowNumber = rIdx + 1; // 1-indexed
+    const isClasp = isClaspRow(rIdx);
+    const rowLabel = getRowLabel(rIdx, true);
+    const row = extendedMatrix[rIdx];
 
-    const runs: ColorRun[] = [];
-    if (row && row.length > 0) {
-      let currentColor = row[0];
-      let currentCount = 1;
+    if (isClasp) {
+      rowsData.push({
+        rowNumber: rIdx,
+        rowLabel,
+        isClasp: true,
+        runs: [{ color: "X", count: numCols, isClasp: true }],
+        rawText: `(${numCols})X Any / Culled beads`,
+        htmlText: `<b>(${numCols})X</b> Any / Culled beads`,
+        mdText: `**(${numCols})X** Any / Culled beads`,
+      });
+    } else {
+      const runs: ColorRun[] = [];
+      if (row && row.length > 0) {
+        let currentColor = row[0];
+        let currentCount = 1;
 
-      for (let c = 1; c < row.length; c++) {
-        if (row[c] === currentColor) {
-          currentCount++;
-        } else {
-          runs.push({ color: currentColor, count: currentCount });
-          currentColor = row[c];
-          currentCount = 1;
+        for (let c = 1; c < row.length; c++) {
+          if (row[c] === currentColor) {
+            currentCount++;
+          } else {
+            runs.push({ color: currentColor, count: currentCount });
+            currentColor = row[c];
+            currentCount = 1;
+          }
         }
+        runs.push({ color: currentColor, count: currentCount });
       }
-      runs.push({ color: currentColor, count: currentCount });
+
+      // Plain text format: (18)G
+      const rawText = runs
+        .map((run) => `(${run.count})${run.color.toUpperCase()}`)
+        .join(", ");
+
+      // HTML format with bold quantity: <b>(18)</b>G
+      const htmlText = runs
+        .map((run) => `<strong style="font-weight: 700;">(${run.count})</strong>${run.color.toUpperCase()}`)
+        .join(", ");
+
+      // Markdown format with bold quantity: **(18)**G
+      const mdText = runs
+        .map((run) => `**(${run.count})**${run.color.toUpperCase()}`)
+        .join(", ");
+
+      rowsData.push({
+        rowNumber: rIdx,
+        rowLabel,
+        isClasp: false,
+        runs,
+        rawText,
+        htmlText,
+        mdText,
+      });
     }
-
-    // Plain text format: (18)G
-    const rawText = runs
-      .map((run) => `(${run.count})${run.color.toUpperCase()}`)
-      .join(", ");
-
-    // HTML format with bold quantity: <b>(18)</b>G
-    const htmlText = runs
-      .map((run) => `<strong style="font-weight: 700;">(${run.count})</strong>${run.color.toUpperCase()}`)
-      .join(", ");
-
-    // Markdown format with bold quantity: **(18)**G
-    const mdText = runs
-      .map((run) => `**(${run.count})**${run.color.toUpperCase()}`)
-      .join(", ");
-
-    rowsData.push({
-      rowNumber,
-      runs,
-      rawText,
-      htmlText,
-      mdText,
-    });
   });
 
   return {
     totalRows,
-    totalCols,
+    totalCols: numCols,
     totalBeads,
+    numPatternRows: claspData.numPatternRows,
     rows: rowsData,
   };
 }
@@ -94,22 +116,32 @@ export function exportWordChartAsText(
   palette: Record<string, ColorDefinition> = COLOR_PALETTE
 ): string {
   const chartData = generateWordChart(matrix, palette, false);
+  const patternBeadCount = chartData.numPatternRows * chartData.totalCols;
   const lines: string[] = [];
+
+  // Calculate counts per color
+  const colorCounts: Record<string, number> = {};
+  Object.keys(palette).forEach((k) => (colorCounts[k] = 0));
+  matrix.forEach((r) => r.forEach((cell) => {
+    if (colorCounts[cell] !== undefined) colorCounts[cell]++;
+    else colorCounts[cell] = 1;
+  }));
 
   lines.push(`==========================================`);
   lines.push(`WORD CHART / СЛОВЕСНАЯ ИНСТРУКЦИЯ ДЛЯ СТАНКА`);
   lines.push(`==========================================`);
-  lines.push(`Размер: ${chartData.totalCols} колонок × ${chartData.totalRows} рядов`);
-  lines.push(`Всего бусин: ${chartData.totalBeads} шт.`);
+  lines.push(`Размер схемы: ${chartData.totalCols} колонок × ${chartData.numPatternRows} рядов (+2 clasp)`);
+  lines.push(`Всего бусин в схеме: ${patternBeadCount} шт. (${formatBeadWeight(patternBeadCount)})`);
   lines.push(`Легенда цветов:`);
   Object.entries(palette).forEach(([key, colorDef]) => {
-    lines.push(`  [${key.toUpperCase()}] : ${colorDef.name} (${colorDef.fill})`);
+    const count = colorCounts[key] || 0;
+    lines.push(`  [${key.toUpperCase()}] : ${colorDef.name} — ${count} шт. (${formatBeadWeight(count)})`);
   });
+  lines.push(`  [X] : Любые / остаточные бусины для застёжки (Clasp)`);
   lines.push(`==========================================\n`);
 
   chartData.rows.forEach((row) => {
-    const rowStr = String(row.rowNumber).padStart(3, "0");
-    lines.push(`${rowStr}: ${row.rawText}`);
+    lines.push(`${row.rowLabel}: ${row.rawText}`);
   });
 
   return lines.join("\n");
@@ -120,22 +152,32 @@ export function exportWordChartAsHtml(
   palette: Record<string, ColorDefinition> = COLOR_PALETTE
 ): string {
   const chartData = generateWordChart(matrix, palette, false);
+  const patternBeadCount = chartData.numPatternRows * chartData.totalCols;
   const lines: string[] = [];
+
+  // Calculate counts per color
+  const colorCounts: Record<string, number> = {};
+  Object.keys(palette).forEach((k) => (colorCounts[k] = 0));
+  matrix.forEach((r) => r.forEach((cell) => {
+    if (colorCounts[cell] !== undefined) colorCounts[cell]++;
+    else colorCounts[cell] = 1;
+  }));
 
   lines.push(`==========================================`);
   lines.push(`WORD CHART / СЛОВЕСНАЯ ИНСТРУКЦИЯ ДЛЯ СТАНКА`);
   lines.push(`==========================================`);
-  lines.push(`Размер: ${chartData.totalCols} колонок × ${chartData.totalRows} рядов`);
-  lines.push(`Всего бусин: ${chartData.totalBeads} шт.`);
+  lines.push(`Размер схемы: ${chartData.totalCols} колонок × ${chartData.numPatternRows} рядов (+2 clasp)`);
+  lines.push(`Всего бусин в схеме: ${patternBeadCount} шт. (${formatBeadWeight(patternBeadCount)})`);
   lines.push(`Легенда цветов:`);
   Object.entries(palette).forEach(([key, colorDef]) => {
-    lines.push(`  [${key.toUpperCase()}] : ${colorDef.name} (${colorDef.fill})`);
+    const count = colorCounts[key] || 0;
+    lines.push(`  [${key.toUpperCase()}] : ${colorDef.name} — ${count} шт. (${formatBeadWeight(count)})`);
   });
+  lines.push(`  [X] : Любые / остаточные бусины для застёжки (Clasp)`);
   lines.push(`==========================================\n`);
 
   chartData.rows.forEach((row) => {
-    const rowStr = String(row.rowNumber).padStart(3, "0");
-    lines.push(`${rowStr}: ${row.htmlText}`);
+    lines.push(`${row.rowLabel}: ${row.htmlText}`);
   });
 
   return lines.join("\n");
@@ -148,6 +190,6 @@ export function exportWordChartAsMarkdown(
   const chartData = generateWordChart(matrix, palette, false);
   
   return chartData.rows
-    .map((row) => row.mdText)
+    .map((row) => `${row.rowLabel}: ${row.mdText}`)
     .join("\n");
 }
